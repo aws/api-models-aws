@@ -1,0 +1,28 @@
+name: Auto Close Pull Request
+on:
+    pull_request_target:
+        types: [opened]
+
+jobs:
+    auto-close:
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+        if: github.repository == 'aws/api-models-aws' || github.repository == 'kellertk/api-models-aws'
+        steps:
+            - name: Auto Close Pull Request
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const body = context.payload.pull_request.body;
+                      if (body.includes('[ ] I confirm that this pull request is not against the generated models')) {
+                          console.log('Closing pull request');
+                          await github.pulls.update({
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              pull_number: context.payload.pull_request.number,
+                              state: 'closed'
+                          });
+                      } else {
+                          console.log('Pull request is not against the generated models');
+                      }
