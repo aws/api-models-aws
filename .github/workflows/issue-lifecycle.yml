@@ -1,0 +1,49 @@
+name: Issue Lifecycle
+on:
+    schedule:
+        - cron: '0 0 * * *'
+jobs:
+    issue-cleanup:
+        permissions:
+            issues: write
+            contents: read
+            pull-requests: write
+        runs-on: ubuntu-latest
+        name: Issue Cleanup
+        steps:
+            - uses: aws-actions/stale-issue-cleanup@v7.1.0
+              with:
+                repo-token: ${{ secrets.GITHUB_TOKEN }}
+                issue-types: "issues,pull-requests"
+                # Stale: no activity after the response-requested label is added
+                stale-issue-message: |
+                    This issue has not had any activity in the last week. If you
+                    still think there is a problem, please leave a comment to
+                    prevent the issue from automatically closing.
+                stale-pr-message: |
+                    This pull request has not had any activity in the last week.
+                    If you still think there is a problem, please leave a
+                    comment to prevent the pull request from automatically
+                    closing.
+                days-before-stale: 7
+                stale-issue-label: closing-soon
+                stale-pr-label: closing-soon
+                response-requested-label: "response-requested"
+                # Close: no activity after the closing-soon label is added
+                days-before-close: 4
+                # Ancient: no activity N days after create date
+                use-created-date-for-ancient: true
+                days-before-ancient: 365
+                ancient-issue-message: |
+                    This issue has not had any activity in the last year. If you
+                    still think there is a problem, please leave a comment to
+                    prevent the issue from automatically closing.
+                ancient-pr-message: |
+                    This pull request has not had any activity in the last year.
+                    If you still think there is a problem, please leave a
+                    comment to prevent the pull request from automatically
+                    closing.
+                # Exemption settings
+                exempt-issue-labels: "no-autoclose"
+                exempt-pr-labels: "no-autoclose"
+                minimum-upvotes-to-exempt: 2

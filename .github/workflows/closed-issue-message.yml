@@ -1,0 +1,19 @@
+name: Closed Issue Message
+on:
+    issues:
+        types: [closed] 
+
+jobs:
+    auto-comment:
+        runs-on: ubuntu-latest
+        permissions:
+            issues: write
+        steps:
+            - name: Add closed issue message
+              uses: aws-actions/closed-issue-message@v1
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  message: |
+                        Hello! This issue has been closed. Comments on closed
+                        issues are hard for our team to see. If you have a
+                        question or need help, please open a new issue.
