@@ -1,0 +1,52 @@
+---
+name: Bug Report
+description: File a bug report against the AWS API models
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+    - type: markdown
+        attributes:
+            value: |
+                Thank you for filing a bug report! Please check the
+                [contriuting guide](CONTRIBUTING.md) first. Provide the
+                following information to help us diagnose the issue.
+    - type: textarea
+        id: bug-description
+        attributes:
+            label: Description
+            description: Provide a general summary of the issue in the Title above
+        validations:
+            required: true
+    - type: textarea
+        id: what-happened
+        attributes:
+            label: What happened?
+            description: Also tell us, what you expected to happen
+        validations:
+            required: false
+    - type: dropdown
+        id: environment
+        attributes:
+            label: SDK Environment
+            description: Where did the issue occur?
+            options:
+              - AWS SDK for Java
+              - AWS SDK for JavaScript
+              - AWS SDK for .NET
+              - AWS SDK for Python
+              - AWS SDK for Ruby
+              - AWS SDK for Go
+              - AWS SDK for C++
+              - AWS SDK for PHP
+              - AWS SDK for Rust
+              - AWS SDK for Swift
+              - AWS CLI
+              - AWS Tools for PowerShell
+              - AWS Mangement Console (console.aws.amazon.com)
+              - Other AWS SDK
+              - Other AWS API or Service
+    - type: textarea
+        id: code
+        attributes:
+            label: Relevant Code or Steps to Reproduce
+            description: Provide a code snippet or steps to reproduce the issue

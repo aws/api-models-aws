@@ -1,0 +1,9 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: Feature Requests
+    url: CONTRIBUTING.md
+    description: This repository does not accept feature requests. Please see the contributing guide for more information.
+  - name: General Questions
+    url: https://aws.amazon.com/contact-us
+    description: This repository does not accept general questions. Please contact AWS using the link provided.
