@@ -1,0 +1,21 @@
+[versions]
+smithy = "1.56.0"
+smithy-gradle-plugins = "1.2.0"
+jreleaser = "1.17.0"
+
+[libraries]
+smithy-aws-cloudformation-traits = { module = "software.amazon.smithy:smithy-aws-cloudformation-traits", version.ref = "smithy" }
+smithy-aws-endpoints = { module = "software.amazon.smithy:smithy-aws-endpoints", version.ref = "smithy" }
+smithy-aws-iam-traits = { module = "software.amazon.smithy:smithy-aws-iam-traits", version.ref = "smithy" }
+smithy-aws-smoke-test-model = { module = "software.amazon.smithy:smithy-aws-smoke-test-model", version.ref = "smithy" }
+smithy-aws-traits = { module = "software.amazon.smithy:smithy-aws-traits", version.ref = "smithy" }
+smithy-protocol-traits = { module = "software.amazon.smithy:smithy-protocol-traits", version.ref = "smithy" }
+smithy-model = { module = "software.amazon.smithy:smithy-model", version.ref = "smithy" }
+smithy-rules-engine = { module = "software.amazon.smithy:smithy-rules-engine", version.ref = "smithy" }
+smithy-smoke-test-traits = { module = "software.amazon.smithy:smithy-smoke-test-traits", version.ref = "smithy" }
+smithy-waiters = { module = "software.amazon.smithy:smithy-waiters", version.ref = "smithy" }
+smithy-gradle-base = { module = "software.amazon.smithy.gradle:smithy-base", version.ref = "smithy-gradle-plugins" }
+smithy-gradle-jar = { module = "software.amazon.smithy.gradle:smithy-jar", version.ref = "smithy-gradle-plugins" }
+
+[plugins]
+jreleaser = { id = "org.jreleaser", version.ref = "jreleaser" }

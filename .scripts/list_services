@@ -1,0 +1,31 @@
+#!/bin/bash
+
+
+# a script for listing out all services within a directory, and assumes a service will contain a `service/` directory.
+# Was used to generate the initial version properties for all services by piping the output into update_versions:
+# > .scripts/list_services . | xargs .scripts/update_versions -p gradle.properties -s
+
+# Check if directory is provided
+if [ $# -ne 1 ]; then
+    echo "usage: $0 <directory>" >&2
+    exit 1
+fi
+
+SCAN_DIR="$1"
+
+# Check if the directory exists
+if [ ! -d "$SCAN_DIR" ]; then
+    echo "$0: $SCAN_DIR: No such directory" >&2
+    exit 1
+fi
+
+# Change to the target directory
+cd "$SCAN_DIR" || exit 1
+
+# Iterate through all directories, find those with service subdirectory,
+# and sort the output
+for dir in */; do
+    if [ -d "${dir}service" ]; then
+        echo "${dir%/}"
+    fi
+done | sort
