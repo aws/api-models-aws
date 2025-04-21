@@ -1,5 +1,3 @@
-import software.amazon.smithy.gradle.tasks.SmithyValidateTask
-
 plugins {
     `java-platform`
     `maven-publish`
@@ -24,3 +22,8 @@ dependencies {
     }
 }
 
+tasks {
+    build {
+        mustRunAfter(clean)
+    }
+}

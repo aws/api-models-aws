@@ -60,7 +60,7 @@ def write_properties(properties_file: Path, properties: dict):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Transform Smithy model.json files from source to destination directory."
+        description="Update versions of service model packages controlled via gradle.properties"
     )
 
     parser.add_argument(

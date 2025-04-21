@@ -38,3 +38,9 @@ sourceSets {
     }
 }
 
+tasks {
+    build {
+        mustRunAfter(clean)
+    }
+}
+
