@@ -1,5 +1,5 @@
 [versions]
-smithy = "1.56.0"
+smithy = "[1.0,2.0["
 smithy-gradle-plugins = "1.2.0"
 jreleaser = "1.17.0"
 
