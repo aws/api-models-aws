@@ -2348,6 +2348,9 @@
           "target": "com.amazonaws.ec2#AssociateNatGatewayAddress"
         },
         {
+          "target": "com.amazonaws.ec2#AssociateRouteServer"
+        },
+        {
           "target": "com.amazonaws.ec2#AssociateRouteTable"
         },
         {
@@ -2588,6 +2591,15 @@
           "target": "com.amazonaws.ec2#CreateRoute"
         },
         {
+          "target": "com.amazonaws.ec2#CreateRouteServer"
+        },
+        {
+          "target": "com.amazonaws.ec2#CreateRouteServerEndpoint"
+        },
+        {
+          "target": "com.amazonaws.ec2#CreateRouteServerPeer"
+        },
+        {
           "target": "com.amazonaws.ec2#CreateRouteTable"
         },
         {
@@ -2820,6 +2832,15 @@
         },
         {
           "target": "com.amazonaws.ec2#DeleteRoute"
+        },
+        {
+          "target": "com.amazonaws.ec2#DeleteRouteServer"
+        },
+        {
+          "target": "com.amazonaws.ec2#DeleteRouteServerEndpoint"
+        },
+        {
+          "target": "com.amazonaws.ec2#DeleteRouteServerPeer"
         },
         {
           "target": "com.amazonaws.ec2#DeleteRouteTable"
@@ -3257,6 +3278,15 @@
           "target": "com.amazonaws.ec2#DescribeReservedInstancesOfferings"
         },
         {
+          "target": "com.amazonaws.ec2#DescribeRouteServerEndpoints"
+        },
+        {
+          "target": "com.amazonaws.ec2#DescribeRouteServerPeers"
+        },
+        {
+          "target": "com.amazonaws.ec2#DescribeRouteServers"
+        },
+        {
           "target": "com.amazonaws.ec2#DescribeRouteTables"
         },
         {
@@ -3488,6 +3518,9 @@
           "target": "com.amazonaws.ec2#DisableIpamOrganizationAdminAccount"
         },
         {
+          "target": "com.amazonaws.ec2#DisableRouteServerPropagation"
+        },
+        {
           "target": "com.amazonaws.ec2#DisableSerialConsoleAccess"
         },
         {
@@ -3531,6 +3564,9 @@
         },
         {
           "target": "com.amazonaws.ec2#DisassociateNatGatewayAddress"
+        },
+        {
+          "target": "com.amazonaws.ec2#DisassociateRouteServer"
         },
         {
           "target": "com.amazonaws.ec2#DisassociateRouteTable"
@@ -3591,6 +3627,9 @@
         },
         {
           "target": "com.amazonaws.ec2#EnableReachabilityAnalyzerOrganizationSharing"
+        },
+        {
+          "target": "com.amazonaws.ec2#EnableRouteServerPropagation"
         },
         {
           "target": "com.amazonaws.ec2#EnableSerialConsoleAccess"
@@ -3729,6 +3768,15 @@
         },
         {
           "target": "com.amazonaws.ec2#GetReservedInstancesExchangeQuote"
+        },
+        {
+          "target": "com.amazonaws.ec2#GetRouteServerAssociations"
+        },
+        {
+          "target": "com.amazonaws.ec2#GetRouteServerPropagations"
+        },
+        {
+          "target": "com.amazonaws.ec2#GetRouteServerRoutingDatabase"
         },
         {
           "target": "com.amazonaws.ec2#GetSecurityGroupsForVpc"
@@ -3915,6 +3963,9 @@
         },
         {
           "target": "com.amazonaws.ec2#ModifyReservedInstances"
+        },
+        {
+          "target": "com.amazonaws.ec2#ModifyRouteServer"
         },
         {
           "target": "com.amazonaws.ec2#ModifySecurityGroupRules"
@@ -5957,6 +6008,15 @@
         }
       }
     },
+    "com.amazonaws.ec2#AsPath": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#String",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
     "com.amazonaws.ec2#AsnAssociation": {
       "type": "structure",
       "members": {
@@ -7135,6 +7195,64 @@
             "aws.protocols#ec2QueryName": "NatGatewayAddressSet",
             "smithy.api#documentation": "<p>The IP addresses.</p>",
             "smithy.api#xmlName": "natGatewayAddressSet"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#AssociateRouteServer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#AssociateRouteServerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#AssociateRouteServerResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Associates a route server with a VPC to enable dynamic route updates.</p>\n         <p>A route server association is the connection established between a route server and a VPC.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#AssociateRouteServerRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The unique identifier for the route server to be associated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "VpcId": {
+          "target": "com.amazonaws.ec2#VpcId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the VPC to associate with the route server.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#AssociateRouteServerResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerAssociation": {
+          "target": "com.amazonaws.ec2#RouteServerAssociation",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerAssociation",
+            "smithy.api#documentation": "<p>Information about the association between the route server and the VPC.</p>",
+            "smithy.api#xmlName": "routeServerAssociation"
           }
         }
       },
@@ -9790,6 +9908,9 @@
     },
     "com.amazonaws.ec2#BoxedInteger": {
       "type": "integer"
+    },
+    "com.amazonaws.ec2#BoxedLong": {
+      "type": "long"
     },
     "com.amazonaws.ec2#BundleId": {
       "type": "string"
@@ -13037,6 +13158,36 @@
         "smithy.api#documentation": "<p>Current state of options for customizable text banner that will be displayed on\n\t\t\tAmazon Web Services provided clients when a VPN session is established.</p>"
       }
     },
+    "com.amazonaws.ec2#ClientRouteEnforcementOptions": {
+      "type": "structure",
+      "members": {
+        "Enforced": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Enable or disable the client route enforcement feature.</p>\n         <p>Valid values: <code>true | false</code>\n         </p>\n         <p>Default value: <code>false</code>\n         </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T\n\t\this feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>\n         <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, \n\t\t\treverting it back to the expected route configurations.</p>"
+      }
+    },
+    "com.amazonaws.ec2#ClientRouteEnforcementResponseOptions": {
+      "type": "structure",
+      "members": {
+        "Enforced": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Enforced",
+            "smithy.api#documentation": "<p>Status of the client route enforcement feature.</p>\n         <p>Valid values: <code>true | false</code>\n         </p>\n         <p>Default value: <code>false</code>\n         </p>",
+            "smithy.api#xmlName": "enforced"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The current status of client route enforcement. The state will either be <code>true</code> (enabled) or <code>false</code> (disabled).</p>"
+      }
+    },
     "com.amazonaws.ec2#ClientSecretType": {
       "type": "string",
       "traits": {
@@ -13576,6 +13727,14 @@
             "aws.protocols#ec2QueryName": "ClientLoginBannerOptions",
             "smithy.api#documentation": "<p>Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is\n\t\t\testablished.</p>",
             "smithy.api#xmlName": "clientLoginBannerOptions"
+          }
+        },
+        "ClientRouteEnforcementOptions": {
+          "target": "com.amazonaws.ec2#ClientRouteEnforcementResponseOptions",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ClientRouteEnforcementOptions",
+            "smithy.api#documentation": "<p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T\n\t\this feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>\n         <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, \n\t\t\treverting it back to the expected route configurations.</p>",
+            "smithy.api#xmlName": "clientRouteEnforcementOptions"
           }
         },
         "DisconnectOnSessionTimeout": {
@@ -14694,7 +14853,8 @@
         "ClientToken": {
           "target": "com.amazonaws.ec2#String",
           "traits": {
-            "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For\n      more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>\n      in the <i>Amazon EC2 API Reference</i>.</p>"
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For\n      more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>\n      in the <i>Amazon EC2 API Reference</i>.</p>",
+            "smithy.api#idempotencyToken": {}
           }
         },
         "Description": {
@@ -15719,6 +15879,12 @@
           "target": "com.amazonaws.ec2#ClientLoginBannerOptions",
           "traits": {
             "smithy.api#documentation": "<p>Options for enabling a customizable text banner that will be displayed on\n\t\t\tAmazon Web Services provided clients when a VPN session is established.</p>"
+          }
+        },
+        "ClientRouteEnforcementOptions": {
+          "target": "com.amazonaws.ec2#ClientRouteEnforcementOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T\n\t\this feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>\n         <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, \n\t\t\treverting it back to the expected route configurations.</p>"
           }
         },
         "DisconnectOnSessionTimeout": {
@@ -19458,7 +19624,7 @@
         "target": "com.amazonaws.ec2#CreateRestoreImageTaskResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Starts a task that restores an AMI from an Amazon S3 object that was previously created by\n      using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n        Amazon S3</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Starts a task that restores an AMI from an Amazon S3 object that was previously created by\n      using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n      Amazon S3</a> in the <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#CreateRestoreImageTaskRequest": {
@@ -19489,7 +19655,7 @@
         "TagSpecifications": {
           "target": "com.amazonaws.ec2#TagSpecificationList",
           "traits": {
-            "smithy.api#documentation": "<p>The tags to apply to the AMI and snapshots on restoration. You can tag the AMI, the\n      snapshots, or both.</p>\n         <ul>\n            <li>\n               <p>To tag the AMI, the value for <code>ResourceType</code> must be\n          <code>image</code>.</p>\n            </li>\n            <li>\n               <p>To tag the snapshots, the value for <code>ResourceType</code> must be\n            <code>snapshot</code>. The same tag is applied to all of the snapshots that are\n          created.</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>The tags to apply to the AMI and snapshots on restoration. You can tag the AMI, the\n      snapshots, or both.</p>\n         <ul>\n            <li>\n               <p>To tag the AMI, the value for <code>ResourceType</code> must be\n          <code>image</code>.</p>\n            </li>\n            <li>\n               <p>To tag the snapshots, the value for <code>ResourceType</code> must be\n          <code>snapshot</code>. The same tag is applied to all of the snapshots that are\n          created.</p>\n            </li>\n         </ul>",
             "smithy.api#xmlName": "TagSpecification"
           }
         },
@@ -19678,6 +19844,233 @@
             "aws.protocols#ec2QueryName": "Return",
             "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
             "smithy.api#xmlName": "return"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#CreateRouteServerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#CreateRouteServerResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new route server to manage dynamic routing in a VPC.</p>\n         <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, \nVPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>\n         <p>Route server supports the follow route table types:</p>\n         <ul>\n            <li>\n               <p>VPC route tables not associated with subnets</p>\n            </li>\n            <li>\n               <p>Subnet route tables</p>\n            </li>\n            <li>\n               <p>Internet gateway route tables</p>\n            </li>\n         </ul>\n         <p>Route server does not support route tables associated with virtual private gateways. To propagate routes into a transit gateway route table, use <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html\">Transit Gateway Connect</a>.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServerEndpoint": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#CreateRouteServerEndpointRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#CreateRouteServerEndpointResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new endpoint for a route server in a specified subnet.</p>\n         <p>A route server endpoint is an Amazon Web Services-managed component inside a subnet that facilitates <a href=\"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\">BGP (Border Gateway Protocol)</a> connections between your route server and your BGP peers.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServerEndpointRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server for which to create an endpoint.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SubnetId": {
+          "target": "com.amazonaws.ec2#SubnetId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the subnet in which to create the route server endpoint.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ClientToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        },
+        "TagSpecifications": {
+          "target": "com.amazonaws.ec2#TagSpecificationList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to apply to the route server endpoint during creation.</p>",
+            "smithy.api#xmlName": "TagSpecification"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServerEndpointResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerEndpoint": {
+          "target": "com.amazonaws.ec2#RouteServerEndpoint",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerEndpoint",
+            "smithy.api#documentation": "<p>Information about the created route server endpoint.</p>",
+            "smithy.api#xmlName": "routeServerEndpoint"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServerPeer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#CreateRouteServerPeerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#CreateRouteServerPeerResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new BGP peer for a specified route server endpoint.</p>\n         <p>A route server peer is a session between a route server endpoint and the device deployed in Amazon Web Services (such as a firewall appliance or other network security function running on an EC2 instance). The device must meet these requirements:</p>\n         <ul>\n            <li>\n               <p>Have an elastic network interface in the VPC</p>\n            </li>\n            <li>\n               <p>Support BGP (Border Gateway Protocol)</p>\n            </li>\n            <li>\n               <p>Can initiate BGP sessions</p>\n            </li>\n         </ul>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServerPeerRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerEndpointId": {
+          "target": "com.amazonaws.ec2#RouteServerEndpointId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server endpoint for which to create a peer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PeerAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The IPv4 address of the peer device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "BgpOptions": {
+          "target": "com.amazonaws.ec2#RouteServerBgpOptionsRequest",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The BGP options for the peer, including ASN (Autonomous System Number) and BFD (Bidrectional Forwarding Detection) settings.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        },
+        "TagSpecifications": {
+          "target": "com.amazonaws.ec2#TagSpecificationList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to apply to the route server peer during creation.</p>",
+            "smithy.api#xmlName": "TagSpecification"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServerPeerResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerPeer": {
+          "target": "com.amazonaws.ec2#RouteServerPeer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerPeer",
+            "smithy.api#documentation": "<p>Information about the created route server peer.</p>",
+            "smithy.api#xmlName": "routeServerPeer"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServerRequest": {
+      "type": "structure",
+      "members": {
+        "AmazonSideAsn": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The private Autonomous System Number (ASN) for the Amazon side of the BGP session. Valid values are from 1 to 4294967295. We recommend using a private ASN in the 64512\u201365534 (16-bit ASN) or 4200000000\u20134294967294 (32-bit ASN) range.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ClientToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        },
+        "PersistRoutes": {
+          "target": "com.amazonaws.ec2#RouteServerPersistRoutesAction",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether routes should be persisted after all BGP sessions are terminated.</p>"
+          }
+        },
+        "PersistRoutesDuration": {
+          "target": "com.amazonaws.ec2#BoxedLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of minutes a route server will wait after BGP is re-established to unpersist the routes in the FIB and RIB. Value must be in the range of 1-5. Required if PersistRoutes is <code>enabled</code>.</p>\n         <p>If you set the duration to 1 minute, then when your network appliance re-establishes BGP with route server, it has 1 minute to relearn it's adjacent network and advertise those routes to route server before route server resumes normal functionality. In most cases, 1 minute is probably sufficient. If, however, you have concerns that your BGP network may not be capable of fully re-establishing and re-learning everything in 1 minute, you can increase the duration up to 5 minutes.</p>"
+          }
+        },
+        "SnsNotificationsEnabled": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether SNS notifications should be enabled for route server events. Enabling SNS notifications persists BGP status changes to an SNS topic provisioned by Amazon Web Services.</p>"
+          }
+        },
+        "TagSpecifications": {
+          "target": "com.amazonaws.ec2#TagSpecificationList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to apply to the route server during creation.</p>",
+            "smithy.api#xmlName": "TagSpecification"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateRouteServerResult": {
+      "type": "structure",
+      "members": {
+        "RouteServer": {
+          "target": "com.amazonaws.ec2#RouteServer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServer",
+            "smithy.api#documentation": "<p>Information about the created route server.</p>",
+            "smithy.api#xmlName": "routeServer"
           }
         }
       },
@@ -20143,7 +20536,7 @@
         "target": "com.amazonaws.ec2#CreateStoreImageTaskResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Stores an AMI as a single object in an Amazon S3 bucket.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n        Amazon S3</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Stores an AMI as a single object in an Amazon S3 bucket.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n      Amazon S3</a> in the <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#CreateStoreImageTaskRequest": {
@@ -26524,6 +26917,156 @@
         "smithy.api#input": {}
       }
     },
+    "com.amazonaws.ec2#DeleteRouteServer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DeleteRouteServerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DeleteRouteServerResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified route server.</p>\n         <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, \nVPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>\n         <p>Route server supports the follow route table types:</p>\n         <ul>\n            <li>\n               <p>VPC route tables not associated with subnets</p>\n            </li>\n            <li>\n               <p>Subnet route tables</p>\n            </li>\n            <li>\n               <p>Internet gateway route tables</p>\n            </li>\n         </ul>\n         <p>Route server does not support route tables associated with virtual private gateways. To propagate routes into a transit gateway route table, use <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html\">Transit Gateway Connect</a>.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#DeleteRouteServerEndpoint": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DeleteRouteServerEndpointRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DeleteRouteServerEndpointResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified route server endpoint.</p>\n         <p>A route server endpoint is an Amazon Web Services-managed component inside a subnet that facilitates <a href=\"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\">BGP (Border Gateway Protocol)</a> connections between your route server and your BGP peers.</p>"
+      }
+    },
+    "com.amazonaws.ec2#DeleteRouteServerEndpointRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerEndpointId": {
+          "target": "com.amazonaws.ec2#RouteServerEndpointId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server endpoint to delete.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteRouteServerEndpointResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerEndpoint": {
+          "target": "com.amazonaws.ec2#RouteServerEndpoint",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerEndpoint",
+            "smithy.api#documentation": "<p>Information about the deleted route server endpoint.</p>",
+            "smithy.api#xmlName": "routeServerEndpoint"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteRouteServerPeer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DeleteRouteServerPeerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DeleteRouteServerPeerResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified BGP peer from a route server.</p>\n         <p>A route server peer is a session between a route server endpoint and the device deployed in Amazon Web Services (such as a firewall appliance or other network security function running on an EC2 instance). The device must meet these requirements:</p>\n         <ul>\n            <li>\n               <p>Have an elastic network interface in the VPC</p>\n            </li>\n            <li>\n               <p>Support BGP (Border Gateway Protocol)</p>\n            </li>\n            <li>\n               <p>Can initiate BGP sessions</p>\n            </li>\n         </ul>"
+      }
+    },
+    "com.amazonaws.ec2#DeleteRouteServerPeerRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerPeerId": {
+          "target": "com.amazonaws.ec2#RouteServerPeerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server peer to delete.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteRouteServerPeerResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerPeer": {
+          "target": "com.amazonaws.ec2#RouteServerPeer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerPeer",
+            "smithy.api#documentation": "<p>Information about the deleted route server peer.</p>",
+            "smithy.api#xmlName": "routeServerPeer"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteRouteServerRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server to delete.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteRouteServerResult": {
+      "type": "structure",
+      "members": {
+        "RouteServer": {
+          "target": "com.amazonaws.ec2#RouteServer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServer",
+            "smithy.api#documentation": "<p>Information about the deleted route server.</p>",
+            "smithy.api#xmlName": "routeServer"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
     "com.amazonaws.ec2#DeleteRouteTable": {
       "type": "operation",
       "input": {
@@ -28585,7 +29128,7 @@
         "target": "com.amazonaws.ec2#DeregisterImageResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new\n      instances.</p>\n         <p>If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in\n      the Recycle Bin for the specified retention period. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html\">Recycle Bin</a> in\n      the <i>Amazon EC2 User Guide</i>.</p>\n         <p>When you deregister an AMI, it doesn't affect any instances that you've already launched\n      from the AMI. You'll continue to incur usage costs for those instances until you terminate\n      them.</p>\n         <p>When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created\n      for the root volume of the instance during the AMI creation process. When you deregister an\n      instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you\n      created the AMI.</p>"
+        "smithy.api#documentation": "<p>Deregisters the specified AMI. A deregistered AMI can't be used to launch new\n      instances.</p>\n         <p>If a deregistered EBS-backed AMI matches a Recycle Bin retention rule, it moves to the\n      Recycle Bin for the specified retention period. It can be restored before its retention period\n      expires, after which it is permanently deleted. If the deregistered AMI doesn't match a\n      retention rule, it is permanently deleted immediately. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html\">Recycle Bin</a> in\n      the <i>Amazon EBS User Guide</i>.</p>\n         <p>Deregistering an AMI does not delete the following:</p>\n         <ul>\n            <li>\n               <p>Instances already launched from the AMI. You'll continue to incur usage costs for the\n          instances until you terminate them.</p>\n            </li>\n            <li>\n               <p>For EBS-backed AMIs: The snapshots that were created of the root and data volumes of\n          the instance during AMI creation. You'll continue to incur snapshot storage costs.</p>\n            </li>\n            <li>\n               <p>For instance store-backed AMIs: The files uploaded to Amazon S3 during AMI creation. You'll\n          continue to incur S3 storage costs.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html\">Deregister an Amazon EC2 AMI</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#DeregisterImageRequest": {
@@ -34021,7 +34564,7 @@
         "Filters": {
           "target": "com.amazonaws.ec2#FilterList",
           "traits": {
-            "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>availability-zone</code> - The name of the Availability Zone (for example,\n            <code>us-west-2a</code>) or Local Zone (for example, <code>us-west-2-lax-1b</code>) of\n          the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-id</code> - The ID of the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-allowed</code> - A Boolean that indicates whether the image meets the\n          criteria specified for Allowed AMIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-state-name</code> - The state of the instance (<code>pending</code> |\n            <code>running</code> | <code>shutting-down</code> | <code>terminated</code> |\n            <code>stopping</code> | <code>stopped</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The type of instance (for example,\n          <code>t3.micro</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>launch-time</code> - The time when the instance was launched, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n            <code>2023-09-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2023-09-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> |\n            <code>aws-marketplace</code> | <code>aws-backup-vault</code>). The valid aliases are\n          defined in an Amazon-maintained list. This is not the Amazon Web Services account alias that can be set\n          using the IAM console. We recommend that you use the <code>Owner</code> request parameter\n          instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that you use\n          the <code>Owner</code> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>zone-id</code> - The ID of the Availability Zone (for example,\n            <code>usw2-az2</code>) or Local Zone (for example, <code>usw2-lax1-az1</code>) of the\n          instance.</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>availability-zone</code> - The name of the Availability Zone (for example,\n          <code>us-west-2a</code>) or Local Zone (for example, <code>us-west-2-lax-1b</code>) of\n          the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-id</code> - The ID of the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-allowed</code> - A Boolean that indicates whether the image meets the\n          criteria specified for Allowed AMIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-state-name</code> - The state of the instance (<code>pending</code> |\n          <code>running</code> | <code>shutting-down</code> | <code>terminated</code> |\n          <code>stopping</code> | <code>stopped</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The type of instance (for example,\n          <code>t3.micro</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>launch-time</code> - The time when the instance was launched, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n          <code>2023-09-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2023-09-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> |\n          <code>aws-marketplace</code> | <code>aws-backup-vault</code>). The valid aliases are\n          defined in an Amazon-maintained list. This is not the Amazon Web Services account alias that can be set\n          using the IAM console. We recommend that you use the <code>Owner</code> request parameter\n          instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that you use\n          the <code>Owner</code> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>zone-id</code> - The ID of the Availability Zone (for example,\n          <code>usw2-az2</code>) or Local Zone (for example, <code>usw2-lax1-az1</code>) of the\n          instance.</p>\n            </li>\n         </ul>",
             "smithy.api#xmlName": "Filter"
           }
         },
@@ -34481,7 +35024,7 @@
         "Filters": {
           "target": "com.amazonaws.ec2#FilterList",
           "traits": {
-            "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether Amazon CloudWatch action\n     based recovery is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether the instance type is a\n     burstable performance T instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n     bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n     performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use\n     in the free tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance\n     storage disk, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.encryption-support</code> - Indicates whether data is\n     encrypted at rest (<code>required</code> | <code>supported</code> |\n     <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage\n     available from all local instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.bandwidth-weightings</code> - For instances that support bandwidth \n     weighting to boost performance (<code>default</code>, <code>vpc-1</code>, <code>ebs-1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic\n     Fabric Adapters (EFAs) per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.encryption-in-transit-supported</code> - Indicates whether the instance\n     type automatically encrypts in-transit traffic between instances  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private\n     IPv4 addresses per network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private\n     IPv6 addresses per network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports\n     IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-cards</code> - The maximum number of network cards per\n     instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network\n     interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-enclaves-support</code> - Indicates whether Nitro Enclaves is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-tpm-support</code> - Indicates whether NitroTPM is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-tpm-info.supported-versions</code> - The supported NitroTPM version\n      (<code>2.0</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in\n     GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-features</code> - The supported CPU features\n      (<code>amd-sev-snp</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> | <code>spot</code> | \n     <code>capacity-block</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core\n     for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the\n     instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be\n     configured for the instance type. For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether Amazon CloudWatch action\n     based recovery is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether the instance type is a\n     burstable performance T instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>dedicated-hosts-supported</code> - Indicates whether the instance type supports\n     Dedicated Hosts.  (<code>true</code> | <code>false</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n     bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n     performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use\n     in the free tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance\n     storage disk, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.encryption-support</code> - Indicates whether data is\n     encrypted at rest (<code>required</code> | <code>supported</code> |\n     <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage\n     available from all local instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.bandwidth-weightings</code> - For instances that support bandwidth \n     weighting to boost performance (<code>default</code>, <code>vpc-1</code>, <code>ebs-1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic\n     Fabric Adapters (EFAs) per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.encryption-in-transit-supported</code> - Indicates whether the instance\n     type automatically encrypts in-transit traffic between instances  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private\n     IPv4 addresses per network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private\n     IPv6 addresses per network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports\n     IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-cards</code> - The maximum number of network cards per\n     instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network\n     interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-enclaves-support</code> - Indicates whether Nitro Enclaves is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-tpm-support</code> - Indicates whether NitroTPM is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-tpm-info.supported-versions</code> - The supported NitroTPM version\n      (<code>2.0</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in\n     GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-features</code> - The supported CPU features\n      (<code>amd-sev-snp</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> | <code>spot</code> | \n     <code>capacity-block</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core\n     for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the\n     instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be\n     configured for the instance type. For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
             "smithy.api#xmlName": "Filter"
           }
         },
@@ -38913,6 +39456,252 @@
         "smithy.api#output": {}
       }
     },
+    "com.amazonaws.ec2#DescribeRouteServerEndpoints": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DescribeRouteServerEndpointsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DescribeRouteServerEndpointsResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes one or more route server endpoints.</p>\n         <p>A route server endpoint is an Amazon Web Services-managed component inside a subnet that facilitates <a href=\"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\">BGP (Border Gateway Protocol)</a> connections between your route server and your BGP peers.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "RouteServerEndpoints",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.ec2#DescribeRouteServerEndpointsRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerEndpointIds": {
+          "target": "com.amazonaws.ec2#RouteServerEndpointIdsList",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of the route server endpoints to describe.</p>",
+            "smithy.api#xmlName": "RouteServerEndpointId"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.ec2#RouteServerMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return with a single call.</p>"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.ec2#FilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more filters to apply to the describe request.</p>",
+            "smithy.api#xmlName": "Filter"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeRouteServerEndpointsResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerEndpoints": {
+          "target": "com.amazonaws.ec2#RouteServerEndpointsList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerEndpointSet",
+            "smithy.api#documentation": "<p>Information about the described route server endpoints.</p>",
+            "smithy.api#xmlName": "routeServerEndpointSet"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NextToken",
+            "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+            "smithy.api#xmlName": "nextToken"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeRouteServerPeers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DescribeRouteServerPeersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DescribeRouteServerPeersResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes one or more route server peers.</p>\n         <p>A route server peer is a session between a route server endpoint and the device deployed in Amazon Web Services (such as a firewall appliance or other network security function running on an EC2 instance). The device must meet these requirements:</p>\n         <ul>\n            <li>\n               <p>Have an elastic network interface in the VPC</p>\n            </li>\n            <li>\n               <p>Support BGP (Border Gateway Protocol)</p>\n            </li>\n            <li>\n               <p>Can initiate BGP sessions</p>\n            </li>\n         </ul>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "RouteServerPeers",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.ec2#DescribeRouteServerPeersRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerPeerIds": {
+          "target": "com.amazonaws.ec2#RouteServerPeerIdsList",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of the route server peers to describe.</p>",
+            "smithy.api#xmlName": "RouteServerPeerId"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.ec2#RouteServerMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return with a single call.</p>"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.ec2#FilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more filters to apply to the describe request.</p>",
+            "smithy.api#xmlName": "Filter"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeRouteServerPeersResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerPeers": {
+          "target": "com.amazonaws.ec2#RouteServerPeersList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerPeerSet",
+            "smithy.api#documentation": "<p>Information about the described route server peers.</p>",
+            "smithy.api#xmlName": "routeServerPeerSet"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NextToken",
+            "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+            "smithy.api#xmlName": "nextToken"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeRouteServers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DescribeRouteServersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DescribeRouteServersResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes one or more route servers.</p>\n         <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, \nVPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>\n         <p>Route server supports the follow route table types:</p>\n         <ul>\n            <li>\n               <p>VPC route tables not associated with subnets</p>\n            </li>\n            <li>\n               <p>Subnet route tables</p>\n            </li>\n            <li>\n               <p>Internet gateway route tables</p>\n            </li>\n         </ul>\n         <p>Route server does not support route tables associated with virtual private gateways. To propagate routes into a transit gateway route table, use <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html\">Transit Gateway Connect</a>.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "RouteServers",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.ec2#DescribeRouteServersRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerIds": {
+          "target": "com.amazonaws.ec2#RouteServerIdsList",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of the route servers to describe.</p>",
+            "smithy.api#xmlName": "RouteServerId"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.ec2#RouteServerMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return with a single call.</p>"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.ec2#FilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more filters to apply to the describe request.</p>",
+            "smithy.api#xmlName": "Filter"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeRouteServersResult": {
+      "type": "structure",
+      "members": {
+        "RouteServers": {
+          "target": "com.amazonaws.ec2#RouteServersList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerSet",
+            "smithy.api#documentation": "<p>Information about the described route servers.</p>",
+            "smithy.api#xmlName": "routeServerSet"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NextToken",
+            "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+            "smithy.api#xmlName": "nextToken"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
     "com.amazonaws.ec2#DescribeRouteTables": {
       "type": "operation",
       "input": {
@@ -40959,7 +41748,7 @@
         "target": "com.amazonaws.ec2#DescribeStoreImageTasksResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Describes the progress of the AMI store tasks. You can describe the store tasks for\n      specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from\n      the last 31 days.</p>\n         <p>For each AMI task, the response indicates if the task is <code>InProgress</code>,\n        <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the\n      response shows the estimated progress as a percentage.</p>\n         <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31\n      days can be viewed.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n        Amazon S3</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+        "smithy.api#documentation": "<p>Describes the progress of the AMI store tasks. You can describe the store tasks for\n      specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from\n      the last 31 days.</p>\n         <p>For each AMI task, the response indicates if the task is <code>InProgress</code>,\n      <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the\n      response shows the estimated progress as a percentage.</p>\n         <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31\n      days can be viewed.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n      Amazon S3</a> in the <i>Amazon EC2 User Guide</i>.</p>",
         "smithy.api#paginated": {
           "inputToken": "NextToken",
           "outputToken": "NextToken",
@@ -41024,7 +41813,7 @@
         "Filters": {
           "target": "com.amazonaws.ec2#FilterList",
           "traits": {
-            "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>task-state</code> - Returns tasks in a certain state (<code>InProgress</code> |\n            <code>Completed</code> | <code>Failed</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>bucket</code> - Returns task information for tasks that targeted a specific\n          bucket. For the filter value, specify the bucket name.</p>\n            </li>\n         </ul>\n         <note>\n            <p>When you specify the <code>ImageIds</code> parameter, any filters that you specify are\n        ignored. To use the filters, you must remove the <code>ImageIds</code> parameter.</p>\n         </note>",
+            "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>task-state</code> - Returns tasks in a certain state (<code>InProgress</code> |\n          <code>Completed</code> | <code>Failed</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>bucket</code> - Returns task information for tasks that targeted a specific\n          bucket. For the filter value, specify the bucket name.</p>\n            </li>\n         </ul>\n         <note>\n            <p>When you specify the <code>ImageIds</code> parameter, any filters that you specify are\n        ignored. To use the filters, you must remove the <code>ImageIds</code> parameter.</p>\n         </note>",
             "smithy.api#xmlName": "Filter"
           }
         },
@@ -44292,7 +45081,7 @@
         "target": "com.amazonaws.ec2#DescribeVpcEndpointServicePermissionsResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Describes the principals (service consumers) that are permitted to discover your VPC\n            endpoint service.</p>",
+        "smithy.api#documentation": "<p>Describes the principals (service consumers) that are permitted to discover your VPC\n            endpoint service. Principal ARNs with path components aren't supported.</p>",
         "smithy.api#paginated": {
           "inputToken": "NextToken",
           "outputToken": "NextToken",
@@ -45722,7 +46511,7 @@
         "target": "com.amazonaws.ec2#DisableAllowedImagesSettingsResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Disables Allowed AMIs for your account in the specified Amazon Web Services Region. When set to\n        <code>disabled</code>, the image criteria in your Allowed AMIs settings do not apply, and no\n      restrictions are placed on AMI discoverability or usage. Users in your account can launch\n      instances using any public AMI or AMI shared with your account.</p>\n         <note>\n            <p>The Allowed AMIs feature does not restrict the AMIs owned by your account. Regardless of\n        the criteria you set, the AMIs created by your account will always be discoverable and\n        usable by users in your account.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n          Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Disables Allowed AMIs for your account in the specified Amazon Web Services Region. When set to\n      <code>disabled</code>, the image criteria in your Allowed AMIs settings do not apply, and no\n      restrictions are placed on AMI discoverability or usage. Users in your account can launch\n      instances using any public AMI or AMI shared with your account.</p>\n         <note>\n            <p>The Allowed AMIs feature does not restrict the AMIs owned by your account. Regardless of\n        the criteria you set, the AMIs created by your account will always be discoverable and\n        usable by users in your account.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n      Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#DisableAllowedImagesSettingsRequest": {
@@ -46255,7 +47044,7 @@
         "target": "com.amazonaws.ec2#DisableImageResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Sets the AMI state to <code>disabled</code> and removes all launch permissions from the\n      AMI. A disabled AMI can't be used for instance launches.</p>\n         <p>A disabled AMI can't be shared. If an AMI was public or previously shared, it is made\n      private. If an AMI was shared with an Amazon Web Services account, organization, or Organizational Unit,\n      they lose access to the disabled AMI. </p>\n         <p>A disabled AMI does not appear in <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html\">DescribeImages</a> API calls by\n      default.</p>\n         <p>Only the AMI owner can disable an AMI.</p>\n         <p>You can re-enable a disabled AMI using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableImage.html\">EnableImage</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html\">Disable an AMI</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Sets the AMI state to <code>disabled</code> and removes all launch permissions from the\n      AMI. A disabled AMI can't be used for instance launches.</p>\n         <p>A disabled AMI can't be shared. If an AMI was public or previously shared, it is made\n      private. If an AMI was shared with an Amazon Web Services account, organization, or Organizational Unit,\n      they lose access to the disabled AMI. </p>\n         <p>A disabled AMI does not appear in <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html\">DescribeImages</a> API calls by\n      default.</p>\n         <p>Only the AMI owner can disable an AMI.</p>\n         <p>You can re-enable a disabled AMI using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableImage.html\">EnableImage</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html\">Disable an AMI</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#DisableImageBlockPublicAccess": {
@@ -46267,7 +47056,7 @@
         "target": "com.amazonaws.ec2#DisableImageBlockPublicAccessResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Disables <i>block public access for AMIs</i> at the account level in the\n      specified Amazon Web Services Region. This removes the <i>block public access</i> restriction\n      from your account. With the restriction removed, you can publicly share your AMIs in the\n      specified Amazon Web Services Region.</p>\n         <p>The API can take up to 10 minutes to configure this setting. During this time, if you run\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html\">GetImageBlockPublicAccessState</a>, the response will be\n      <code>block-new-sharing</code>. When the API has completed the configuration, the response\n      will be <code>unblocked</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis\">Block\n        public access to your AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Disables <i>block public access for AMIs</i> at the account level in the\n      specified Amazon Web Services Region. This removes the <i>block public access</i> restriction\n      from your account. With the restriction removed, you can publicly share your AMIs in the\n      specified Amazon Web Services Region.</p>\n         <p>The API can take up to 10 minutes to configure this setting. During this time, if you run\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html\">GetImageBlockPublicAccessState</a>, the response will be\n      <code>block-new-sharing</code>. When the API has completed the configuration, the response\n      will be <code>unblocked</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis\">Block\n      public access to your AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#DisableImageBlockPublicAccessRequest": {
@@ -46309,7 +47098,7 @@
         "target": "com.amazonaws.ec2#DisableImageDeprecationResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Cancels the deprecation of the specified AMI.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html\">Deprecate an AMI</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Cancels the deprecation of the specified AMI.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html\">Deprecate an AMI</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#DisableImageDeprecationRequest": {
@@ -46359,7 +47148,7 @@
         "target": "com.amazonaws.ec2#DisableImageDeregistrationProtectionResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Disables deregistration protection for an AMI. When deregistration protection is disabled,\n      the AMI can be deregistered.</p>\n         <p>If you chose to include a 24-hour cooldown period when you enabled deregistration\n      protection for the AMI, then, when you disable deregistration protection, you won\u2019t\n      immediately be able to deregister the AMI.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html#ami-deregistration-protection\">Protect an\n        AMI from deregistration</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Disables deregistration protection for an AMI. When deregistration protection is disabled,\n      the AMI can be deregistered.</p>\n         <p>If you chose to include a 24-hour cooldown period when you enabled deregistration\n      protection for the AMI, then, when you disable deregistration protection, you won\u2019t\n      immediately be able to deregister the AMI.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html#ami-deregistration-protection\">Protect an\n      AMI from deregistration</a> in the <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#DisableImageDeregistrationProtectionRequest": {
@@ -46481,6 +47270,64 @@
             "aws.protocols#ec2QueryName": "Success",
             "smithy.api#documentation": "<p>The result of disabling the IPAM account.</p>",
             "smithy.api#xmlName": "success"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DisableRouteServerPropagation": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DisableRouteServerPropagationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DisableRouteServerPropagationResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Disables route propagation from a route server to a specified route table.</p>\n         <p>When enabled, route server propagation installs the routes in the FIB on the route table you've specified. Route server supports IPv4 and IPv6 route propagation.</p>\n         <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, \nVPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>\n         <p>Route server supports the follow route table types:</p>\n         <ul>\n            <li>\n               <p>VPC route tables not associated with subnets</p>\n            </li>\n            <li>\n               <p>Subnet route tables</p>\n            </li>\n            <li>\n               <p>Internet gateway route tables</p>\n            </li>\n         </ul>\n         <p>Route server does not support route tables associated with virtual private gateways. To propagate routes into a transit gateway route table, use <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html\">Transit Gateway Connect</a>.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#DisableRouteServerPropagationRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server for which to disable propagation.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RouteTableId": {
+          "target": "com.amazonaws.ec2#RouteTableId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route table for which to disable route server propagation.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DisableRouteServerPropagationResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerPropagation": {
+          "target": "com.amazonaws.ec2#RouteServerPropagation",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerPropagation",
+            "smithy.api#documentation": "<p>Information about the disabled route server propagation.</p>",
+            "smithy.api#xmlName": "routeServerPropagation"
           }
         }
       },
@@ -47311,6 +48158,64 @@
             "aws.protocols#ec2QueryName": "NatGatewayAddressSet",
             "smithy.api#documentation": "<p>Information about the NAT gateway IP addresses.</p>",
             "smithy.api#xmlName": "natGatewayAddressSet"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DisassociateRouteServer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DisassociateRouteServerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DisassociateRouteServerResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Disassociates a route server from a VPC.</p>\n         <p>A route server association is the connection established between a route server and a VPC.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#DisassociateRouteServerRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server to disassociate.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "VpcId": {
+          "target": "com.amazonaws.ec2#VpcId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the VPC to disassociate from the route server.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DisassociateRouteServerResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerAssociation": {
+          "target": "com.amazonaws.ec2#RouteServerAssociation",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerAssociation",
+            "smithy.api#documentation": "<p>Information about the disassociated route server.</p>",
+            "smithy.api#xmlName": "routeServerAssociation"
           }
         }
       },
@@ -49342,13 +50247,13 @@
         "EnaSrdEnabled": {
           "target": "com.amazonaws.ec2#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether ENA Express is enabled for the network interface when you \n\t\t\tlaunch an instance from your launch template.</p>"
+            "smithy.api#documentation": "<p>Specifies whether ENA Express is enabled for the network interface when you \n\t\t\tlaunch an instance.</p>"
           }
         },
         "EnaSrdUdpSpecification": {
           "target": "com.amazonaws.ec2#EnaSrdUdpSpecificationRequest",
           "traits": {
-            "smithy.api#documentation": "<p>Contains ENA Express settings for UDP network traffic in your launch template.</p>"
+            "smithy.api#documentation": "<p>Contains ENA Express settings for UDP network traffic for the network interface \n\t        attached to the instance.</p>"
           }
         }
       },
@@ -49379,7 +50284,7 @@
         "EnaSrdUdpEnabled": {
           "target": "com.amazonaws.ec2#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates whether UDP traffic uses ENA Express for your instance. To ensure that \n\t\t\tUDP traffic can use ENA Express when you launch an instance, you must also set \n\t\t\t<b>EnaSrdEnabled</b> in the <b>EnaSrdSpecificationRequest</b> to <code>true</code> in your \n\t\t\tlaunch template.</p>"
+            "smithy.api#documentation": "<p>Indicates whether UDP traffic uses ENA Express for your instance. To ensure that \n\t\t\tUDP traffic can use ENA Express when you launch an instance, you must also set \n\t\t\t<b>EnaSrdEnabled</b> in the <b>EnaSrdSpecificationRequest</b> to <code>true</code>.</p>"
           }
         }
       },
@@ -49477,7 +50382,7 @@
         "target": "com.amazonaws.ec2#EnableAllowedImagesSettingsResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Enables Allowed AMIs for your account in the specified Amazon Web Services Region. Two values are\n      accepted:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code>: The image criteria in your Allowed AMIs settings are applied. As\n          a result, only AMIs matching these criteria are discoverable and can be used by your\n          account to launch instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>audit-mode</code>: The image criteria in your Allowed AMIs settings are not\n          applied. No restrictions are placed on AMI discoverability or usage. Users in your account\n          can launch instances using any public AMI or AMI shared with your account.</p>\n               <p>The purpose of <code>audit-mode</code> is to indicate which AMIs will be affected when\n          Allowed AMIs is <code>enabled</code>. In <code>audit-mode</code>, each AMI displays either\n            <code>\"ImageAllowed\": true</code> or <code>\"ImageAllowed\": false</code> to indicate\n          whether the AMI will be discoverable and available to users in the account when Allowed\n          AMIs is enabled.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The Allowed AMIs feature does not restrict the AMIs owned by your account. Regardless of\n        the criteria you set, the AMIs created by your account will always be discoverable and\n        usable by users in your account.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n          Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Enables Allowed AMIs for your account in the specified Amazon Web Services Region. Two values are\n      accepted:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code>: The image criteria in your Allowed AMIs settings are applied. As\n          a result, only AMIs matching these criteria are discoverable and can be used by your\n          account to launch instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>audit-mode</code>: The image criteria in your Allowed AMIs settings are not\n          applied. No restrictions are placed on AMI discoverability or usage. Users in your account\n          can launch instances using any public AMI or AMI shared with your account.</p>\n               <p>The purpose of <code>audit-mode</code> is to indicate which AMIs will be affected when\n          Allowed AMIs is <code>enabled</code>. In <code>audit-mode</code>, each AMI displays either\n          <code>\"ImageAllowed\": true</code> or <code>\"ImageAllowed\": false</code> to indicate\n          whether the AMI will be discoverable and available to users in the account when Allowed\n          AMIs is enabled.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The Allowed AMIs feature does not restrict the AMIs owned by your account. Regardless of\n        the criteria you set, the AMIs created by your account will always be discoverable and\n        usable by users in your account.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n      Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#EnableAllowedImagesSettingsRequest": {
@@ -50036,7 +50941,7 @@
         "target": "com.amazonaws.ec2#EnableImageResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Re-enables a disabled AMI. The re-enabled AMI is marked as <code>available</code> and can\n      be used for instance launches, appears in describe operations, and can be shared. Amazon Web Services\n      accounts, organizations, and Organizational Units that lost access to the AMI when it was\n      disabled do not regain access automatically. Once the AMI is available, it can be shared with\n      them again.</p>\n         <p>Only the AMI owner can re-enable a disabled AMI.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html\">Disable an AMI</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Re-enables a disabled AMI. The re-enabled AMI is marked as <code>available</code> and can\n      be used for instance launches, appears in describe operations, and can be shared. Amazon Web Services\n      accounts, organizations, and Organizational Units that lost access to the AMI when it was\n      disabled do not regain access automatically. Once the AMI is available, it can be shared with\n      them again.</p>\n         <p>Only the AMI owner can re-enable a disabled AMI.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html\">Disable an AMI</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#EnableImageBlockPublicAccess": {
@@ -50048,7 +50953,7 @@
         "target": "com.amazonaws.ec2#EnableImageBlockPublicAccessResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Enables <i>block public access for AMIs</i> at the account level in the\n      specified Amazon Web Services Region. This prevents the public sharing of your AMIs. However, if you already\n      have public AMIs, they will remain publicly available.</p>\n         <p>The API can take up to 10 minutes to configure this setting. During this time, if you run\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html\">GetImageBlockPublicAccessState</a>, the response will be <code>unblocked</code>. When\n      the API has completed the configuration, the response will be\n      <code>block-new-sharing</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis\">Block\n        public access to your AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Enables <i>block public access for AMIs</i> at the account level in the\n      specified Amazon Web Services Region. This prevents the public sharing of your AMIs. However, if you already\n      have public AMIs, they will remain publicly available.</p>\n         <p>The API can take up to 10 minutes to configure this setting. During this time, if you run\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html\">GetImageBlockPublicAccessState</a>, the response will be <code>unblocked</code>. When\n      the API has completed the configuration, the response will be\n      <code>block-new-sharing</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis\">Block\n      public access to your AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#EnableImageBlockPublicAccessRequest": {
@@ -50098,7 +51003,7 @@
         "target": "com.amazonaws.ec2#EnableImageDeprecationResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Enables deprecation of the specified AMI at the specified date and time.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html\">Deprecate an AMI</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Enables deprecation of the specified AMI at the specified date and time.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html\">Deprecate an AMI</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#EnableImageDeprecationRequest": {
@@ -50116,7 +51021,7 @@
           "target": "com.amazonaws.ec2#MillisecondDateTime",
           "traits": {
             "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>The date and time to deprecate the AMI, in UTC, in the following format:\n        <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z.\n      If you specify a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.</p>\n         <p>You can\u2019t specify a date in the past. The upper limit for <code>DeprecateAt</code> is 10\n      years from now, except for public AMIs, where the upper limit is 2 years from the creation\n      date.</p>",
+            "smithy.api#documentation": "<p>The date and time to deprecate the AMI, in UTC, in the following format:\n      <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z.\n      If you specify a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.</p>\n         <p>You can\u2019t specify a date in the past. The upper limit for <code>DeprecateAt</code> is 10\n      years from now, except for public AMIs, where the upper limit is 2 years from the creation\n      date.</p>",
             "smithy.api#required": {}
           }
         },
@@ -50156,7 +51061,7 @@
         "target": "com.amazonaws.ec2#EnableImageDeregistrationProtectionResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Enables deregistration protection for an AMI. When deregistration protection is enabled,\n      the AMI can't be deregistered.</p>\n         <p>To allow the AMI to be deregistered, you must first disable deregistration protection\n      using <a>DisableImageDeregistrationProtection</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html#ami-deregistration-protection\">Protect an\n        AMI from deregistration</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Enables deregistration protection for an AMI. When deregistration protection is enabled,\n      the AMI can't be deregistered.</p>\n         <p>To allow the AMI to be deregistered, you must first disable deregistration protection\n      using <a>DisableImageDeregistrationProtection</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html#ami-deregistration-protection\">Protect an\n      AMI from deregistration</a> in the <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#EnableImageDeregistrationProtectionRequest": {
@@ -50326,6 +51231,64 @@
             "aws.protocols#ec2QueryName": "ReturnValue",
             "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
             "smithy.api#xmlName": "returnValue"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#EnableRouteServerPropagation": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#EnableRouteServerPropagationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#EnableRouteServerPropagationResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Defines which route tables the route server can update with routes.</p>\n         <p>When enabled, route server propagation installs the routes in the FIB on the route table you've specified. Route server supports IPv4 and IPv6 route propagation.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#EnableRouteServerPropagationRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server for which to enable propagation.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RouteTableId": {
+          "target": "com.amazonaws.ec2#RouteTableId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route table to which route server will propagate routes.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#EnableRouteServerPropagationResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerPropagation": {
+          "target": "com.amazonaws.ec2#RouteServerPropagation",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerPropagation",
+            "smithy.api#documentation": "<p>Information about the enabled route server propagation.</p>",
+            "smithy.api#xmlName": "routeServerPropagation"
           }
         }
       },
@@ -52249,7 +53212,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Request to create a launch template for a Windows fast launch enabled AMI.</p>\n         <note>\n            <p>Note - You can specify either the <code>LaunchTemplateName</code> or the\n          <code>LaunchTemplateId</code>, but not both.</p>\n         </note>"
+        "smithy.api#documentation": "<p>Request to create a launch template for a Windows fast launch enabled AMI.</p>\n         <note>\n            <p>Note - You can specify either the <code>LaunchTemplateName</code> or the\n        <code>LaunchTemplateId</code>, but not both.</p>\n         </note>"
       }
     },
     "com.amazonaws.ec2#FastLaunchLaunchTemplateSpecificationResponse": {
@@ -54296,7 +55259,7 @@
         "target": "com.amazonaws.ec2#GetAllowedImagesSettingsResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Gets the current state of the Allowed AMIs setting and the list of Allowed AMIs criteria\n      at the account level in the specified Region.</p>\n         <note>\n            <p>The Allowed AMIs feature does not restrict the AMIs owned by your account. Regardless of\n        the criteria you set, the AMIs created by your account will always be discoverable and\n        usable by users in your account.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n          Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Gets the current state of the Allowed AMIs setting and the list of Allowed AMIs criteria\n      at the account level in the specified Region.</p>\n         <note>\n            <p>The Allowed AMIs feature does not restrict the AMIs owned by your account. Regardless of\n        the criteria you set, the AMIs created by your account will always be discoverable and\n        usable by users in your account.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n      Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#GetAllowedImagesSettingsRequest": {
@@ -55415,7 +56378,7 @@
         "target": "com.amazonaws.ec2#GetImageBlockPublicAccessStateResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Gets the current state of <i>block public access for AMIs</i> at the account\n      level in the specified Amazon Web Services Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis\">Block\n        public access to your AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Gets the current state of <i>block public access for AMIs</i> at the account\n      level in the specified Amazon Web Services Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis\">Block\n      public access to your AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#GetImageBlockPublicAccessStateRequest": {
@@ -57046,6 +58009,197 @@
       },
       "traits": {
         "smithy.api#documentation": "<p>Contains the output of GetReservedInstancesExchangeQuote.</p>",
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerAssociations": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#GetRouteServerAssociationsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#GetRouteServerAssociationsResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Gets information about the associations for the specified route server.</p>\n         <p>A route server association is the connection established between a route server and a VPC.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerAssociationsRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server for which to get association information.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerAssociationsResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerAssociations": {
+          "target": "com.amazonaws.ec2#RouteServerAssociationsList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerAssociationSet",
+            "smithy.api#documentation": "<p>Information about the associations for the specified route server.</p>",
+            "smithy.api#xmlName": "routeServerAssociationSet"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerPropagations": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#GetRouteServerPropagationsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#GetRouteServerPropagationsResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Gets information about the route propagations for the specified route server.</p>\n         <p>When enabled, route server propagation installs the routes in the FIB on the route table you've specified. Route server supports IPv4 and IPv6 route propagation.</p>\n         <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, \nVPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>\n         <p>Route server supports the follow route table types:</p>\n         <ul>\n            <li>\n               <p>VPC route tables not associated with subnets</p>\n            </li>\n            <li>\n               <p>Subnet route tables</p>\n            </li>\n            <li>\n               <p>Internet gateway route tables</p>\n            </li>\n         </ul>\n         <p>Route server does not support route tables associated with virtual private gateways. To propagate routes into a transit gateway route table, use <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html\">Transit Gateway Connect</a>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerPropagationsRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server for which to get propagation information.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RouteTableId": {
+          "target": "com.amazonaws.ec2#RouteTableId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the route table for which to get propagation information.</p>"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerPropagationsResult": {
+      "type": "structure",
+      "members": {
+        "RouteServerPropagations": {
+          "target": "com.amazonaws.ec2#RouteServerPropagationsList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerPropagationSet",
+            "smithy.api#documentation": "<p>Information about the route propagations for the specified route server.</p>",
+            "smithy.api#xmlName": "routeServerPropagationSet"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerRoutingDatabase": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#GetRouteServerRoutingDatabaseRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#GetRouteServerRoutingDatabaseResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Gets the routing database for the specified route server. The <a href=\"https://en.wikipedia.org/wiki/Routing_table\">Routing Information Base (RIB)</a> serves as a database that stores all the routing information and network topology data collected by a router or routing system, such as routes learned from BGP peers. The RIB is constantly updated as new routing information is received or existing routes change. This ensures that the route server always has the most current view of the network topology and can make optimal routing decisions.</p>\n         <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, \nVPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>\n         <p>Route server supports the follow route table types:</p>\n         <ul>\n            <li>\n               <p>VPC route tables not associated with subnets</p>\n            </li>\n            <li>\n               <p>Subnet route tables</p>\n            </li>\n            <li>\n               <p>Internet gateway route tables</p>\n            </li>\n         </ul>\n         <p>Route server does not support route tables associated with virtual private gateways. To propagate routes into a transit gateway route table, use <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html\">Transit Gateway Connect</a>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerRoutingDatabaseRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server for which to get the routing database.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.ec2#RouteServerMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of routing database entries to return in a single response.</p>"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.ec2#FilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>Filters to apply to the routing database query.</p>",
+            "smithy.api#xmlName": "Filter"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#GetRouteServerRoutingDatabaseResult": {
+      "type": "structure",
+      "members": {
+        "AreRoutesPersisted": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "aws.protocols#ec2QueryName": "AreRoutesPersisted",
+            "smithy.api#documentation": "<p>Indicates whether routes are being persisted in the routing database.</p>",
+            "smithy.api#xmlName": "areRoutesPersisted"
+          }
+        },
+        "Routes": {
+          "target": "com.amazonaws.ec2#RouteServerRouteList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteSet",
+            "smithy.api#documentation": "<p>The collection of routes in the route server's routing database.</p>",
+            "smithy.api#xmlName": "routeSet"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NextToken",
+            "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+            "smithy.api#xmlName": "nextToken"
+          }
+        }
+      },
+      "traits": {
         "smithy.api#output": {}
       }
     },
@@ -59760,7 +60914,7 @@
           "target": "com.amazonaws.ec2#Boolean",
           "traits": {
             "aws.protocols#ec2QueryName": "ImageAllowed",
-            "smithy.api#documentation": "<p>If <code>true</code>, the AMI satisfies the criteria for Allowed AMIs and can be\n      discovered and used in the account. If <code>false</code> and Allowed AMIs is set to\n        <code>enabled</code>, the AMI can't be discovered or used in the account. If\n        <code>false</code> and Allowed AMIs is set to <code>audit-mode</code>, the AMI can be\n      discovered and used in the account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n      Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>",
+            "smithy.api#documentation": "<p>If <code>true</code>, the AMI satisfies the criteria for Allowed AMIs and can be\n      discovered and used in the account. If <code>false</code> and Allowed AMIs is set to\n      <code>enabled</code>, the AMI can't be discovered or used in the account. If\n      <code>false</code> and Allowed AMIs is set to <code>audit-mode</code>, the AMI can be\n      discovered and used in the account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n      Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>",
             "smithy.api#xmlName": "imageAllowed"
           }
         },
@@ -60119,7 +61273,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The list of criteria that are evaluated to determine whch AMIs are discoverable and usable\n      in the account in the specified Amazon Web Services Region. Currently, the only criteria that can be\n      specified are AMI providers. </p>\n         <p>Up to 10 <code>imageCriteria</code> objects can be specified, and up to a total of 200\n      values for all <code>imageProviders</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#allowed-amis-json-configuration\">JSON\n        configuration for the Allowed AMIs criteria</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>The list of criteria that are evaluated to determine whch AMIs are discoverable and usable\n      in the account in the specified Amazon Web Services Region. Currently, the only criteria that can be\n      specified are AMI providers. </p>\n         <p>Up to 10 <code>imageCriteria</code> objects can be specified, and up to a total of 200\n      values for all <code>imageProviders</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#allowed-amis-json-configuration\">JSON\n        configuration for the Allowed AMIs criteria</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#ImageCriterionList": {
@@ -60143,7 +61297,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The list of criteria that are evaluated to determine whch AMIs are discoverable and usable\n      in the account in the specified Amazon Web Services Region. Currently, the only criteria that can be\n      specified are AMI providers. </p>\n         <p>Up to 10 <code>imageCriteria</code> objects can be specified, and up to a total of 200\n      values for all <code>imageProviders</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#allowed-amis-json-configuration\">JSON\n        configuration for the Allowed AMIs criteria</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>The list of criteria that are evaluated to determine whch AMIs are discoverable and usable\n      in the account in the specified Amazon Web Services Region. Currently, the only criteria that can be\n      specified are AMI providers. </p>\n         <p>Up to 10 <code>imageCriteria</code> objects can be specified, and up to a total of 200\n      values for all <code>imageProviders</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#allowed-amis-json-configuration\">JSON\n        configuration for the Allowed AMIs criteria</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#ImageCriterionRequestList": {
@@ -60277,7 +61431,7 @@
           "target": "com.amazonaws.ec2#String",
           "traits": {
             "aws.protocols#ec2QueryName": "ImageOwnerAlias",
-            "smithy.api#documentation": "<p>The alias of the AMI owner.</p>\n         <p>Valid values: <code>amazon</code> | <code>aws-backup-vault</code> |\n        <code>aws-marketplace</code>\n         </p>",
+            "smithy.api#documentation": "<p>The alias of the AMI owner.</p>\n         <p>Valid values: <code>amazon</code> | <code>aws-backup-vault</code> |\n      <code>aws-marketplace</code>\n         </p>",
             "smithy.api#xmlName": "imageOwnerAlias"
           }
         },
@@ -60293,7 +61447,7 @@
           "target": "com.amazonaws.ec2#String",
           "traits": {
             "aws.protocols#ec2QueryName": "DeprecationTime",
-            "smithy.api#documentation": "<p>The deprecation date and time of the AMI, in UTC, in the following format:\n        <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z.</p>",
+            "smithy.api#documentation": "<p>The deprecation date and time of the AMI, in UTC, in the following format:\n      <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z.</p>",
             "smithy.api#xmlName": "deprecationTime"
           }
         },
@@ -76338,7 +77492,7 @@
         "DeviceIndex": {
           "target": "com.amazonaws.ec2#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The device index for the network interface attachment. Each network interface requires\n            a device index. If you create a launch template that includes secondary network interfaces \n            but not a primary network interface, then you must add a primary network interface as a \n            launch parameter when you launch an instance from the template.</p>"
+            "smithy.api#documentation": "<p>The device index for the network interface attachment. The primary network interface\n            has a device index of 0. Each network interface is of type <code>interface</code>, you\n            must specify a device index. If you create a launch template that includes secondary \n            network interfaces  but not a primary network interface, then you must add a primary \n            network interface as a launch parameter when you launch an instance from the template.</p>"
           }
         },
         "Groups": {
@@ -77190,7 +78344,7 @@
         "target": "com.amazonaws.ec2#ListImagesInRecycleBinResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Lists one or more AMIs that are currently in the Recycle Bin. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html\">Recycle\n        Bin</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+        "smithy.api#documentation": "<p>Lists one or more AMIs that are currently in the Recycle Bin. For more information, see\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html\">Recycle\n        Bin</a> in the <i>Amazon EC2 User Guide</i>.</p>",
         "smithy.api#paginated": {
           "inputToken": "NextToken",
           "outputToken": "NextToken",
@@ -79548,6 +80702,12 @@
             "smithy.api#documentation": "<p>Options for enabling a customizable text banner that will be displayed on\n\t\t\tAmazon Web Services provided clients when a VPN session is established.</p>"
           }
         },
+        "ClientRouteEnforcementOptions": {
+          "target": "com.amazonaws.ec2#ClientRouteEnforcementOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T\n\t\this feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>\n         <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, \n\t\t\treverting it back to the expected route configurations.</p>"
+          }
+        },
         "DisconnectOnSessionTimeout": {
           "target": "com.amazonaws.ec2#Boolean",
           "traits": {
@@ -80244,7 +81404,7 @@
           "target": "com.amazonaws.ec2#InstanceAttributeName",
           "traits": {
             "aws.protocols#ec2QueryName": "Attribute",
-            "smithy.api#documentation": "<p>The name of the attribute to modify.</p>\n         <important>\n            <p>You can modify the following attributes only: <code>disableApiTermination</code> |\n                    <code>instanceType</code> | <code>kernel</code> | <code>ramdisk</code> |\n                    <code>instanceInitiatedShutdownBehavior</code> | <code>blockDeviceMapping</code>\n                | <code>userData</code> | <code>sourceDestCheck</code> | <code>groupSet</code> |\n                    <code>ebsOptimized</code> | <code>sriovNetSupport</code> |\n                    <code>enaSupport</code> | <code>nvmeSupport</code> | <code>disableApiStop</code>\n                | <code>enclaveOptions</code>\n            </p>\n         </important>",
+            "smithy.api#documentation": "<p>The name of the attribute to modify.</p>\n         <note>\n            <p>When changing the instance type: If the original instance type is configured for\n                configurable bandwidth, and the desired instance type doesn't support configurable\n                bandwidth, first set the existing bandwidth configuration to <code>default</code>\n                using the <a>ModifyInstanceNetworkPerformanceOptions</a>\n                operation.</p>\n         </note>\n         <important>\n            <p>You can modify the following attributes only: <code>disableApiTermination</code> |\n                    <code>instanceType</code> | <code>kernel</code> | <code>ramdisk</code> |\n                    <code>instanceInitiatedShutdownBehavior</code> | <code>blockDeviceMapping</code>\n                | <code>userData</code> | <code>sourceDestCheck</code> | <code>groupSet</code> |\n                    <code>ebsOptimized</code> | <code>sriovNetSupport</code> |\n                    <code>enaSupport</code> | <code>nvmeSupport</code> | <code>disableApiStop</code>\n                | <code>enclaveOptions</code>\n            </p>\n         </important>",
             "smithy.api#xmlName": "attribute"
           }
         },
@@ -81987,6 +83147,74 @@
       },
       "traits": {
         "smithy.api#documentation": "<p>Contains the output of ModifyReservedInstances.</p>",
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#ModifyRouteServer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#ModifyRouteServerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#ModifyRouteServerResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Modifies the configuration of an existing route server.</p>\n         <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, \nVPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>\n         <p>Route server supports the follow route table types:</p>\n         <ul>\n            <li>\n               <p>VPC route tables not associated with subnets</p>\n            </li>\n            <li>\n               <p>Subnet route tables</p>\n            </li>\n            <li>\n               <p>Internet gateway route tables</p>\n            </li>\n         </ul>\n         <p>Route server does not support route tables associated with virtual private gateways. To propagate routes into a transit gateway route table, use <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html\">Transit Gateway Connect</a>.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html\">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#ModifyRouteServerRequest": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the route server to modify.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PersistRoutes": {
+          "target": "com.amazonaws.ec2#RouteServerPersistRoutesAction",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether to persist routes after all BGP sessions are terminated.</p>\n         <ul>\n            <li>\n               <p>enable: Routes will be persisted in FIB and RIB after all BGP sessions are terminated.</p>\n            </li>\n            <li>\n               <p>disable: Routes will not be persisted in FIB and RIB after all BGP sessions are terminated.</p>\n            </li>\n            <li>\n               <p>reset: If a route server has persisted routes due to all BGP sessions having ended, reset will withdraw all routes and reset route server to an empty FIB and RIB.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "PersistRoutesDuration": {
+          "target": "com.amazonaws.ec2#BoxedLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of minutes a route server will wait after BGP is re-established to unpersist the routes in the FIB and RIB. Value must be in the range of 1-5. Required if PersistRoutes is <code>enabled</code>.</p>\n         <p>If you set the duration to 1 minute, then when your network appliance re-establishes BGP with route server, it has 1 minute to relearn it's adjacent network and advertise those routes to route server before route server resumes normal functionality. In most cases, 1 minute is probably sufficient. If, however, you have concerns that your BGP network may not be capable of fully re-establishing and re-learning everything in 1 minute, you can increase the duration up to 5 minutes.</p>"
+          }
+        },
+        "SnsNotificationsEnabled": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether to enable SNS notifications for route server events. Enabling SNS notifications persists BGP status changes to an SNS topic provisioned by Amazon Web Services.</p>"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A check for whether you have the required permissions for the action without actually making the request \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#ModifyRouteServerResult": {
+      "type": "structure",
+      "members": {
+        "RouteServer": {
+          "target": "com.amazonaws.ec2#RouteServer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServer",
+            "smithy.api#documentation": "<p>Information about the modified route server.</p>",
+            "smithy.api#xmlName": "routeServer"
+          }
+        }
+      },
+      "traits": {
         "smithy.api#output": {}
       }
     },
@@ -84503,7 +85731,7 @@
         "target": "com.amazonaws.ec2#ModifyVpcEndpointServicePermissionsResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Modifies the permissions for your VPC endpoint service. You can add or remove permissions\n            for service consumers (Amazon Web Services accounts, users, and IAM roles) to connect to\n            your endpoint service.</p>\n         <p>If you grant permissions to all principals, the service is public. Any users who know the name of a\n\t        public service can send a request to attach an endpoint. If the service does not require manual approval,\n\t        attachments are automatically approved.</p>"
+        "smithy.api#documentation": "<p>Modifies the permissions for your VPC endpoint service. You can add or remove permissions\n            for service consumers (Amazon Web Services accounts, users, and IAM roles) to connect to\n            your endpoint service. Principal ARNs with path components aren't supported.</p>\n         <p>If you grant permissions to all principals, the service is public. Any users who know the name of a\n\t        public service can send a request to attach an endpoint. If the service does not require manual approval,\n\t        attachments are automatically approved.</p>"
       }
     },
     "com.amazonaws.ec2#ModifyVpcEndpointServicePermissionsRequest": {
@@ -92922,7 +94150,7 @@
         "target": "com.amazonaws.ec2#ReplaceImageCriteriaInAllowedImagesSettingsResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Sets or replaces the criteria for Allowed AMIs.</p>\n         <note>\n            <p>The Allowed AMIs feature does not restrict the AMIs owned by your account. Regardless of\n        the criteria you set, the AMIs created by your account will always be discoverable and\n        usable by users in your account.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n          Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>"
+        "smithy.api#documentation": "<p>Sets or replaces the criteria for Allowed AMIs.</p>\n         <note>\n            <p>The Allowed AMIs feature does not restrict the AMIs owned by your account. Regardless of\n        the criteria you set, the AMIs created by your account will always be discoverable and\n        usable by users in your account.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html\">Control the discovery and use of AMIs in\n      Amazon EC2 with Allowed AMIs</a> in\n      <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "com.amazonaws.ec2#ReplaceImageCriteriaInAllowedImagesSettingsRequest": {
@@ -96598,6 +97826,24 @@
             "smithy.api#enumValue": "vpc-block-public-access-exclusion"
           }
         },
+        "route_server": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "route-server"
+          }
+        },
+        "route_server_endpoint": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "route-server-endpoint"
+          }
+        },
+        "route_server_peer": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "route-server-peer"
+          }
+        },
         "ipam_resource_discovery": {
           "target": "smithy.api#Unit",
           "traits": {
@@ -97994,6 +99240,941 @@
           "traits": {
             "smithy.api#enumValue": "EnableVgwRoutePropagation"
           }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServer": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerId",
+            "smithy.api#documentation": "<p>The unique identifier of the route server.</p>",
+            "smithy.api#xmlName": "routeServerId"
+          }
+        },
+        "AmazonSideAsn": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "aws.protocols#ec2QueryName": "AmazonSideAsn",
+            "smithy.api#documentation": "<p>The Border Gateway Protocol (BGP) Autonomous System Number (ASN) for the appliance. Valid values are from 1 to 4294967295. We recommend using a private ASN in the 64512\u201365534 (16-bit ASN) or 4200000000\u20134294967294 (32-bit ASN) range.</p>",
+            "smithy.api#xmlName": "amazonSideAsn"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.ec2#RouteServerState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "State",
+            "smithy.api#documentation": "<p>The current state of the route server.</p>",
+            "smithy.api#xmlName": "state"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.ec2#TagList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "TagSet",
+            "smithy.api#documentation": "<p>Any tags assigned to the route server.</p>",
+            "smithy.api#xmlName": "tagSet"
+          }
+        },
+        "PersistRoutesState": {
+          "target": "com.amazonaws.ec2#RouteServerPersistRoutesState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PersistRoutesState",
+            "smithy.api#documentation": "<p>The current state of route persistence for the route server.</p>",
+            "smithy.api#xmlName": "persistRoutesState"
+          }
+        },
+        "PersistRoutesDuration": {
+          "target": "com.amazonaws.ec2#BoxedLong",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PersistRoutesDuration",
+            "smithy.api#documentation": "<p>The number of minutes a route server will wait after BGP is re-established to unpersist the routes in the FIB and RIB. Value must be in the range of 1-5. The default value is 1. Only valid if <code>persistRoutesState</code> is 'enabled'.</p>\n         <p>If you set the duration to 1 minute, then when your network appliance re-establishes BGP with route server, it has 1 minute to relearn it's adjacent network and advertise those routes to route server before route server resumes normal functionality. In most cases, 1 minute is probably sufficient. If, however, you have concerns that your BGP network may not be capable of fully re-establishing and re-learning everything in 1 minute, you can increase the duration up to 5 minutes.</p>",
+            "smithy.api#xmlName": "persistRoutesDuration"
+          }
+        },
+        "SnsNotificationsEnabled": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "aws.protocols#ec2QueryName": "SnsNotificationsEnabled",
+            "smithy.api#documentation": "<p>Indicates whether SNS notifications are enabled for the route server. Enabling SNS notifications persists BGP status changes to an SNS topic provisioned by Amazon Web Services.</p>",
+            "smithy.api#xmlName": "snsNotificationsEnabled"
+          }
+        },
+        "SnsTopicArn": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "SnsTopicArn",
+            "smithy.api#documentation": "<p>The ARN of the SNS topic where notifications are published.</p>",
+            "smithy.api#xmlName": "snsTopicArn"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a route server and its configuration.</p>\n         <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, \nVPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>\n         <p>Route server supports the follow route table types:</p>\n         <ul>\n            <li>\n               <p>VPC route tables not associated with subnets</p>\n            </li>\n            <li>\n               <p>Subnet route tables</p>\n            </li>\n            <li>\n               <p>Internet gateway route tables</p>\n            </li>\n         </ul>\n         <p>Route server does not support route tables associated with virtual private gateways. To propagate routes into a transit gateway route table, use <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html\">Transit Gateway Connect</a>.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerAssociation": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerId",
+            "smithy.api#documentation": "<p>The ID of the associated route server.</p>",
+            "smithy.api#xmlName": "routeServerId"
+          }
+        },
+        "VpcId": {
+          "target": "com.amazonaws.ec2#VpcId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "VpcId",
+            "smithy.api#documentation": "<p>The ID of the associated VPC.</p>",
+            "smithy.api#xmlName": "vpcId"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.ec2#RouteServerAssociationState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "State",
+            "smithy.api#documentation": "<p>The current state of the association.</p>",
+            "smithy.api#xmlName": "state"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the association between a route server and a VPC.</p>\n         <p>A route server association is the connection established between a route server and a VPC.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerAssociationState": {
+      "type": "enum",
+      "members": {
+        "ASSOCIATING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "associating"
+          }
+        },
+        "ASSOCIATED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "associated"
+          }
+        },
+        "DISASSOCIATING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "disassociating"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerAssociationsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerAssociation",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerBfdState": {
+      "type": "enum",
+      "members": {
+        "UP": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "up"
+          }
+        },
+        "DOWN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "down"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerBfdStatus": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "target": "com.amazonaws.ec2#RouteServerBfdState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Status",
+            "smithy.api#documentation": "<p>The operational status of the BFD session.</p>",
+            "smithy.api#xmlName": "status"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The current status of Bidirectional Forwarding Detection (BFD) for a BGP session.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerBgpOptions": {
+      "type": "structure",
+      "members": {
+        "PeerAsn": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PeerAsn",
+            "smithy.api#documentation": "<p>The Border Gateway Protocol (BGP) Autonomous System Number (ASN) for the appliance. Valid values are from 1 to 4294967295. We recommend using a private ASN in the 64512\u201365534 (16-bit ASN) or 4200000000\u20134294967294 (32-bit ASN) range.</p>",
+            "smithy.api#xmlName": "peerAsn"
+          }
+        },
+        "PeerLivenessDetection": {
+          "target": "com.amazonaws.ec2#RouteServerPeerLivenessMode",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PeerLivenessDetection",
+            "smithy.api#documentation": "<p>The liveness detection protocol used for the BGP peer.</p>\n         <p>The requested liveness detection protocol for the BGP peer.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>bgp-keepalive</code>: The standard BGP keep alive mechanism (<a href=\"https://www.rfc-editor.org/rfc/rfc4271#page-21\">RFC4271</a>) that is stable but may take longer to fail-over in cases of network impact or router failure.</p>\n            </li>\n            <li>\n               <p>\n                  <code>bfd</code>: An additional Bidirectional Forwarding Detection (BFD) protocol (<a href=\"https://www.rfc-editor.org/rfc/rfc5880\">RFC5880</a>) that enables fast failover by using more sensitive liveness detection.</p>\n            </li>\n         </ul>\n         <p>Defaults to <code>bgp-keepalive</code>.</p>",
+            "smithy.api#xmlName": "peerLivenessDetection"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The BGP configuration options for a route server peer.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerBgpOptionsRequest": {
+      "type": "structure",
+      "members": {
+        "PeerAsn": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The Border Gateway Protocol (BGP) Autonomous System Number (ASN) for the appliance. Valid values are from 1 to 4294967295. We recommend using a private ASN in the 64512\u201365534 (16-bit ASN) or 4200000000\u20134294967294 (32-bit ASN) range.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PeerLivenessDetection": {
+          "target": "com.amazonaws.ec2#RouteServerPeerLivenessMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The requested liveness detection protocol for the BGP peer.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>bgp-keepalive</code>: The standard BGP keep alive mechanism (<a href=\"https://www.rfc-editor.org/rfc/rfc4271#page-21\">RFC4271</a>) that is stable but may take longer to fail-over in cases of network impact or router failure.</p>\n            </li>\n            <li>\n               <p>\n                  <code>bfd</code>: An additional Bidirectional Forwarding Detection (BFD) protocol (<a href=\"https://www.rfc-editor.org/rfc/rfc5880\">RFC5880</a>) that enables fast failover by using more sensitive liveness detection.</p>\n            </li>\n         </ul>\n         <p>Defaults to <code>bgp-keepalive</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The BGP configuration options requested for a route server peer.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerBgpState": {
+      "type": "enum",
+      "members": {
+        "UP": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "up"
+          }
+        },
+        "DOWN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "down"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerBgpStatus": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "target": "com.amazonaws.ec2#RouteServerBgpState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Status",
+            "smithy.api#documentation": "<p>The operational status of the BGP session. The status enables you to monitor session liveness if you lack monitoring on your router/appliance.</p>",
+            "smithy.api#xmlName": "status"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The current status of a BGP session.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerEndpoint": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerId",
+            "smithy.api#documentation": "<p>The ID of the route server associated with this endpoint.</p>",
+            "smithy.api#xmlName": "routeServerId"
+          }
+        },
+        "RouteServerEndpointId": {
+          "target": "com.amazonaws.ec2#RouteServerEndpointId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerEndpointId",
+            "smithy.api#documentation": "<p>The unique identifier of the route server endpoint.</p>",
+            "smithy.api#xmlName": "routeServerEndpointId"
+          }
+        },
+        "VpcId": {
+          "target": "com.amazonaws.ec2#VpcId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "VpcId",
+            "smithy.api#documentation": "<p>The ID of the VPC containing the endpoint.</p>",
+            "smithy.api#xmlName": "vpcId"
+          }
+        },
+        "SubnetId": {
+          "target": "com.amazonaws.ec2#SubnetId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "SubnetId",
+            "smithy.api#documentation": "<p>The ID of the subnet to place the route server endpoint into.</p>",
+            "smithy.api#xmlName": "subnetId"
+          }
+        },
+        "EniId": {
+          "target": "com.amazonaws.ec2#NetworkInterfaceId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "EniId",
+            "smithy.api#documentation": "<p>The ID of the Elastic network interface for the endpoint.</p>",
+            "smithy.api#xmlName": "eniId"
+          }
+        },
+        "EniAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "EniAddress",
+            "smithy.api#documentation": "<p>The IP address of the Elastic network interface for the endpoint.</p>",
+            "smithy.api#xmlName": "eniAddress"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.ec2#RouteServerEndpointState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "State",
+            "smithy.api#documentation": "<p>The current state of the route server endpoint.</p>",
+            "smithy.api#xmlName": "state"
+          }
+        },
+        "FailureReason": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "FailureReason",
+            "smithy.api#documentation": "<p>The reason for any failure in endpoint creation or operation.</p>",
+            "smithy.api#xmlName": "failureReason"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.ec2#TagList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "TagSet",
+            "smithy.api#documentation": "<p>Any tags assigned to the route server endpoint.</p>",
+            "smithy.api#xmlName": "tagSet"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a route server endpoint and its properties.</p>\n         <p>A route server endpoint is an Amazon Web Services-managed component inside a subnet that facilitates <a href=\"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\">BGP (Border Gateway Protocol)</a> connections between your route server and your BGP peers.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerEndpointId": {
+      "type": "string"
+    },
+    "com.amazonaws.ec2#RouteServerEndpointIdsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerEndpointId"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerEndpointState": {
+      "type": "enum",
+      "members": {
+        "PENDING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        },
+        "AVAILABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "available"
+          }
+        },
+        "DELETING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleting"
+          }
+        },
+        "DELETED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleted"
+          }
+        },
+        "FAILING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "failing"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "failed"
+          }
+        },
+        "DELETE_FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "delete-failed"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerEndpointsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerEndpoint",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerId": {
+      "type": "string"
+    },
+    "com.amazonaws.ec2#RouteServerIdsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerId"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerMaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 5,
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPeer": {
+      "type": "structure",
+      "members": {
+        "RouteServerPeerId": {
+          "target": "com.amazonaws.ec2#RouteServerPeerId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerPeerId",
+            "smithy.api#documentation": "<p>The unique identifier of the route server peer.</p>",
+            "smithy.api#xmlName": "routeServerPeerId"
+          }
+        },
+        "RouteServerEndpointId": {
+          "target": "com.amazonaws.ec2#RouteServerEndpointId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerEndpointId",
+            "smithy.api#documentation": "<p>The ID of the route server endpoint associated with this peer.</p>",
+            "smithy.api#xmlName": "routeServerEndpointId"
+          }
+        },
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerId",
+            "smithy.api#documentation": "<p>The ID of the route server associated with this peer.</p>",
+            "smithy.api#xmlName": "routeServerId"
+          }
+        },
+        "VpcId": {
+          "target": "com.amazonaws.ec2#VpcId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "VpcId",
+            "smithy.api#documentation": "<p>The ID of the VPC containing the route server peer.</p>",
+            "smithy.api#xmlName": "vpcId"
+          }
+        },
+        "SubnetId": {
+          "target": "com.amazonaws.ec2#SubnetId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "SubnetId",
+            "smithy.api#documentation": "<p>The ID of the subnet containing the route server peer.</p>",
+            "smithy.api#xmlName": "subnetId"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.ec2#RouteServerPeerState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "State",
+            "smithy.api#documentation": "<p>The current state of the route server peer.</p>",
+            "smithy.api#xmlName": "state"
+          }
+        },
+        "FailureReason": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "FailureReason",
+            "smithy.api#documentation": "<p>The reason for any failure in peer creation or operation.</p>",
+            "smithy.api#xmlName": "failureReason"
+          }
+        },
+        "EndpointEniId": {
+          "target": "com.amazonaws.ec2#NetworkInterfaceId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "EndpointEniId",
+            "smithy.api#documentation": "<p>The ID of the Elastic network interface for the route server endpoint.</p>",
+            "smithy.api#xmlName": "endpointEniId"
+          }
+        },
+        "EndpointEniAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "EndpointEniAddress",
+            "smithy.api#documentation": "<p>The IP address of the Elastic network interface for the route server endpoint.</p>",
+            "smithy.api#xmlName": "endpointEniAddress"
+          }
+        },
+        "PeerAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PeerAddress",
+            "smithy.api#documentation": "<p>The IPv4 address of the peer device.</p>",
+            "smithy.api#xmlName": "peerAddress"
+          }
+        },
+        "BgpOptions": {
+          "target": "com.amazonaws.ec2#RouteServerBgpOptions",
+          "traits": {
+            "aws.protocols#ec2QueryName": "BgpOptions",
+            "smithy.api#documentation": "<p>The BGP configuration options for this peer, including ASN (Autonomous System Number) and BFD (Bidrectional Forwarding Detection) settings.</p>",
+            "smithy.api#xmlName": "bgpOptions"
+          }
+        },
+        "BgpStatus": {
+          "target": "com.amazonaws.ec2#RouteServerBgpStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "BgpStatus",
+            "smithy.api#documentation": "<p>The current status of the BGP session with this peer.</p>",
+            "smithy.api#xmlName": "bgpStatus"
+          }
+        },
+        "BfdStatus": {
+          "target": "com.amazonaws.ec2#RouteServerBfdStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "BfdStatus",
+            "smithy.api#documentation": "<p>The current status of the BFD session with this peer.</p>",
+            "smithy.api#xmlName": "bfdStatus"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.ec2#TagList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "TagSet",
+            "smithy.api#documentation": "<p>Any tags assigned to the route server peer.</p>",
+            "smithy.api#xmlName": "tagSet"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a BGP peer configuration for a route server endpoint.</p>\n         <p>A route server peer is a session between a route server endpoint and the device deployed in Amazon Web Services (such as a firewall appliance or other network security function running on an EC2 instance). The device must meet these requirements:</p>\n         <ul>\n            <li>\n               <p>Have an elastic network interface in the VPC</p>\n            </li>\n            <li>\n               <p>Support BGP (Border Gateway Protocol)</p>\n            </li>\n            <li>\n               <p>Can initiate BGP sessions</p>\n            </li>\n         </ul>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPeerId": {
+      "type": "string"
+    },
+    "com.amazonaws.ec2#RouteServerPeerIdsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerPeerId"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPeerLivenessMode": {
+      "type": "enum",
+      "members": {
+        "BFD": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "bfd"
+          }
+        },
+        "BGP_KEEPALIVE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "bgp-keepalive"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPeerState": {
+      "type": "enum",
+      "members": {
+        "PENDING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        },
+        "AVAILABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "available"
+          }
+        },
+        "DELETING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleting"
+          }
+        },
+        "DELETED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleted"
+          }
+        },
+        "FAILING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "failing"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "failed"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPeersList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerPeer",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPersistRoutesAction": {
+      "type": "enum",
+      "members": {
+        "ENABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "enable"
+          }
+        },
+        "DISABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "disable"
+          }
+        },
+        "RESET": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "reset"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPersistRoutesState": {
+      "type": "enum",
+      "members": {
+        "ENABLING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "enabling"
+          }
+        },
+        "ENABLED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "enabled"
+          }
+        },
+        "RESETTING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "resetting"
+          }
+        },
+        "DISABLING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "disabling"
+          }
+        },
+        "DISABLED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "disabled"
+          }
+        },
+        "MODIFYING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "modifying"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPropagation": {
+      "type": "structure",
+      "members": {
+        "RouteServerId": {
+          "target": "com.amazonaws.ec2#RouteServerId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerId",
+            "smithy.api#documentation": "<p>The ID of the route server configured for route propagation.</p>",
+            "smithy.api#xmlName": "routeServerId"
+          }
+        },
+        "RouteTableId": {
+          "target": "com.amazonaws.ec2#RouteTableId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteTableId",
+            "smithy.api#documentation": "<p>The ID of the route table configured for route server propagation.</p>",
+            "smithy.api#xmlName": "routeTableId"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.ec2#RouteServerPropagationState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "State",
+            "smithy.api#documentation": "<p>The current state of route propagation.</p>",
+            "smithy.api#xmlName": "state"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the route propagation configuration between a route server and a route table.</p>\n         <p>When enabled, route server propagation installs the routes in the FIB on the route table you've specified. Route server supports IPv4 and IPv6 route propagation.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPropagationState": {
+      "type": "enum",
+      "members": {
+        "PENDING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        },
+        "AVAILABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "available"
+          }
+        },
+        "DELETING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleting"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerPropagationsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerPropagation",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerRoute": {
+      "type": "structure",
+      "members": {
+        "RouteServerEndpointId": {
+          "target": "com.amazonaws.ec2#RouteServerEndpointId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerEndpointId",
+            "smithy.api#documentation": "<p>The ID of the route server endpoint that received this route.</p>",
+            "smithy.api#xmlName": "routeServerEndpointId"
+          }
+        },
+        "RouteServerPeerId": {
+          "target": "com.amazonaws.ec2#RouteServerPeerId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteServerPeerId",
+            "smithy.api#documentation": "<p>The ID of the route server peer that advertised this route.</p>",
+            "smithy.api#xmlName": "routeServerPeerId"
+          }
+        },
+        "RouteInstallationDetails": {
+          "target": "com.amazonaws.ec2#RouteServerRouteInstallationDetails",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteInstallationDetailSet",
+            "smithy.api#documentation": "<p>Details about the installation status of this route in route tables.</p>",
+            "smithy.api#xmlName": "routeInstallationDetailSet"
+          }
+        },
+        "RouteStatus": {
+          "target": "com.amazonaws.ec2#RouteServerRouteStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteStatus",
+            "smithy.api#documentation": "<p>The current status of the route in the routing database. Values are <code>in-rib</code> or <code>in-fib</code> depending on if the routes are in the RIB or the FIB database.</p>\n         <p>The <a href=\"https://en.wikipedia.org/wiki/Routing_table\">Routing Information Base (RIB)</a> serves as a database that stores all the routing information and network topology data collected by a router or routing system, such as routes learned from BGP peers. The RIB is constantly updated as new routing information is received or existing routes change. This ensures that the route server always has the most current view of the network topology and can make optimal routing decisions.</p>\n         <p>The <a href=\"https://en.wikipedia.org/wiki/Forwarding_information_base\">Forwarding Information Base (FIB)</a> serves as a forwarding table for what route server has determined are the best-path routes in the RIB after evaluating all available routing information and policies. The FIB routes are installed on the route tables. The FIB is recomputed whenever there are changes to the RIB.</p>",
+            "smithy.api#xmlName": "routeStatus"
+          }
+        },
+        "Prefix": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Prefix",
+            "smithy.api#documentation": "<p>The destination CIDR block of the route.</p>",
+            "smithy.api#xmlName": "prefix"
+          }
+        },
+        "AsPaths": {
+          "target": "com.amazonaws.ec2#AsPath",
+          "traits": {
+            "aws.protocols#ec2QueryName": "AsPathSet",
+            "smithy.api#documentation": "<p>The AS path attributes of the BGP route.</p>",
+            "smithy.api#xmlName": "asPathSet"
+          }
+        },
+        "Med": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Med",
+            "smithy.api#documentation": "<p>The Multi-Exit Discriminator (MED) value of the BGP route.</p>",
+            "smithy.api#xmlName": "med"
+          }
+        },
+        "NextHopIp": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NextHopIp",
+            "smithy.api#documentation": "<p>The IP address for the next hop.</p>",
+            "smithy.api#xmlName": "nextHopIp"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a route in the route server's routing database.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerRouteInstallationDetail": {
+      "type": "structure",
+      "members": {
+        "RouteTableId": {
+          "target": "com.amazonaws.ec2#RouteTableId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteTableId",
+            "smithy.api#documentation": "<p>The ID of the route table where the route is being installed.</p>",
+            "smithy.api#xmlName": "routeTableId"
+          }
+        },
+        "RouteInstallationStatus": {
+          "target": "com.amazonaws.ec2#RouteServerRouteInstallationStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteInstallationStatus",
+            "smithy.api#documentation": "<p>The current installation status of the route in the route table.</p>",
+            "smithy.api#xmlName": "routeInstallationStatus"
+          }
+        },
+        "RouteInstallationStatusReason": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "RouteInstallationStatusReason",
+            "smithy.api#documentation": "<p>The reason for the current installation status of the route.</p>",
+            "smithy.api#xmlName": "routeInstallationStatusReason"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the installation status of a route in a route table.</p>"
+      }
+    },
+    "com.amazonaws.ec2#RouteServerRouteInstallationDetails": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerRouteInstallationDetail",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerRouteInstallationStatus": {
+      "type": "enum",
+      "members": {
+        "INSTALLED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "installed"
+          }
+        },
+        "REJECTED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "rejected"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerRouteList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServerRoute",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerRouteStatus": {
+      "type": "enum",
+      "members": {
+        "IN_RIB": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "in-rib"
+          }
+        },
+        "IN_FIB": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "in-fib"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServerState": {
+      "type": "enum",
+      "members": {
+        "PENDING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        },
+        "AVAILABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "available"
+          }
+        },
+        "MODIFYING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "modifying"
+          }
+        },
+        "DELETING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleting"
+          }
+        },
+        "DELETED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleted"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#RouteServersList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#RouteServer",
+        "traits": {
+          "smithy.api#xmlName": "item"
         }
       }
     },
@@ -100912,6 +103093,12 @@
           "target": "smithy.api#Unit",
           "traits": {
             "smithy.api#enumValue": "nlb"
+          }
+        },
+        "rnat": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "rnat"
           }
         }
       }
@@ -104014,7 +106201,7 @@
           "target": "com.amazonaws.ec2#String",
           "traits": {
             "aws.protocols#ec2QueryName": "StoreTaskState",
-            "smithy.api#documentation": "<p>The state of the store task (<code>InProgress</code>, <code>Completed</code>, or\n        <code>Failed</code>).</p>",
+            "smithy.api#documentation": "<p>The state of the store task (<code>InProgress</code>, <code>Completed</code>, or\n      <code>Failed</code>).</p>",
             "smithy.api#xmlName": "storeTaskState"
           }
         },
@@ -104022,7 +106209,7 @@
           "target": "com.amazonaws.ec2#String",
           "traits": {
             "aws.protocols#ec2QueryName": "StoreTaskFailureReason",
-            "smithy.api#documentation": "<p>If the tasks fails, the reason for the failure is returned. If the task succeeds,\n        <code>null</code> is returned.</p>",
+            "smithy.api#documentation": "<p>If the tasks fails, the reason for the failure is returned. If the task succeeds,\n      <code>null</code> is returned.</p>",
             "smithy.api#xmlName": "storeTaskFailureReason"
           }
         }
@@ -107718,7 +109905,7 @@
           "target": "com.amazonaws.ec2#DefaultRouteTableAssociationValue",
           "traits": {
             "aws.protocols#ec2QueryName": "DefaultRouteTableAssociation",
-            "smithy.api#documentation": "<p>Indicates whether resource attachments are automatically associated with the default association route table.</p>",
+            "smithy.api#documentation": "<p>Indicates whether resource attachments are automatically associated with the default\n         association route table. Enabled by default. If <code>defaultRouteTableAssociation</code>\n         is set to <code>enable</code>,\n         Amazon Web Services Transit Gateway will create the default transit gateway route\n         table.</p>",
             "smithy.api#xmlName": "defaultRouteTableAssociation"
           }
         },
@@ -107734,7 +109921,7 @@
           "target": "com.amazonaws.ec2#DefaultRouteTablePropagationValue",
           "traits": {
             "aws.protocols#ec2QueryName": "DefaultRouteTablePropagation",
-            "smithy.api#documentation": "<p>Indicates whether resource attachments automatically propagate routes to the default propagation route table.</p>",
+            "smithy.api#documentation": "<p>Indicates whether resource attachments automatically propagate routes to the default\n         propagation route table. Enabled by default. If <code>defaultRouteTablePropagation</code>\n         is set to <code>enable</code>,\n         Amazon Web Services Transit Gateway will create the default transit gateway route\n         table.</p>",
             "smithy.api#xmlName": "defaultRouteTablePropagation"
           }
         },
@@ -113983,6 +116170,18 @@
           "target": "smithy.api#Unit",
           "traits": {
             "smithy.api#enumValue": "available"
+          }
+        },
+        "creating": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "creating"
+          }
+        },
+        "delete_failed": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "delete-failed"
           }
         }
       }
