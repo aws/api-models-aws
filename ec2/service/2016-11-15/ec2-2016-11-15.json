@@ -2549,6 +2549,12 @@
           "target": "com.amazonaws.ec2#CreateLocalGatewayRouteTableVpcAssociation"
         },
         {
+          "target": "com.amazonaws.ec2#CreateLocalGatewayVirtualInterface"
+        },
+        {
+          "target": "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceGroup"
+        },
+        {
           "target": "com.amazonaws.ec2#CreateManagedPrefixList"
         },
         {
@@ -2790,6 +2796,12 @@
         },
         {
           "target": "com.amazonaws.ec2#DeleteLocalGatewayRouteTableVpcAssociation"
+        },
+        {
+          "target": "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterface"
+        },
+        {
+          "target": "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceGroup"
         },
         {
           "target": "com.amazonaws.ec2#DeleteManagedPrefixList"
@@ -3248,6 +3260,9 @@
           "target": "com.amazonaws.ec2#DescribeNetworkInterfaces"
         },
         {
+          "target": "com.amazonaws.ec2#DescribeOutpostLags"
+        },
+        {
           "target": "com.amazonaws.ec2#DescribePlacementGroups"
         },
         {
@@ -3306,6 +3321,9 @@
         },
         {
           "target": "com.amazonaws.ec2#DescribeSecurityGroupVpcAssociations"
+        },
+        {
+          "target": "com.amazonaws.ec2#DescribeServiceLinkVirtualInterfaces"
         },
         {
           "target": "com.amazonaws.ec2#DescribeSnapshotAttribute"
@@ -18415,6 +18433,176 @@
         "smithy.api#output": {}
       }
     },
+    "com.amazonaws.ec2#CreateLocalGatewayVirtualInterface": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Create a virtual interface for a local gateway. </p>"
+      }
+    },
+    "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceGroupResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Create a local gateway virtual interface group.</p>"
+      }
+    },
+    "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceGroupRequest": {
+      "type": "structure",
+      "members": {
+        "LocalGatewayId": {
+          "target": "com.amazonaws.ec2#LocalGatewayId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the local gateway.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "LocalBgpAsn": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP).</p>"
+          }
+        },
+        "LocalBgpAsnExtended": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The extended 32-bit ASN for the local BGP configuration.</p>"
+          }
+        },
+        "TagSpecifications": {
+          "target": "com.amazonaws.ec2#TagSpecificationList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to apply to the local gateway virtual interface group when the resource is\n         being created.</p>",
+            "smithy.api#xmlName": "TagSpecification"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceGroupResult": {
+      "type": "structure",
+      "members": {
+        "LocalGatewayVirtualInterfaceGroup": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroup",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterfaceGroup",
+            "smithy.api#documentation": "<p>Information about the created local gateway virtual interface group.</p>",
+            "smithy.api#xmlName": "localGatewayVirtualInterfaceGroup"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceRequest": {
+      "type": "structure",
+      "members": {
+        "LocalGatewayVirtualInterfaceGroupId": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroupId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the local gateway virtual interface group.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "OutpostLagId": {
+          "target": "com.amazonaws.ec2#OutpostLagId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>References the Link Aggregation Group (LAG) that connects the Outpost to on-premises network devices.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Vlan": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The virtual local area network (VLAN) used for the local gateway virtual interface.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "LocalAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The IP address assigned to the local gateway virtual interface on the Outpost side. Only IPv4 is supported.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PeerAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The peer IP address for the local gateway virtual interface. Only IPv4 is\n         supported.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PeerBgpAsn": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The Autonomous System Number (ASN) of the Border Gateway Protocol (BGP) peer.</p>"
+          }
+        },
+        "TagSpecifications": {
+          "target": "com.amazonaws.ec2#TagSpecificationList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to apply to a resource when the local gateway virtual interface is being created. </p>",
+            "smithy.api#xmlName": "TagSpecification"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        },
+        "PeerBgpAsnExtended": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The extended 32-bit ASN of the BGP peer for use with larger ASN values.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceResult": {
+      "type": "structure",
+      "members": {
+        "LocalGatewayVirtualInterface": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterface",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterface",
+            "smithy.api#documentation": "<p>Information about the local gateway virtual interface.</p>",
+            "smithy.api#xmlName": "localGatewayVirtualInterface"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
     "com.amazonaws.ec2#CreateManagedPrefixList": {
       "type": "operation",
       "input": {
@@ -19520,6 +19708,12 @@
           "target": "com.amazonaws.ec2#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Indicates whether to automatically delete the original root volume after the root volume \n      replacement task completes. To delete the original root volume, specify <code>true</code>. \n      If you choose to keep the original root volume after the replacement task completes, you must \n      manually delete it when you no longer need it.</p>"
+          }
+        },
+        "VolumeInitializationRate": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download \n      the snapshot blocks from Amazon S3 to the replacement root volume. This is also known as \n      <i>volume initialization</i>. Specifying a volume initialization rate ensures that \n      the volume is initialized at a predictable and consistent rate after creation.</p>\n         <p>Omit this parameter if:</p>\n         <ul>\n            <li>\n               <p>You want to create the volume using fast snapshot restore. You must specify a snapshot \n          that is enabled for fast snapshot restore. In this case, the volume is fully initialized at \n          creation.</p>\n               <note>\n                  <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, \n            the volume will be initialized at the specified rate instead of fast snapshot restore.</p>\n               </note>\n            </li>\n            <li>\n               <p>You want to create a volume that is initialized at the default rate.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html\">\n      Initialize Amazon EBS volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Valid range: 100 - 300 MiB/s</p>"
           }
         }
       },
@@ -23060,6 +23254,12 @@
             "smithy.api#idempotencyToken": {}
           }
         },
+        "VolumeInitializationRate": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download \n      the snapshot blocks from Amazon S3 to the volume. This is also known as <i>volume \n        initialization</i>. Specifying a volume initialization rate ensures that the volume is \n      initialized at a predictable and consistent rate after creation.</p>\n         <p>This parameter is supported only for volumes created from snapshots. Omit this parameter \n      if:</p>\n         <ul>\n            <li>\n               <p>You want to create the volume using fast snapshot restore. You must specify a snapshot \n          that is enabled for fast snapshot restore. In this case, the volume is fully initialized at \n          creation.</p>\n               <note>\n                  <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, \n            the volume will be initialized at the specified rate instead of fast snapshot restore.</p>\n               </note>\n            </li>\n            <li>\n               <p>You want to create a volume that is initialized at the default rate.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html\">\n      Initialize Amazon EBS volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Valid range: 100 - 300 MiB/s</p>"
+          }
+        },
         "Operator": {
           "target": "com.amazonaws.ec2#OperatorRequest",
           "traits": {
@@ -26086,6 +26286,106 @@
             "aws.protocols#ec2QueryName": "LocalGatewayRouteTableVpcAssociation",
             "smithy.api#documentation": "<p>Information about the association.</p>",
             "smithy.api#xmlName": "localGatewayRouteTableVpcAssociation"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterface": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified local gateway virtual interface.</p>"
+      }
+    },
+    "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceGroupResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Delete the specified local gateway interface group.</p>"
+      }
+    },
+    "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceGroupRequest": {
+      "type": "structure",
+      "members": {
+        "LocalGatewayVirtualInterfaceGroupId": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroupId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the local gateway virtual interface group to delete.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceGroupResult": {
+      "type": "structure",
+      "members": {
+        "LocalGatewayVirtualInterfaceGroup": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroup",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterfaceGroup",
+            "smithy.api#documentation": "<p>Information about the deleted local gateway virtual interface group.</p>",
+            "smithy.api#xmlName": "localGatewayVirtualInterfaceGroup"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceRequest": {
+      "type": "structure",
+      "members": {
+        "LocalGatewayVirtualInterfaceId": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the local virtual interface to delete.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DeleteLocalGatewayVirtualInterfaceResult": {
+      "type": "structure",
+      "members": {
+        "LocalGatewayVirtualInterface": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterface",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterface",
+            "smithy.api#documentation": "<p>Information about the deleted local gateway virtual interface.</p>",
+            "smithy.api#xmlName": "localGatewayVirtualInterface"
           }
         }
       },
@@ -38570,6 +38870,82 @@
         "smithy.api#output": {}
       }
     },
+    "com.amazonaws.ec2#DescribeOutpostLags": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DescribeOutpostLagsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DescribeOutpostLagsResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the Outposts link aggregation groups (LAGs).</p>"
+      }
+    },
+    "com.amazonaws.ec2#DescribeOutpostLagsRequest": {
+      "type": "structure",
+      "members": {
+        "OutpostLagIds": {
+          "target": "com.amazonaws.ec2#OutpostLagIdSet",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of the Outpost LAGs.</p>",
+            "smithy.api#xmlName": "OutpostLagId"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.ec2#FilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The filters to use for narrowing down the request. The following filters are\n         supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>service-link-virtual-interface-id</code> - The ID of the service link virtual interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-link-virtual-interface-arn</code> - The ARN of the service link virtual interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>outpost-id</code> - The Outpost ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>outpost-arn</code> - The Outpost ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The ID of the Amazon Web Services account that owns the service link virtual interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vlan</code> - The ID of the address pool.</p>\n            </li>\n            <li>\n               <p>\n                  <code>local-address</code> - The local address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>peer-address</code> - The peer address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>peer-bgp-asn</code> - The peer BGP ASN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>outpost-lag-id</code> - The Outpost LAG ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>configuration-state</code> - The configuration state of the service link virtual interface.</p>\n            </li>\n         </ul>",
+            "smithy.api#xmlName": "Filter"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.ec2#OutpostLagMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeOutpostLagsResult": {
+      "type": "structure",
+      "members": {
+        "OutpostLags": {
+          "target": "com.amazonaws.ec2#OutpostLagSet",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OutpostLagSet",
+            "smithy.api#documentation": "<p>The Outpost LAGs.</p>",
+            "smithy.api#xmlName": "outpostLagSet"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NextToken",
+            "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+            "smithy.api#xmlName": "nextToken"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
     "com.amazonaws.ec2#DescribePlacementGroups": {
       "type": "operation",
       "input": {
@@ -40432,6 +40808,82 @@
             "aws.protocols#ec2QueryName": "SecurityGroupInfo",
             "smithy.api#documentation": "<p>Information about the security groups.</p>",
             "smithy.api#xmlName": "securityGroupInfo"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeServiceLinkVirtualInterfaces": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DescribeServiceLinkVirtualInterfacesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DescribeServiceLinkVirtualInterfacesResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the Outpost service link virtual interfaces.</p>"
+      }
+    },
+    "com.amazonaws.ec2#DescribeServiceLinkVirtualInterfacesRequest": {
+      "type": "structure",
+      "members": {
+        "ServiceLinkVirtualInterfaceIds": {
+          "target": "com.amazonaws.ec2#ServiceLinkVirtualInterfaceIdSet",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of the service link virtual interfaces.</p>",
+            "smithy.api#xmlName": "ServiceLinkVirtualInterfaceId"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.ec2#FilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The filters to use for narrowing down the request. The following filters are\n         supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>outpost-lag-id</code> - The ID of the Outpost LAG.</p>\n            </li>\n            <li>\n               <p>\n                  <code>outpost-arn</code> - The Outpost ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The ID of the Amazon Web Services account that owns the service link virtual interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The  state of the Outpost LAG.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vlan</code> - The ID of the address pool.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-link-virtual-interface-id</code> - The ID of the service link virtual interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>local-gateway-virtual-interface-id</code> - The ID of the local gateway virtual interface.</p>\n            </li>\n         </ul>",
+            "smithy.api#xmlName": "Filter"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.ec2#ServiceLinkMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeServiceLinkVirtualInterfacesResult": {
+      "type": "structure",
+      "members": {
+        "ServiceLinkVirtualInterfaces": {
+          "target": "com.amazonaws.ec2#ServiceLinkVirtualInterfaceSet",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ServiceLinkVirtualInterfaceSet",
+            "smithy.api#documentation": "<p>Describes the service link virtual interfaces.</p>",
+            "smithy.api#xmlName": "serviceLinkVirtualInterfaceSet"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NextToken",
+            "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+            "smithy.api#xmlName": "nextToken"
           }
         }
       },
@@ -49216,6 +49668,12 @@
             "smithy.api#documentation": "<p>Indicates whether the encryption state of an EBS volume is changed while being\n            restored from a backing snapshot. The effect of setting the encryption state to <code>true</code> depends on \nthe volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html#encryption-parameters\">Amazon EBS encryption</a> in the <i>Amazon EBS User Guide</i>.</p>\n         <p>In no case can you remove encryption from an encrypted volume.</p>\n         <p>Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For\n            more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances\">Supported instance types</a>.</p>\n         <p>This parameter is not returned by <a>DescribeImageAttribute</a>.</p>\n         <p>For <a>CreateImage</a> and <a>RegisterImage</a>, whether you can \n            include this parameter, and the allowed values differ depending on the type of block \n            device mapping you are creating.</p>\n         <ul>\n            <li>\n               <p>If you are creating a block device mapping for a <b>new (empty) \n                    volume</b>, you can include this parameter, and specify either <code>true</code> \n                    for an encrypted volume, or <code>false</code> for an unencrypted volume. If you omit \n                    this parameter, it defaults to <code>false</code> (unencrypted).</p>\n            </li>\n            <li>\n               <p>If you are creating a block device mapping from an <b>existing \n                    encrypted or unencrypted snapshot</b>, you must omit this parameter. If you \n                    include this parameter, the request will fail, regardless of the value that you \n                    specify.</p>\n            </li>\n            <li>\n               <p>If you are creating a block device mapping from an <b>existing \n                    unencrypted volume</b>, you can include this parameter, but you must specify \n                    <code>false</code>. If you specify <code>true</code>, the request will fail. In this \n                    case, we recommend that you omit the parameter.</p>\n            </li>\n            <li>\n               <p>If you are creating a block device mapping from an <b>existing \n                    encrypted volume</b>, you can include this parameter, and specify either \n                    <code>true</code> or <code>false</code>. However, if you specify <code>false</code>, \n                    the parameter is ignored and the block device mapping is always encrypted. In this \n                    case, we recommend that you omit the parameter.</p>\n            </li>\n         </ul>",
             "smithy.api#xmlName": "encrypted"
           }
+        },
+        "VolumeInitializationRate": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download \n            the snapshot blocks from Amazon S3 to the volume. This is also known as \n            <i>volume initialization</i>. Specifying a volume initialization rate ensures that \n            the volume is initialized at a predictable and consistent rate after creation.</p>\n         <p>This parameter is supported only for volumes created from snapshots. Omit this parameter \n            if:</p>\n         <ul>\n            <li>\n               <p>You want to create the volume using fast snapshot restore. You must specify a snapshot \n                    that is enabled for fast snapshot restore. In this case, the volume is fully initialized at \n                    creation.</p>\n               <note>\n                  <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, \n                        the volume will be initialized at the specified rate instead of fast snapshot restore.</p>\n               </note>\n            </li>\n            <li>\n               <p>You want to create a volume that is initialized at the default rate.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html\">\n            Initialize Amazon EBS volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>This parameter is not supported when using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html\">CreateImage</a>.</p>\n         <p>Valid range: 100 - 300 MiB/s</p>"
+          }
         }
       },
       "traits": {
@@ -54357,7 +54815,7 @@
           }
         },
         "ImageId": {
-          "target": "com.amazonaws.ec2#ImageId",
+          "target": "com.amazonaws.ec2#String",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the AMI in the format <code>ami-17characters00000</code>.</p>\n         <p>Alternatively, you can specify a Systems Manager parameter, using one of the following\n         formats. The Systems Manager parameter will resolve to an AMI ID on launch.</p>\n         <p>To reference a public parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resolve:ssm:<i>public-parameter</i>\n                  </code>\n               </p>\n            </li>\n         </ul>\n         <p>To reference a parameter stored in the same account:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resolve:ssm:<i>parameter-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resolve:ssm:<i>parameter-name:version-number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resolve:ssm:<i>parameter-name:label</i>\n                  </code>\n               </p>\n            </li>\n         </ul>\n         <p>To reference a parameter shared from another Amazon Web Services account:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resolve:ssm:<i>parameter-ARN</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resolve:ssm:<i>parameter-ARN:version-number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resolve:ssm:<i>parameter-ARN:label</i>\n                  </code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#use-an-ssm-parameter-instead-of-an-ami-id\">Use a Systems Manager parameter instead of an AMI ID</a> in the\n         <i>Amazon EC2 User Guide</i>.</p>\n         <note>\n            <p>This parameter is only available for fleets of type <code>instant</code>. For fleets\n            of type <code>maintain</code> and <code>request</code>, you must specify the AMI ID in\n            the launch template.</p>\n         </note>"
           }
@@ -76716,6 +77174,14 @@
             "smithy.api#documentation": "<p>The throughput that the volume supports, in MiB/s.</p>",
             "smithy.api#xmlName": "throughput"
           }
+        },
+        "VolumeInitializationRate": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "VolumeInitializationRate",
+            "smithy.api#documentation": "<p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume, in MiB/s. \n            If no volume initialization rate was specified, the value is <code>null</code>.</p>",
+            "smithy.api#xmlName": "volumeInitializationRate"
+          }
         }
       },
       "traits": {
@@ -76771,6 +77237,12 @@
           "target": "com.amazonaws.ec2#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The throughput to provision for a <code>gp3</code> volume, with a maximum of 1,000\n            MiB/s.</p>\n         <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>"
+          }
+        },
+        "VolumeInitializationRate": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download \n            the snapshot blocks from Amazon S3 to the volume. This is also known as <i>volume \n                initialization</i>. Specifying a volume initialization rate ensures that the volume is \n            initialized at a predictable and consistent rate after creation.</p>\n         <p>This parameter is supported only for volumes created from snapshots. Omit this parameter \n            if:</p>\n         <ul>\n            <li>\n               <p>You want to create the volume using fast snapshot restore. You must specify a snapshot \n                    that is enabled for fast snapshot restore. In this case, the volume is fully initialized \n                    at creation.</p>\n               <note>\n                  <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, \n                        the volume will be initialized at the specified rate instead of fast snapshot restore.</p>\n               </note>\n            </li>\n            <li>\n               <p>You want to create a volume that is initialized at the default rate.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html\">\n            Initialize Amazon EBS volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Valid range: 100 - 300 MiB/s</p>"
           }
         }
       },
@@ -79259,6 +79731,30 @@
             "smithy.api#xmlName": "localGatewayId"
           }
         },
+        "LocalGatewayVirtualInterfaceGroupId": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroupId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterfaceGroupId",
+            "smithy.api#documentation": "<p>The ID of the local gateway virtual interface group.</p>",
+            "smithy.api#xmlName": "localGatewayVirtualInterfaceGroupId"
+          }
+        },
+        "LocalGatewayVirtualInterfaceArn": {
+          "target": "com.amazonaws.ec2#ResourceArn",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterfaceArn",
+            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the local gateway virtual interface.</p>",
+            "smithy.api#xmlName": "localGatewayVirtualInterfaceArn"
+          }
+        },
+        "OutpostLagId": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OutpostLagId",
+            "smithy.api#documentation": "<p>The Outpost LAG ID.</p>",
+            "smithy.api#xmlName": "outpostLagId"
+          }
+        },
         "Vlan": {
           "target": "com.amazonaws.ec2#Integer",
           "traits": {
@@ -79299,6 +79795,14 @@
             "smithy.api#xmlName": "peerBgpAsn"
           }
         },
+        "PeerBgpAsnExtended": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PeerBgpAsnExtended",
+            "smithy.api#documentation": "<p>The extended 32-bit ASN of the BGP peer for use with larger ASN values.</p>",
+            "smithy.api#xmlName": "peerBgpAsnExtended"
+          }
+        },
         "OwnerId": {
           "target": "com.amazonaws.ec2#String",
           "traits": {
@@ -79314,10 +79818,47 @@
             "smithy.api#documentation": "<p>The tags assigned to the virtual interface.</p>",
             "smithy.api#xmlName": "tagSet"
           }
+        },
+        "ConfigurationState": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceConfigurationState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ConfigurationState",
+            "smithy.api#documentation": "<p>The current state of the local gateway virtual interface.</p>",
+            "smithy.api#xmlName": "configurationState"
+          }
         }
       },
       "traits": {
         "smithy.api#documentation": "<p>Describes a local gateway virtual interface.</p>"
+      }
+    },
+    "com.amazonaws.ec2#LocalGatewayVirtualInterfaceConfigurationState": {
+      "type": "enum",
+      "members": {
+        "pending": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        },
+        "available": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "available"
+          }
+        },
+        "deleting": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleting"
+          }
+        },
+        "deleted": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleted"
+          }
+        }
       }
     },
     "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroup": {
@@ -79355,6 +79896,30 @@
             "smithy.api#xmlName": "ownerId"
           }
         },
+        "LocalBgpAsn": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalBgpAsn",
+            "smithy.api#documentation": "<p>The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP).</p>",
+            "smithy.api#xmlName": "localBgpAsn"
+          }
+        },
+        "LocalBgpAsnExtended": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalBgpAsnExtended",
+            "smithy.api#documentation": "<p>The extended 32-bit ASN for the local BGP configuration.</p>",
+            "smithy.api#xmlName": "localBgpAsnExtended"
+          }
+        },
+        "LocalGatewayVirtualInterfaceGroupArn": {
+          "target": "com.amazonaws.ec2#ResourceArn",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterfaceGroupArn",
+            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the local gateway virtual interface group.</p>",
+            "smithy.api#xmlName": "localGatewayVirtualInterfaceGroupArn"
+          }
+        },
         "Tags": {
           "target": "com.amazonaws.ec2#TagList",
           "traits": {
@@ -79362,10 +79927,53 @@
             "smithy.api#documentation": "<p>The tags assigned to the virtual interface group.</p>",
             "smithy.api#xmlName": "tagSet"
           }
+        },
+        "ConfigurationState": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroupConfigurationState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ConfigurationState",
+            "smithy.api#documentation": "<p>The current state of the local gateway virtual interface group.</p>",
+            "smithy.api#xmlName": "configurationState"
+          }
         }
       },
       "traits": {
         "smithy.api#documentation": "<p>Describes a local gateway virtual interface group.</p>"
+      }
+    },
+    "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroupConfigurationState": {
+      "type": "enum",
+      "members": {
+        "pending": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        },
+        "incomplete": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "incomplete"
+          }
+        },
+        "available": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "available"
+          }
+        },
+        "deleting": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleting"
+          }
+        },
+        "deleted": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleted"
+          }
+        }
       }
     },
     "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroupId": {
@@ -89544,6 +90152,100 @@
         "smithy.api#pattern": "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/op-[a-f0-9]{17}$"
       }
     },
+    "com.amazonaws.ec2#OutpostLag": {
+      "type": "structure",
+      "members": {
+        "OutpostArn": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OutpostArn",
+            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the Outpost LAG.</p>",
+            "smithy.api#xmlName": "outpostArn"
+          }
+        },
+        "OwnerId": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OwnerId",
+            "smithy.api#documentation": "<p>The ID of the Outpost LAG owner.</p>",
+            "smithy.api#xmlName": "ownerId"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "State",
+            "smithy.api#documentation": "<p>The current state of the Outpost LAG.</p>",
+            "smithy.api#xmlName": "state"
+          }
+        },
+        "OutpostLagId": {
+          "target": "com.amazonaws.ec2#OutpostLagId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OutpostLagId",
+            "smithy.api#documentation": "<p>The ID of the Outpost LAG.</p>",
+            "smithy.api#xmlName": "outpostLagId"
+          }
+        },
+        "LocalGatewayVirtualInterfaceIds": {
+          "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceIdSet",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterfaceIdSet",
+            "smithy.api#documentation": "<p>The IDs of the local gateway virtual interfaces associated with the Outpost LAG.</p>",
+            "smithy.api#xmlName": "localGatewayVirtualInterfaceIdSet"
+          }
+        },
+        "ServiceLinkVirtualInterfaceIds": {
+          "target": "com.amazonaws.ec2#ServiceLinkVirtualInterfaceIdSet",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ServiceLinkVirtualInterfaceIdSet",
+            "smithy.api#documentation": "<p>The service link virtual interface IDs associated with the Outpost LAG.</p>",
+            "smithy.api#xmlName": "serviceLinkVirtualInterfaceIdSet"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.ec2#TagList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "TagSet",
+            "smithy.api#documentation": "<p>The tags associated with the Outpost LAG.</p>",
+            "smithy.api#xmlName": "tagSet"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an Outpost link aggregation group (LAG).</p>"
+      }
+    },
+    "com.amazonaws.ec2#OutpostLagId": {
+      "type": "string"
+    },
+    "com.amazonaws.ec2#OutpostLagIdSet": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#OutpostLagId",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#OutpostLagMaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 5,
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.ec2#OutpostLagSet": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#OutpostLag",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
     "com.amazonaws.ec2#OwnerStringList": {
       "type": "list",
       "member": {
@@ -97611,6 +98313,12 @@
             "smithy.api#enumValue": "network-insights-access-scope-analysis"
           }
         },
+        "outpost_lag": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "outpost-lag"
+          }
+        },
         "placement_group": {
           "target": "smithy.api#Unit",
           "traits": {
@@ -97651,6 +98359,12 @@
           "target": "smithy.api#Unit",
           "traits": {
             "smithy.api#enumValue": "security-group-rule"
+          }
+        },
+        "service_link_virtual_interface": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "service-link-virtual-interface"
           }
         },
         "snapshot": {
@@ -103112,6 +103826,169 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.ec2#ServiceDetail",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#ServiceLinkMaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 5,
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.ec2#ServiceLinkVirtualInterface": {
+      "type": "structure",
+      "members": {
+        "ServiceLinkVirtualInterfaceId": {
+          "target": "com.amazonaws.ec2#ServiceLinkVirtualInterfaceId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ServiceLinkVirtualInterfaceId",
+            "smithy.api#documentation": "<p>The ID of the service link virtual interface.</p>",
+            "smithy.api#xmlName": "serviceLinkVirtualInterfaceId"
+          }
+        },
+        "ServiceLinkVirtualInterfaceArn": {
+          "target": "com.amazonaws.ec2#ResourceArn",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ServiceLinkVirtualInterfaceArn",
+            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) for the service link virtual interface. </p>",
+            "smithy.api#xmlName": "serviceLinkVirtualInterfaceArn"
+          }
+        },
+        "OutpostId": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OutpostId",
+            "smithy.api#documentation": "<p>The Outpost ID for the service link virtual interface.</p>",
+            "smithy.api#xmlName": "outpostId"
+          }
+        },
+        "OutpostArn": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OutpostArn",
+            "smithy.api#documentation": "<p>The Outpost Amazon Resource Number (ARN) for the service link virtual interface.</p>",
+            "smithy.api#xmlName": "outpostArn"
+          }
+        },
+        "OwnerId": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OwnerId",
+            "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the service link virtual interface..</p>",
+            "smithy.api#xmlName": "ownerId"
+          }
+        },
+        "LocalAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "LocalAddress",
+            "smithy.api#documentation": "<p>The IPv4 address assigned to the local gateway virtual interface on the Outpost side.</p>",
+            "smithy.api#xmlName": "localAddress"
+          }
+        },
+        "PeerAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PeerAddress",
+            "smithy.api#documentation": "<p>The IPv4 peer address for the service link virtual interface.</p>",
+            "smithy.api#xmlName": "peerAddress"
+          }
+        },
+        "PeerBgpAsn": {
+          "target": "com.amazonaws.ec2#Long",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PeerBgpAsn",
+            "smithy.api#documentation": "<p>The ASN for the Border Gateway Protocol (BGP) associated with the service link virtual interface.</p>",
+            "smithy.api#xmlName": "peerBgpAsn"
+          }
+        },
+        "Vlan": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Vlan",
+            "smithy.api#documentation": "<p>The virtual local area network for the service link virtual interface.</p>",
+            "smithy.api#xmlName": "vlan"
+          }
+        },
+        "OutpostLagId": {
+          "target": "com.amazonaws.ec2#OutpostLagId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "OutpostLagId",
+            "smithy.api#documentation": "<p>The link aggregation group (LAG) ID for the service link virtual interface.</p>",
+            "smithy.api#xmlName": "outpostLagId"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.ec2#TagList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "TagSet",
+            "smithy.api#documentation": "<p>The tags associated with the service link virtual interface.</p>",
+            "smithy.api#xmlName": "tagSet"
+          }
+        },
+        "ConfigurationState": {
+          "target": "com.amazonaws.ec2#ServiceLinkVirtualInterfaceConfigurationState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ConfigurationState",
+            "smithy.api#documentation": "<p>The current state of the service link virtual interface.</p>",
+            "smithy.api#xmlName": "configurationState"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the service link virtual interfaces that establish connectivity between Amazon Web Services Outpost and on-premises networks.</p>"
+      }
+    },
+    "com.amazonaws.ec2#ServiceLinkVirtualInterfaceConfigurationState": {
+      "type": "enum",
+      "members": {
+        "pending": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        },
+        "available": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "available"
+          }
+        },
+        "deleting": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleting"
+          }
+        },
+        "deleted": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "deleted"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#ServiceLinkVirtualInterfaceId": {
+      "type": "string"
+    },
+    "com.amazonaws.ec2#ServiceLinkVirtualInterfaceIdSet": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#ServiceLinkVirtualInterfaceId",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#ServiceLinkVirtualInterfaceSet": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#ServiceLinkVirtualInterface",
         "traits": {
           "smithy.api#xmlName": "item"
         }
@@ -114573,6 +115450,14 @@
             "aws.protocols#ec2QueryName": "Operator",
             "smithy.api#documentation": "<p>The service provider that manages the volume.</p>",
             "smithy.api#xmlName": "operator"
+          }
+        },
+        "VolumeInitializationRate": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "VolumeInitializationRate",
+            "smithy.api#documentation": "<p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume during creation, \n      in MiB/s. If no volume initialization rate was specified, the value is <code>null</code>.</p>",
+            "smithy.api#xmlName": "volumeInitializationRate"
           }
         },
         "VolumeId": {
