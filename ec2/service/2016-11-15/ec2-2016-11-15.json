@@ -88411,6 +88411,14 @@
             "smithy.api#xmlName": "filterInArnSet"
           }
         },
+        "FilterOutArns": {
+          "target": "com.amazonaws.ec2#ArnList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "FilterOutArnSet",
+            "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the resources that the path must ignore.</p>",
+            "smithy.api#xmlName": "filterOutArnSet"
+          }
+        },
         "StartDate": {
           "target": "com.amazonaws.ec2#MillisecondDateTime",
           "traits": {
@@ -106654,6 +106662,13 @@
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the resources that the path must traverse.</p>",
             "smithy.api#xmlName": "FilterInArn"
+          }
+        },
+        "FilterOutArns": {
+          "target": "com.amazonaws.ec2#ArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the resources that the path will ignore.</p>",
+            "smithy.api#xmlName": "FilterOutArn"
           }
         },
         "DryRun": {
