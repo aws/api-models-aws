@@ -101,6 +101,7 @@ def handle_model(model_path: Path, overrides: Dict[str, dict] = None) -> ModelIn
 
     # Find the service shape
     service_shape = None
+    service_shape_id = None
     sdk_id = None
 
     for shape_id, shape in smithy_model_json.get("shapes", {}).items():
