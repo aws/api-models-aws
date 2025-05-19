@@ -14,7 +14,7 @@ repositories {
 //// Workaround per: https://github.com/gradle/gradle/issues/15383
 val Project.libs get() = the<org.gradle.accessors.dm.LibrariesForLibs>()
 
-description = "This module contains the smithy model (JSON AST) for ${name.capitalized()}"
+description = "This module contains the Smithy model (JSON AST) for ${name.capitalized()}."
 extra["displayName"] = "Software :: Amazon :: API :: Models :: ${name.capitalized()}"
 
 dependencies {
