@@ -1,3 +1,4 @@
+import org.gradle.internal.extensions.stdlib.capitalized
 import org.jreleaser.model.Active
 
 plugins {
@@ -6,6 +7,10 @@ plugins {
     alias(libs.plugins.jreleaser)
     id("api-models-aws.publishing-conventions")
 }
+
+description = "This module contains the smithy model (JSON AST) for all AWS services."
+extra["displayName"] = "Software :: Amazon :: API :: Models"
+
 
 subprojects {
     afterEvaluate {
