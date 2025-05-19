@@ -8,7 +8,7 @@ plugins {
     id("api-models-aws.publishing-conventions")
 }
 
-description = "This module contains the smithy model (JSON AST) for all AWS services."
+description = "This module contains the Smithy model (JSON AST) for all AWS services."
 extra["displayName"] = "Software :: Amazon :: API :: Models"
 subprojects {
     afterEvaluate {
