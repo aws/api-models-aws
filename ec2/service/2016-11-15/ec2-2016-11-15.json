@@ -2487,6 +2487,9 @@
           "target": "com.amazonaws.ec2#CreateDefaultVpc"
         },
         {
+          "target": "com.amazonaws.ec2#CreateDelegateMacVolumeOwnershipTask"
+        },
+        {
           "target": "com.amazonaws.ec2#CreateDhcpOptions"
         },
         {
@@ -2557,6 +2560,9 @@
         },
         {
           "target": "com.amazonaws.ec2#CreateLocalGatewayVirtualInterfaceGroup"
+        },
+        {
+          "target": "com.amazonaws.ec2#CreateMacSystemIntegrityProtectionModificationTask"
         },
         {
           "target": "com.amazonaws.ec2#CreateManagedPrefixList"
@@ -3229,6 +3235,9 @@
         },
         {
           "target": "com.amazonaws.ec2#DescribeMacHosts"
+        },
+        {
+          "target": "com.amazonaws.ec2#DescribeMacModificationTasks"
         },
         {
           "target": "com.amazonaws.ec2#DescribeManagedPrefixLists"
@@ -14969,7 +14978,7 @@
         "SnapshotCopyCompletionDurationMinutes": {
           "target": "com.amazonaws.ec2#Long",
           "traits": {
-            "smithy.api#documentation": "<p>Specify a completion duration, in 15 minute increments, to initiate a time-based \n      AMI copy. The specified completion duration applies to each of the snapshots associated \n      with the AMI. Each snapshot associated with the AMI will be completed within the \n      specified completion duration, regardless of their size.</p>\n         <p>If you do not specify a value, the AMI copy operation is completed on a best-effort \n      basis.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html\">\n      Time-based copies</a>.</p>"
+            "smithy.api#documentation": "<p>Specify a completion duration, in 15 minute increments, to initiate a time-based AMI copy.\n      The specified completion duration applies to each of the snapshots associated with the AMI.\n      Each snapshot associated with the AMI will be completed within the specified completion\n      duration, with copy throughput automatically adjusted for each snapshot based on its size to\n      meet the timing target.</p>\n         <p>If you do not specify a value, the AMI copy operation is completed on a best-effort \n      basis.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html\">\n      Time-based copies</a>.</p>"
           }
         },
         "DryRun": {
@@ -16376,6 +16385,78 @@
             "aws.protocols#ec2QueryName": "Vpc",
             "smithy.api#documentation": "<p>Information about the VPC.</p>",
             "smithy.api#xmlName": "vpc"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateDelegateMacVolumeOwnershipTask": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#CreateDelegateMacVolumeOwnershipTaskRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#CreateDelegateMacVolumeOwnershipTaskResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Delegates ownership of the Amazon EBS root volume for an Apple silicon \n         Mac instance to an administrative user.</p>"
+      }
+    },
+    "com.amazonaws.ec2#CreateDelegateMacVolumeOwnershipTaskRequest": {
+      "type": "structure",
+      "members": {
+        "ClientToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        },
+        "InstanceId": {
+          "target": "com.amazonaws.ec2#InstanceId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the Amazon EC2 Mac instance.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MacCredentials": {
+          "target": "com.amazonaws.ec2#SensitiveMacCredentials",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>Specifies the following credentials:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Internal disk administrative user</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Username</b> - Only the default administrative user \n                     (<code>aws-managed-user</code>) is supported and it is used by default. You can't \n                     specify a different administrative user.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Password</b> - If you did not change the default \n                     password for <code>aws-managed-user</code>, specify the default password, which is \n                     <i>blank</i>. Otherwise, specify your password.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon EBS root volume administrative user</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Username</b> - If you did not change the default \n                     administrative user, specify <code>ec2-user</code>. Otherwise, specify the username \n                     for your administrative user.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Password</b> - Specify the password for the \n                     administrative user.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The credentials must be specified in the following JSON format:</p>\n         <p>\n            <code>{\n  \"internalDiskPassword\":\"<i>internal-disk-admin_password</i>\",\n  \"rootVolumeUsername\":\"<i>root-volume-admin_username</i>\",\n  \"rootVolumepassword\":\"<i>root-volume-admin_password</i>\"\n}</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagSpecifications": {
+          "target": "com.amazonaws.ec2#TagSpecificationList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to assign to the volume ownership delegation task.</p>",
+            "smithy.api#xmlName": "TagSpecification"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateDelegateMacVolumeOwnershipTaskResult": {
+      "type": "structure",
+      "members": {
+        "MacModificationTask": {
+          "target": "com.amazonaws.ec2#MacModificationTask",
+          "traits": {
+            "aws.protocols#ec2QueryName": "MacModificationTask",
+            "smithy.api#documentation": "<p>Information about the volume ownership delegation task.</p>",
+            "smithy.api#xmlName": "macModificationTask"
           }
         }
       },
@@ -18622,6 +18703,90 @@
             "aws.protocols#ec2QueryName": "LocalGatewayVirtualInterface",
             "smithy.api#documentation": "<p>Information about the local gateway virtual interface.</p>",
             "smithy.api#xmlName": "localGatewayVirtualInterface"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateMacSystemIntegrityProtectionModificationTask": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#CreateMacSystemIntegrityProtectionModificationTaskRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#CreateMacSystemIntegrityProtectionModificationTaskResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a System Integrity Protection (SIP) modification task to configure the SIP settings \n         for an x86 Mac instance or Apple silicon Mac instance. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-configure\">\n            Configure SIP for Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>When you configure the SIP settings for your instance, you can either enable \n         or disable all SIP settings, or you can specify a custom SIP configuration that \n         selectively enables or disables specific SIP settings.</p>\n         <note>\n            <p>If you implement a custom configuration, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-check-settings\">\n               connect to the instance and verify the settings</a> to ensure that your \n            requirements are properly implemented and functioning as intended.</p>\n            <p>SIP configurations might change with macOS updates. We recommend that you \n            review custom SIP settings after any macOS version upgrade to ensure \n            continued compatibility and proper functionality of your security configurations.</p>\n         </note>\n         <p>To enable or disable all SIP settings, use the <b>MacSystemIntegrityProtectionStatus</b> \n         parameter only. For example, to enable all SIP settings, specify the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MacSystemIntegrityProtectionStatus=enabled</code>\n               </p>\n            </li>\n         </ul>\n         <p>To specify a custom configuration that selectively enables or disables specific SIP \n         settings, use the <b>MacSystemIntegrityProtectionStatus</b> \n         parameter to enable or disable all SIP settings, and then use the \n         <b>MacSystemIntegrityProtectionConfiguration</b> parameter \n         to specify exceptions. In this case, the exceptions you specify for <b>MacSystemIntegrityProtectionConfiguration</b> override the value \n         you specify for <b>MacSystemIntegrityProtectionStatus</b>. \n         For example, to enable all SIP settings, except <code>NvramProtections</code>, \n         specify the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MacSystemIntegrityProtectionStatus=enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MacSystemIntegrityProtectionConfigurationRequest \"NvramProtections=disabled\"</code>\n               </p>\n            </li>\n         </ul>"
+      }
+    },
+    "com.amazonaws.ec2#CreateMacSystemIntegrityProtectionModificationTaskRequest": {
+      "type": "structure",
+      "members": {
+        "ClientToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        },
+        "InstanceId": {
+          "target": "com.amazonaws.ec2#InstanceId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the Amazon EC2 Mac instance.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MacCredentials": {
+          "target": "com.amazonaws.ec2#SensitiveMacCredentials",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            <b>[Apple silicon Mac instances only]</b> Specifies the \n         following credentials:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Internal disk administrative user</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Username</b> - Only the default administrative \n                     user (<code>aws-managed-user</code>) is supported and it is used by default. You \n                     can't specify a different administrative user.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Password</b> - If you did not change the default \n                     password for <code>aws-managed-user</code>, specify the default password, which \n                     is <i>blank</i>. Otherwise, specify your password.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon EBS root volume administrative user</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Username</b> - If you did not change the default \n                     administrative user, specify <code>ec2-user</code>. Otherwise, specify the username \n                     for your administrative user.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Password</b> - Specify the password for the \n                     administrative user.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The credentials must be specified in the following JSON format:</p>\n         <p>\n            <code>{\n  \"internalDiskPassword\":\"<i>internal-disk-admin_password</i>\",\n  \"rootVolumeUsername\":\"<i>root-volume-admin_username</i>\",\n  \"rootVolumepassword\":\"<i>root-volume-admin_password</i>\"\n}</code>\n         </p>"
+          }
+        },
+        "MacSystemIntegrityProtectionConfiguration": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionConfigurationRequest",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the overrides to selectively enable or disable individual SIP settings. \n         The individual settings you specify here override the overall SIP status you specify \n         for <b>MacSystemIntegrityProtectionStatus</b>.</p>"
+          }
+        },
+        "MacSystemIntegrityProtectionStatus": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>Specifies the overall SIP status for the instance. To enable all SIP settings, specify \n         <code>enabled</code>. To disable all SIP settings, specify <code>disabled</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagSpecifications": {
+          "target": "com.amazonaws.ec2#TagSpecificationList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies tags to apply to the SIP modification task.</p>",
+            "smithy.api#xmlName": "TagSpecification"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#CreateMacSystemIntegrityProtectionModificationTaskResult": {
+      "type": "structure",
+      "members": {
+        "MacModificationTask": {
+          "target": "com.amazonaws.ec2#MacModificationTask",
+          "traits": {
+            "aws.protocols#ec2QueryName": "MacModificationTask",
+            "smithy.api#documentation": "<p>Information about the SIP modification task.</p>",
+            "smithy.api#xmlName": "macModificationTask"
           }
         }
       },
@@ -34088,7 +34253,7 @@
         "target": "com.amazonaws.ec2#DescribeImagesResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the\n      images available to you.</p>\n         <p>The images available to you include public images, private images that you own, and\n      private images owned by other Amazon Web Services accounts for which you have explicit launch\n      permissions.</p>\n         <p>Recently deregistered images appear in the returned results for a short interval and then\n      return empty results. After all instances that reference a deregistered AMI are terminated,\n      specifying the ID of the image will eventually return an error indicating that the AMI ID\n      cannot be found.</p>\n         <p>When Allowed AMIs is set to <code>enabled</code>, only allowed images are returned in the\n      results, with the <code>imageAllowed</code> field set to <code>true</code> for each image. In\n        <code>audit-mode</code>, the <code>imageAllowed</code> field is set to <code>true</code> for\n      images that meet the account's Allowed AMIs criteria, and <code>false</code> for images that\n      don't meet the criteria. For more information, see <a>EnableAllowedImagesSettings</a>.</p>\n         <important>\n            <p>We strongly recommend using only paginated requests. Unpaginated requests are\n        susceptible to throttling and timeouts.</p>\n         </important>\n         <note>\n            <p>The order of the elements in the response, including those within nested structures,\n        might vary. Applications should not assume the elements appear in a particular order.</p>\n         </note>",
+        "smithy.api#documentation": "<p>Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the\n      images available to you.</p>\n         <p>The images available to you include public images, private images that you own, and\n      private images owned by other Amazon Web Services accounts for which you have explicit launch\n      permissions.</p>\n         <p>Recently deregistered images appear in the returned results for a short interval and then\n      return empty results. After all instances that reference a deregistered AMI are terminated,\n      specifying the ID of the image will eventually return an error indicating that the AMI ID\n      cannot be found.</p>\n         <p>When Allowed AMIs is set to <code>enabled</code>, only allowed images are returned in the\n      results, with the <code>imageAllowed</code> field set to <code>true</code> for each image. In\n        <code>audit-mode</code>, the <code>imageAllowed</code> field is set to <code>true</code> for\n      images that meet the account's Allowed AMIs criteria, and <code>false</code> for images that\n      don't meet the criteria. For more information, see <a>EnableAllowedImagesSettings</a>.</p>\n         <p>The Amazon EC2 API follows an eventual consistency model. This means that the result of an API\n      command you run that creates or modifies resources might not be immediately available to all\n      subsequent commands you run. For guidance on how to manage eventual consistency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html\">Eventual\n        consistency in the Amazon EC2 API</a> in the <i>Amazon EC2 Developer\n        Guide</i>.</p>\n         <important>\n            <p>We strongly recommend using only paginated requests. Unpaginated requests are\n        susceptible to throttling and timeouts.</p>\n         </important>\n         <note>\n            <p>The order of the elements in the response, including those within nested structures,\n        might vary. Applications should not assume the elements appear in a particular order.</p>\n         </note>",
         "smithy.api#examples": [
           {
             "title": "To describe an AMI",
@@ -37558,6 +37723,97 @@
         "smithy.api#output": {}
       }
     },
+    "com.amazonaws.ec2#DescribeMacModificationTasks": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#DescribeMacModificationTasksRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#DescribeMacModificationTasksResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a System Integrity Protection (SIP) modification task or volume ownership delegation \n         task for an Amazon EC2 Mac instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-configure\">Configure \n            SIP for Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "MacModificationTasks",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.ec2#DescribeMacModificationTasksMaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 500
+        }
+      }
+    },
+    "com.amazonaws.ec2#DescribeMacModificationTasksRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.ec2#FilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies one or more filters for the request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>instance-id</code> - The ID of the instance for which the task was created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>task-state</code> - The state of the task (<code>successful</code> | <code>failed</code> | \n               <code>in-progress</code> | <code>pending</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>mac-system-integrity-protection-configuration.sip-status</code> - The overall SIP \n               state requested in the task (<code>enabled</code> | <code>disabled</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>start-time</code> - The date and time the task was created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>task-type</code> - The type of task (<code>sip-modification</code> | <code>volume-ownership-delegation</code>).</p>\n            </li>\n         </ul>",
+            "smithy.api#xmlName": "Filter"
+          }
+        },
+        "MacModificationTaskIds": {
+          "target": "com.amazonaws.ec2#MacModificationTaskIdList",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of task.</p>",
+            "smithy.api#xmlName": "MacModificationTaskId"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.ec2#DescribeMacModificationTasksMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#DescribeMacModificationTasksResult": {
+      "type": "structure",
+      "members": {
+        "MacModificationTasks": {
+          "target": "com.amazonaws.ec2#MacModificationTaskList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "MacModificationTaskSet",
+            "smithy.api#documentation": "<p>Information about the tasks.</p>",
+            "smithy.api#xmlName": "macModificationTaskSet"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NextToken",
+            "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+            "smithy.api#xmlName": "nextToken"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
     "com.amazonaws.ec2#DescribeManagedPrefixLists": {
       "type": "operation",
       "input": {
@@ -38908,7 +39164,7 @@
         "target": "com.amazonaws.ec2#DescribeOutpostLagsResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Describes the Outposts link aggregation groups (LAGs).</p>"
+        "smithy.api#documentation": "<p>Describes the Outposts link aggregation groups (LAGs).</p>\n         <note>\n            <p>LAGs are only available for second-generation Outposts racks at this time.</p>\n         </note>"
       }
     },
     "com.amazonaws.ec2#DescribeOutpostLagsRequest": {
@@ -80513,12 +80769,282 @@
         }
       }
     },
+    "com.amazonaws.ec2#MacModificationTask": {
+      "type": "structure",
+      "members": {
+        "InstanceId": {
+          "target": "com.amazonaws.ec2#InstanceId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "InstanceId",
+            "smithy.api#documentation": "<p>The ID of the Amazon EC2 Mac instance.</p>",
+            "smithy.api#xmlName": "instanceId"
+          }
+        },
+        "MacModificationTaskId": {
+          "target": "com.amazonaws.ec2#MacModificationTaskId",
+          "traits": {
+            "aws.protocols#ec2QueryName": "MacModificationTaskId",
+            "smithy.api#documentation": "<p>The ID of task.</p>",
+            "smithy.api#xmlName": "macModificationTaskId"
+          }
+        },
+        "MacSystemIntegrityProtectionConfig": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionConfiguration",
+          "traits": {
+            "aws.protocols#ec2QueryName": "MacSystemIntegrityProtectionConfig",
+            "smithy.api#documentation": "<p>[SIP modification tasks only] Information about the SIP \n         configuration.</p>",
+            "smithy.api#xmlName": "macSystemIntegrityProtectionConfig"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.ec2#MillisecondDateTime",
+          "traits": {
+            "aws.protocols#ec2QueryName": "StartTime",
+            "smithy.api#documentation": "<p>The date and time the task was created, in the UTC timezone \n         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>",
+            "smithy.api#xmlName": "startTime"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.ec2#TagList",
+          "traits": {
+            "aws.protocols#ec2QueryName": "TagSet",
+            "smithy.api#documentation": "<p>The tags assigned to the task.</p>",
+            "smithy.api#xmlName": "tagSet"
+          }
+        },
+        "TaskState": {
+          "target": "com.amazonaws.ec2#MacModificationTaskState",
+          "traits": {
+            "aws.protocols#ec2QueryName": "TaskState",
+            "smithy.api#documentation": "<p>The state of the task.</p>",
+            "smithy.api#xmlName": "taskState"
+          }
+        },
+        "TaskType": {
+          "target": "com.amazonaws.ec2#MacModificationTaskType",
+          "traits": {
+            "aws.protocols#ec2QueryName": "TaskType",
+            "smithy.api#documentation": "<p>The type of task.</p>",
+            "smithy.api#xmlName": "taskType"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about a System Integrity Protection (SIP) modification task or volume \n         ownership delegation task for an Amazon EC2 Mac instance.</p>"
+      }
+    },
+    "com.amazonaws.ec2#MacModificationTaskId": {
+      "type": "string"
+    },
+    "com.amazonaws.ec2#MacModificationTaskIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#MacModificationTaskId",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#MacModificationTaskList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ec2#MacModificationTask",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#MacModificationTaskState": {
+      "type": "enum",
+      "members": {
+        "successful": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "successful"
+          }
+        },
+        "failed": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "failed"
+          }
+        },
+        "inprogress": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "in-progress"
+          }
+        },
+        "pending": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ec2#MacModificationTaskType": {
+      "type": "enum",
+      "members": {
+        "SIPModification": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "sip-modification"
+          }
+        },
+        "VolumeOwnershipDelegation": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "volume-ownership-delegation"
+          }
+        }
+      }
+    },
     "com.amazonaws.ec2#MacOSVersionStringList": {
       "type": "list",
       "member": {
         "target": "com.amazonaws.ec2#String",
         "traits": {
           "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.ec2#MacSystemIntegrityProtectionConfiguration": {
+      "type": "structure",
+      "members": {
+        "AppleInternal": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "AppleInternal",
+            "smithy.api#documentation": "<p>Indicates whether Apple Internal was enabled or disabled by the task.</p>",
+            "smithy.api#xmlName": "appleInternal"
+          }
+        },
+        "BaseSystem": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "BaseSystem",
+            "smithy.api#documentation": "<p>Indicates whether Base System was enabled or disabled by the task.</p>",
+            "smithy.api#xmlName": "baseSystem"
+          }
+        },
+        "DebuggingRestrictions": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "DebuggingRestrictions",
+            "smithy.api#documentation": "<p>Indicates whether Debugging Restrictions was enabled or disabled by the task.</p>",
+            "smithy.api#xmlName": "debuggingRestrictions"
+          }
+        },
+        "DTraceRestrictions": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "DTraceRestrictions",
+            "smithy.api#documentation": "<p>Indicates whether Dtrace Restrictions was enabled or disabled by the task.</p>",
+            "smithy.api#xmlName": "dTraceRestrictions"
+          }
+        },
+        "FilesystemProtections": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "FilesystemProtections",
+            "smithy.api#documentation": "<p>Indicates whether Filesystem Protections was enabled or disabled by the task.</p>",
+            "smithy.api#xmlName": "filesystemProtections"
+          }
+        },
+        "KextSigning": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "KextSigning",
+            "smithy.api#documentation": "<p>Indicates whether Kext Signing was enabled or disabled by the task.</p>",
+            "smithy.api#xmlName": "kextSigning"
+          }
+        },
+        "NvramProtections": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "NvramProtections",
+            "smithy.api#documentation": "<p>Indicates whether NVRAM Protections was enabled or disabled by the task.</p>",
+            "smithy.api#xmlName": "nvramProtections"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Status",
+            "smithy.api#documentation": "<p>Indicates SIP was enabled or disabled by the task.</p>",
+            "smithy.api#xmlName": "status"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the configuration for a System Integrity Protection (SIP) modification task.</p>"
+      }
+    },
+    "com.amazonaws.ec2#MacSystemIntegrityProtectionConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "AppleInternal": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables Apple Internal.</p>"
+          }
+        },
+        "BaseSystem": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables Base System.</p>"
+          }
+        },
+        "DebuggingRestrictions": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables Debugging Restrictions.</p>"
+          }
+        },
+        "DTraceRestrictions": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables Dtrace Restrictions.</p>"
+          }
+        },
+        "FilesystemProtections": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables Filesystem Protections.</p>"
+          }
+        },
+        "KextSigning": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables Kext Signing.</p>"
+          }
+        },
+        "NvramProtections": {
+          "target": "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables Nvram Protections.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a custom configuration for a System Integrity Protection (SIP) modification task.</p>"
+      }
+    },
+    "com.amazonaws.ec2#MacSystemIntegrityProtectionSettingStatus": {
+      "type": "enum",
+      "members": {
+        "enabled": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "enabled"
+          }
+        },
+        "disabled": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "disabled"
+          }
         }
       }
     },
@@ -98802,6 +99328,12 @@
           "traits": {
             "smithy.api#enumValue": "ipam-external-resource-verification-token"
           }
+        },
+        "mac_modification_task": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "mac-modification-task"
+          }
         }
       }
     },
@@ -103680,6 +104212,12 @@
       },
       "traits": {
         "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#SensitiveMacCredentials": {
+      "type": "string",
+      "traits": {
+        "smithy.api#sensitive": {}
       }
     },
     "com.amazonaws.ec2#SensitiveUrl": {
