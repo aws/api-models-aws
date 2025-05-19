@@ -10,8 +10,6 @@ plugins {
 
 description = "This module contains the smithy model (JSON AST) for all AWS services."
 extra["displayName"] = "Software :: Amazon :: API :: Models"
-
-
 subprojects {
     afterEvaluate {
         apply {
