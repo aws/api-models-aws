@@ -2,7 +2,7 @@ plugins {
     `maven-publish`
 }
 
-group = "software.amazon.api.models"
+group = "com.sonatype.central.testing.amazon"
 version = project.property("model.${project.name}.version")!!
 
 publishing {
