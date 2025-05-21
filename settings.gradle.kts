@@ -13,6 +13,7 @@ settings.extra.properties.forEach {
         // Skip the "all" project, it is set up in the root gradle file
         if (project != "all") {
             include(project)
+            project(":${project}").projectDir = file("models/${project}")
         }
     }
 }
