@@ -1,0 +1,5846 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.madstudio#AcceptEulas": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#AcceptEulasRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#AcceptEulasResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios/{studioId}/eula-acceptances",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#AcceptEulasRequest": {
+      "type": "structure",
+      "members": {
+        "eulaIds": {
+          "target": "com.amazonaws.madstudio#EulaIdList",
+          "traits": {
+            "smithy.api#jsonName": "eulaIds"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#AcceptEulasResponse": {
+      "type": "structure",
+      "members": {
+        "eulaAcceptances": {
+          "target": "com.amazonaws.madstudio#EulaAcceptanceList",
+          "traits": {
+            "smithy.api#jsonName": "eulaAcceptances"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "code"
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.madstudio#ExceptionContext",
+          "traits": {
+            "smithy.api#jsonName": "context"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.madstudio#ActiveDirectoryComputerAttribute": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "value"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ActiveDirectoryComputerAttributeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#ActiveDirectoryComputerAttribute"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ActiveDirectoryConfiguration": {
+      "type": "structure",
+      "members": {
+        "computerAttributes": {
+          "target": "com.amazonaws.madstudio#ActiveDirectoryComputerAttributeList",
+          "traits": {
+            "smithy.api#jsonName": "computerAttributes"
+          }
+        },
+        "directoryId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "directoryId"
+          }
+        },
+        "directoryName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "directoryName"
+          }
+        },
+        "dnsIpAddresses": {
+          "target": "com.amazonaws.madstudio#ActiveDirectoryDnsIpAddressList",
+          "traits": {
+            "smithy.api#jsonName": "dnsIpAddresses"
+          }
+        },
+        "organizationalUnitDistinguishedName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "organizationalUnitDistinguishedName"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ActiveDirectoryDnsIpAddressList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#__string"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ComputeFarmConfiguration": {
+      "type": "structure",
+      "members": {
+        "activeDirectoryUser": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "activeDirectoryUser"
+          }
+        },
+        "endpoint": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "endpoint"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ConflictException": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "code"
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.madstudio#ExceptionContext",
+          "traits": {
+            "smithy.api#jsonName": "context"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.madstudio#CreateLaunchProfile": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#CreateLaunchProfileRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#CreateLaunchProfileResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateLaunchProfileRequest": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name",
+            "smithy.api#required": {}
+          }
+        },
+        "streamConfiguration": {
+          "target": "com.amazonaws.madstudio#StreamConfigurationCreate",
+          "traits": {
+            "smithy.api#jsonName": "streamConfiguration",
+            "smithy.api#required": {}
+          }
+        },
+        "studioComponentIds": {
+          "target": "com.amazonaws.madstudio#LaunchProfileStudioComponentIdList",
+          "traits": {
+            "smithy.api#jsonName": "studioComponentIds",
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateLaunchProfileResponse": {
+      "type": "structure",
+      "members": {
+        "launchProfile": {
+          "target": "com.amazonaws.madstudio#LaunchProfile",
+          "traits": {
+            "smithy.api#jsonName": "launchProfile"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStreamingImage": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#CreateStreamingImageRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#CreateStreamingImageResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-images",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStreamingImageRequest": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "imageId": {
+          "target": "com.amazonaws.madstudio#ImageId",
+          "traits": {
+            "smithy.api#jsonName": "imageId",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name",
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStreamingImageResponse": {
+      "type": "structure",
+      "members": {
+        "streamingImage": {
+          "target": "com.amazonaws.madstudio#StreamingImage",
+          "traits": {
+            "smithy.api#jsonName": "streamingImage"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStreamingSession": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#CreateStreamingSessionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#CreateStreamingSessionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-sessions",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStreamingSessionRequest": {
+      "type": "structure",
+      "members": {
+        "ec2InstanceType": {
+          "target": "com.amazonaws.madstudio#StreamingInstanceType",
+          "traits": {
+            "smithy.api#jsonName": "ec2InstanceType"
+          }
+        },
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "launchProfileId"
+          }
+        },
+        "streamingImageId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "streamingImageId"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStreamingSessionResponse": {
+      "type": "structure",
+      "members": {
+        "session": {
+          "target": "com.amazonaws.madstudio#StreamingSession",
+          "traits": {
+            "smithy.api#jsonName": "session"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudio": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#CreateStudioRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#CreateStudioResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudioComponent": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#CreateStudioComponentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#CreateStudioComponentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios/{studioId}/studio-components",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudioComponentRequest": {
+      "type": "structure",
+      "members": {
+        "configuration": {
+          "target": "com.amazonaws.madstudio#StudioComponentConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "configuration"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "ec2SecurityGroupIds": {
+          "target": "com.amazonaws.madstudio#StudioComponentSecurityGroupIdList",
+          "traits": {
+            "smithy.api#jsonName": "ec2SecurityGroupIds"
+          }
+        },
+        "initializationScript": {
+          "target": "com.amazonaws.madstudio#StudioComponentInitializationScript",
+          "traits": {
+            "smithy.api#jsonName": "initializationScript"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name",
+            "smithy.api#required": {}
+          }
+        },
+        "scriptParameters": {
+          "target": "com.amazonaws.madstudio#StudioComponentScriptParameterKeyValueList",
+          "traits": {
+            "smithy.api#jsonName": "scriptParameters"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "subtype": {
+          "target": "com.amazonaws.madstudio#StudioComponentSubtype",
+          "traits": {
+            "smithy.api#jsonName": "subtype"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.madstudio#StudioComponentType",
+          "traits": {
+            "smithy.api#jsonName": "type",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudioComponentResponse": {
+      "type": "structure",
+      "members": {
+        "studioComponent": {
+          "target": "com.amazonaws.madstudio#StudioComponent",
+          "traits": {
+            "smithy.api#jsonName": "studioComponent"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudioRequest": {
+      "type": "structure",
+      "members": {
+        "adminRoleArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "adminRoleArn",
+            "smithy.api#required": {}
+          }
+        },
+        "displayName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "displayName",
+            "smithy.api#required": {}
+          }
+        },
+        "studioEncryptionConfiguration": {
+          "target": "com.amazonaws.madstudio#StudioEncryptionConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "studioEncryptionConfiguration"
+          }
+        },
+        "studioName": {
+          "target": "com.amazonaws.madstudio#StudioName",
+          "traits": {
+            "smithy.api#jsonName": "studioName",
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "userRoleArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "userRoleArn",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudioResponse": {
+      "type": "structure",
+      "members": {
+        "studio": {
+          "target": "com.amazonaws.madstudio#Studio",
+          "traits": {
+            "smithy.api#jsonName": "studio"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudioSatellite": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#CreateStudioSatelliteRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#CreateStudioSatelliteResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios/{studioId}/satellite",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudioSatelliteRequest": {
+      "type": "structure",
+      "members": {
+        "studioEncryptionConfiguration": {
+          "target": "com.amazonaws.madstudio#StudioEncryptionConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "studioEncryptionConfiguration"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#CreateStudioSatelliteResponse": {
+      "type": "structure",
+      "members": {
+        "studioSatellite": {
+          "target": "com.amazonaws.madstudio#StudioSatellite",
+          "traits": {
+            "smithy.api#jsonName": "studioSatellite"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteLaunchProfile": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#DeleteLaunchProfileRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#DeleteLaunchProfileResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteLaunchProfileMember": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#DeleteLaunchProfileMemberRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#DeleteLaunchProfileMemberResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership/{principalId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteLaunchProfileMemberRequest": {
+      "type": "structure",
+      "members": {
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "principalId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteLaunchProfileMemberResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.madstudio#DeleteLaunchProfileRequest": {
+      "type": "structure",
+      "members": {
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteLaunchProfileResponse": {
+      "type": "structure",
+      "members": {
+        "launchProfile": {
+          "target": "com.amazonaws.madstudio#LaunchProfile",
+          "traits": {
+            "smithy.api#jsonName": "launchProfile"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStreamingImage": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#DeleteStreamingImageRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#DeleteStreamingImageResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-images/{streamingImageId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStreamingImageRequest": {
+      "type": "structure",
+      "members": {
+        "streamingImageId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStreamingImageResponse": {
+      "type": "structure",
+      "members": {
+        "streamingImage": {
+          "target": "com.amazonaws.madstudio#StreamingImage",
+          "traits": {
+            "smithy.api#jsonName": "streamingImage"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStreamingSession": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#DeleteStreamingSessionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#DeleteStreamingSessionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStreamingSessionRequest": {
+      "type": "structure",
+      "members": {
+        "sessionId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStreamingSessionResponse": {
+      "type": "structure",
+      "members": {
+        "session": {
+          "target": "com.amazonaws.madstudio#StreamingSession",
+          "traits": {
+            "smithy.api#jsonName": "session"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudio": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#DeleteStudioRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#DeleteStudioResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/studios/{studioId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioComponent": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#DeleteStudioComponentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#DeleteStudioComponentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/studios/{studioId}/studio-components/{studioComponentId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioComponentRequest": {
+      "type": "structure",
+      "members": {
+        "studioComponentId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioComponentResponse": {
+      "type": "structure",
+      "members": {
+        "studioComponent": {
+          "target": "com.amazonaws.madstudio#StudioComponent",
+          "traits": {
+            "smithy.api#jsonName": "studioComponent"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioMember": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#DeleteStudioMemberRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#DeleteStudioMemberResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/studios/{studioId}/membership/{principalId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioMemberRequest": {
+      "type": "structure",
+      "members": {
+        "principalId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioMemberResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.madstudio#DeleteStudioRequest": {
+      "type": "structure",
+      "members": {
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioResponse": {
+      "type": "structure",
+      "members": {
+        "studio": {
+          "target": "com.amazonaws.madstudio#Studio",
+          "traits": {
+            "smithy.api#jsonName": "studio"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioSatellite": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#DeleteStudioSatelliteRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#DeleteStudioSatelliteResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/studios/{studioId}/satellite",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioSatelliteRequest": {
+      "type": "structure",
+      "members": {
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#DeleteStudioSatelliteResponse": {
+      "type": "structure",
+      "members": {
+        "studioSatellite": {
+          "target": "com.amazonaws.madstudio#StudioSatellite",
+          "traits": {
+            "smithy.api#jsonName": "studioSatellite"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#Eula": {
+      "type": "structure",
+      "members": {
+        "content": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "content"
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "createdAt"
+          }
+        },
+        "eulaId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "eulaId"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "updatedAt"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#EulaAcceptance": {
+      "type": "structure",
+      "members": {
+        "acceptedBy": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "acceptedBy"
+          }
+        },
+        "acceptedOn": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "acceptedOn"
+          }
+        },
+        "accepteeId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "accepteeId"
+          }
+        },
+        "eulaAcceptanceId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "eulaAcceptanceId"
+          }
+        },
+        "eulaId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "eulaId"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#EulaAcceptanceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#EulaAcceptance"
+      }
+    },
+    "com.amazonaws.madstudio#EulaIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#__string"
+      }
+    },
+    "com.amazonaws.madstudio#EulaList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#Eula"
+      }
+    },
+    "com.amazonaws.madstudio#ExceptionContext": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.madstudio#__string"
+      },
+      "value": {
+        "target": "com.amazonaws.madstudio#__string"
+      }
+    },
+    "com.amazonaws.madstudio#GetEula": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetEulaRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetEulaResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/eulas/{eulaId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetEulaRequest": {
+      "type": "structure",
+      "members": {
+        "eulaId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetEulaResponse": {
+      "type": "structure",
+      "members": {
+        "eula": {
+          "target": "com.amazonaws.madstudio#Eula",
+          "traits": {
+            "smithy.api#jsonName": "eula"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfile": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetLaunchProfileRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetLaunchProfileResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfileInitialization": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetLaunchProfileInitializationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetLaunchProfileInitializationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/init",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfileInitializationRequest": {
+      "type": "structure",
+      "members": {
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "platform": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "platform",
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfileInitializationResponse": {
+      "type": "structure",
+      "members": {
+        "launchProfileInitialization": {
+          "target": "com.amazonaws.madstudio#LaunchProfileInitialization",
+          "traits": {
+            "smithy.api#jsonName": "launchProfileInitialization"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfileMember": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetLaunchProfileMemberRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetLaunchProfileMemberResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership/{principalId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfileMemberRequest": {
+      "type": "structure",
+      "members": {
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "principalId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfileMemberResponse": {
+      "type": "structure",
+      "members": {
+        "member": {
+          "target": "com.amazonaws.madstudio#LaunchProfileMembership",
+          "traits": {
+            "smithy.api#jsonName": "member"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfileRequest": {
+      "type": "structure",
+      "members": {
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetLaunchProfileResponse": {
+      "type": "structure",
+      "members": {
+        "launchProfile": {
+          "target": "com.amazonaws.madstudio#LaunchProfile",
+          "traits": {
+            "smithy.api#jsonName": "launchProfile"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStreamingImage": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetStreamingImageRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetStreamingImageResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-images/{streamingImageId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStreamingImageRequest": {
+      "type": "structure",
+      "members": {
+        "streamingImageId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStreamingImageResponse": {
+      "type": "structure",
+      "members": {
+        "streamingImage": {
+          "target": "com.amazonaws.madstudio#StreamingImage",
+          "traits": {
+            "smithy.api#jsonName": "streamingImage"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStreamingSession": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetStreamingSessionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetStreamingSessionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStreamingSessionRequest": {
+      "type": "structure",
+      "members": {
+        "sessionId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStreamingSessionResponse": {
+      "type": "structure",
+      "members": {
+        "session": {
+          "target": "com.amazonaws.madstudio#StreamingSession",
+          "traits": {
+            "smithy.api#jsonName": "session"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudio": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetStudioRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetStudioResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudioComponent": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetStudioComponentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetStudioComponentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/studio-components/{studioComponentId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudioComponentRequest": {
+      "type": "structure",
+      "members": {
+        "studioComponentId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudioComponentResponse": {
+      "type": "structure",
+      "members": {
+        "studioComponent": {
+          "target": "com.amazonaws.madstudio#StudioComponent",
+          "traits": {
+            "smithy.api#jsonName": "studioComponent"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudioMember": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#GetStudioMemberRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#GetStudioMemberResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/membership/{principalId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudioMemberRequest": {
+      "type": "structure",
+      "members": {
+        "principalId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudioMemberResponse": {
+      "type": "structure",
+      "members": {
+        "member": {
+          "target": "com.amazonaws.madstudio#StudioMembership",
+          "traits": {
+            "smithy.api#jsonName": "member"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudioRequest": {
+      "type": "structure",
+      "members": {
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#GetStudioResponse": {
+      "type": "structure",
+      "members": {
+        "studio": {
+          "target": "com.amazonaws.madstudio#Studio",
+          "traits": {
+            "smithy.api#jsonName": "studio"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ImageId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^ami-[0-9A-z]+$"
+      }
+    },
+    "com.amazonaws.madstudio#InternalServerErrorException": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "code"
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.madstudio#ExceptionContext",
+          "traits": {
+            "smithy.api#jsonName": "context"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfile": {
+      "type": "structure",
+      "members": {
+        "createdAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "createdAt"
+          }
+        },
+        "createdBy": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "createdBy"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "launchProfileId"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.madstudio#LaunchProfileState",
+          "traits": {
+            "smithy.api#jsonName": "state"
+          }
+        },
+        "statusCode": {
+          "target": "com.amazonaws.madstudio#LaunchProfileStatusCode",
+          "traits": {
+            "smithy.api#jsonName": "statusCode"
+          }
+        },
+        "statusMessage": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "statusMessage"
+          }
+        },
+        "streamConfiguration": {
+          "target": "com.amazonaws.madstudio#StreamConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "streamConfiguration"
+          }
+        },
+        "studioComponentIds": {
+          "target": "com.amazonaws.madstudio#LaunchProfileStudioComponentIdList",
+          "traits": {
+            "smithy.api#jsonName": "studioComponentIds"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "updatedAt"
+          }
+        },
+        "updatedBy": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "updatedBy"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileInitialization": {
+      "type": "structure",
+      "members": {
+        "activeDirectory": {
+          "target": "com.amazonaws.madstudio#LaunchProfileInitializationActiveDirectory",
+          "traits": {
+            "smithy.api#jsonName": "activeDirectory"
+          }
+        },
+        "ec2SecurityGroupIds": {
+          "target": "com.amazonaws.madstudio#LaunchProfileSecurityGroupIdList",
+          "traits": {
+            "smithy.api#jsonName": "ec2SecurityGroupIds"
+          }
+        },
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "launchProfileId"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "platform": {
+          "target": "com.amazonaws.madstudio#LaunchProfilePlatform",
+          "traits": {
+            "smithy.api#jsonName": "platform"
+          }
+        },
+        "studioComponents": {
+          "target": "com.amazonaws.madstudio#LaunchProfileInitializationStudioComponentList",
+          "traits": {
+            "smithy.api#jsonName": "studioComponents"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileInitializationActiveDirectory": {
+      "type": "structure",
+      "members": {
+        "computerAttributes": {
+          "target": "com.amazonaws.madstudio#ActiveDirectoryComputerAttributeList",
+          "traits": {
+            "smithy.api#jsonName": "computerAttributes"
+          }
+        },
+        "directoryId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "directoryId"
+          }
+        },
+        "directoryName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "directoryName"
+          }
+        },
+        "dnsIpAddresses": {
+          "target": "com.amazonaws.madstudio#ActiveDirectoryDnsIpAddressList",
+          "traits": {
+            "smithy.api#jsonName": "dnsIpAddresses"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "organizationalUnitDistinguishedName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "organizationalUnitDistinguishedName"
+          }
+        },
+        "studioComponentId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "studioComponentId"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileInitializationStudioComponent": {
+      "type": "structure",
+      "members": {
+        "initializationScript": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "initializationScript"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "studioComponentId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "studioComponentId"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "type"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileInitializationStudioComponentList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#LaunchProfileInitializationStudioComponent"
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#LaunchProfile"
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileMembership": {
+      "type": "structure",
+      "members": {
+        "persona": {
+          "target": "com.amazonaws.madstudio#LaunchProfilePersona",
+          "traits": {
+            "smithy.api#jsonName": "persona"
+          }
+        },
+        "principalId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "principalId"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileMembershipList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#LaunchProfileMembership"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 20
+        }
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfilePersona": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "USER",
+            "name": "USER"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfilePlatform": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "LINUX",
+            "name": "LINUX"
+          },
+          {
+            "value": "WINDOWS",
+            "name": "WINDOWS"
+          },
+          {
+            "value": "linux",
+            "name": "linux"
+          },
+          {
+            "value": "windows",
+            "name": "windows"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileSecurityGroupIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#SecurityGroupId"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1
+        }
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CREATING",
+            "name": "CREATING"
+          },
+          {
+            "value": "READY",
+            "name": "READY"
+          },
+          {
+            "value": "UPDATING",
+            "name": "UPDATING"
+          },
+          {
+            "value": "DELETING",
+            "name": "DELETING"
+          },
+          {
+            "value": "DELETED",
+            "name": "DELETED"
+          },
+          {
+            "value": "ERROR",
+            "name": "ERROR"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileStatusCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CREATING_LAUNCH_PROFILE",
+            "name": "CREATING_LAUNCH_PROFILE"
+          },
+          {
+            "value": "UPDATING_LAUNCH_PROFILE",
+            "name": "UPDATING_LAUNCH_PROFILE"
+          },
+          {
+            "value": "LAUNCH_PROFILE_READY",
+            "name": "LAUNCH_PROFILE_READY"
+          },
+          {
+            "value": "DELETING_LAUNCH_PROFILE",
+            "name": "DELETING_LAUNCH_PROFILE"
+          },
+          {
+            "value": "DELETING_LAUNCH_PROFILE_MEMBERSHIP",
+            "name": "DELETING_LAUNCH_PROFILE_MEMBERSHIP"
+          },
+          {
+            "value": "LAUNCH_PROFILE_DELETED",
+            "name": "LAUNCH_PROFILE_DELETED"
+          },
+          {
+            "value": "INTERNAL_ERROR",
+            "name": "INTERNAL_ERROR"
+          },
+          {
+            "value": "MAD_STREAM_LOGICAL_IMAGE_NOT_FOUND",
+            "name": "MAD_STREAM_LOGICAL_IMAGE_NOT_FOUND"
+          },
+          {
+            "value": "MAD_STREAM_LOGICAL_IMAGE_NOT_READY",
+            "name": "MAD_STREAM_LOGICAL_IMAGE_NOT_READY"
+          },
+          {
+            "value": "MAD_STREAM_ACTIVE_SESSSIONS",
+            "name": "MAD_STREAM_ACTIVE_SESSSIONS"
+          },
+          {
+            "value": "MAD_STREAM_TERMINAL_STATE",
+            "name": "MAD_STREAM_TERMINAL_STATE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#LaunchProfileStudioComponentIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#__string"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.madstudio#LicenseServiceConfiguration": {
+      "type": "structure",
+      "members": {
+        "endpoint": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "endpoint"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListEulaAcceptances": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListEulaAcceptancesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListEulaAcceptancesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/eula-acceptances",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListEulaAcceptancesRequest": {
+      "type": "structure",
+      "members": {
+        "eulaId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "eulaId"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListEulaAcceptancesResponse": {
+      "type": "structure",
+      "members": {
+        "eulaAcceptances": {
+          "target": "com.amazonaws.madstudio#EulaAcceptanceList",
+          "traits": {
+            "smithy.api#jsonName": "eulaAcceptances"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListEulas": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListEulasRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListEulasResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/eulas",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListEulasRequest": {
+      "type": "structure",
+      "members": {
+        "eulaIds": {
+          "target": "com.amazonaws.madstudio#multiValueQueryStringList",
+          "traits": {
+            "smithy.api#httpQuery": "eulaIds"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListEulasResponse": {
+      "type": "structure",
+      "members": {
+        "eulas": {
+          "target": "com.amazonaws.madstudio#EulaList",
+          "traits": {
+            "smithy.api#jsonName": "eulas"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListLaunchProfileMembers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListLaunchProfileMembersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListLaunchProfileMembersResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListLaunchProfileMembersRequest": {
+      "type": "structure",
+      "members": {
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListLaunchProfileMembersResponse": {
+      "type": "structure",
+      "members": {
+        "members": {
+          "target": "com.amazonaws.madstudio#LaunchProfileMembershipList",
+          "traits": {
+            "smithy.api#jsonName": "members"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListLaunchProfiles": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListLaunchProfilesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListLaunchProfilesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListLaunchProfilesRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "principalId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "principalId"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.madstudio#multiValueQueryStringList",
+          "traits": {
+            "smithy.api#httpQuery": "state"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListLaunchProfilesResponse": {
+      "type": "structure",
+      "members": {
+        "launchProfiles": {
+          "target": "com.amazonaws.madstudio#LaunchProfileList",
+          "traits": {
+            "smithy.api#jsonName": "launchProfiles"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListRegions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListRegionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListRegionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/regions",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListRegionsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListRegionsResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "regions": {
+          "target": "com.amazonaws.madstudio#RegionList",
+          "traits": {
+            "smithy.api#jsonName": "regions"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingImages": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListStreamingImagesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListStreamingImagesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-images",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingImagesRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "owner": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "owner"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingImagesResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "streamingImages": {
+          "target": "com.amazonaws.madstudio#StreamingImageList",
+          "traits": {
+            "smithy.api#jsonName": "streamingImages"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingSessionStreams": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListStreamingSessionStreamsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListStreamingSessionStreamsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}/streams",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingSessionStreamsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingSessionStreamsResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "streams": {
+          "target": "com.amazonaws.madstudio#StreamingSessionStreamList",
+          "traits": {
+            "smithy.api#jsonName": "streams"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingSessions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListStreamingSessionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListStreamingSessionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-sessions",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingSessionsRequest": {
+      "type": "structure",
+      "members": {
+        "createdBy": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "createdBy"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "sessionIds": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "sessionIds"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStreamingSessionsResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "sessions": {
+          "target": "com.amazonaws.madstudio#StreamingSessionList",
+          "traits": {
+            "smithy.api#jsonName": "sessions"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioComponents": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListStudioComponentsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListStudioComponentsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/studio-components",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioComponentsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.madstudio#multiValueQueryStringList",
+          "traits": {
+            "smithy.api#httpQuery": "state"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.madstudio#multiValueQueryStringList",
+          "traits": {
+            "smithy.api#httpQuery": "type"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioComponentsResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "studioComponents": {
+          "target": "com.amazonaws.madstudio#StudioComponentList",
+          "traits": {
+            "smithy.api#jsonName": "studioComponents"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioMembers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListStudioMembersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListStudioMembersResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/membership",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioMembersRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioMembersResponse": {
+      "type": "structure",
+      "members": {
+        "members": {
+          "target": "com.amazonaws.madstudio#StudioMembershipList",
+          "traits": {
+            "smithy.api#jsonName": "members"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioRegions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListStudioRegionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListStudioRegionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios/{studioId}/regions",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioRegionsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudioRegionsResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "studioRegions": {
+          "target": "com.amazonaws.madstudio#StudioRegionList",
+          "traits": {
+            "smithy.api#jsonName": "studioRegions"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudios": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListStudiosRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListStudiosResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/studios",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudiosRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.madstudio#MaxResults",
+          "traits": {
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListStudiosResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "studios": {
+          "target": "com.amazonaws.madstudio#StudioList",
+          "traits": {
+            "smithy.api#jsonName": "studios"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#ListTagsForResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/2020-08-01/tags/{resourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#MadStudio": {
+      "type": "service",
+      "version": "2020-08-01",
+      "operations": [
+        {
+          "target": "com.amazonaws.madstudio#AcceptEulas"
+        },
+        {
+          "target": "com.amazonaws.madstudio#CreateLaunchProfile"
+        },
+        {
+          "target": "com.amazonaws.madstudio#CreateStreamingImage"
+        },
+        {
+          "target": "com.amazonaws.madstudio#CreateStreamingSession"
+        },
+        {
+          "target": "com.amazonaws.madstudio#CreateStudio"
+        },
+        {
+          "target": "com.amazonaws.madstudio#CreateStudioComponent"
+        },
+        {
+          "target": "com.amazonaws.madstudio#CreateStudioSatellite"
+        },
+        {
+          "target": "com.amazonaws.madstudio#DeleteLaunchProfile"
+        },
+        {
+          "target": "com.amazonaws.madstudio#DeleteLaunchProfileMember"
+        },
+        {
+          "target": "com.amazonaws.madstudio#DeleteStreamingImage"
+        },
+        {
+          "target": "com.amazonaws.madstudio#DeleteStreamingSession"
+        },
+        {
+          "target": "com.amazonaws.madstudio#DeleteStudio"
+        },
+        {
+          "target": "com.amazonaws.madstudio#DeleteStudioComponent"
+        },
+        {
+          "target": "com.amazonaws.madstudio#DeleteStudioMember"
+        },
+        {
+          "target": "com.amazonaws.madstudio#DeleteStudioSatellite"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetEula"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetLaunchProfile"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetLaunchProfileInitialization"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetLaunchProfileMember"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetStreamingImage"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetStreamingSession"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetStudio"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetStudioComponent"
+        },
+        {
+          "target": "com.amazonaws.madstudio#GetStudioMember"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListEulaAcceptances"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListEulas"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListLaunchProfileMembers"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListLaunchProfiles"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListRegions"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListStreamingImages"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListStreamingSessions"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListStreamingSessionStreams"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListStudioComponents"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListStudioMembers"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListStudioRegions"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListStudios"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.madstudio#PutLaunchProfileMembers"
+        },
+        {
+          "target": "com.amazonaws.madstudio#PutStudioMembers"
+        },
+        {
+          "target": "com.amazonaws.madstudio#TagResource"
+        },
+        {
+          "target": "com.amazonaws.madstudio#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.madstudio#UpdateLaunchProfile"
+        },
+        {
+          "target": "com.amazonaws.madstudio#UpdateLaunchProfileMember"
+        },
+        {
+          "target": "com.amazonaws.madstudio#UpdateStreamingImage"
+        },
+        {
+          "target": "com.amazonaws.madstudio#UpdateStudio"
+        },
+        {
+          "target": "com.amazonaws.madstudio#UpdateStudioComponent"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "MadStudio",
+          "arnNamespace": "madagascar",
+          "cloudFormationName": "MadStudio",
+          "cloudTrailEventSource": "madstudio.amazonaws.com",
+          "endpointPrefix": "madstudio"
+        },
+        "aws.auth#sigv4": {
+          "name": "madagascar"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#title": "AmazonMadStudio"
+      }
+    },
+    "com.amazonaws.madstudio#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.madstudio#PutLaunchProfileMembers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#PutLaunchProfileMembersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#PutLaunchProfileMembersResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#PutLaunchProfileMembersRequest": {
+      "type": "structure",
+      "members": {
+        "identityStoreId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "identityStoreId"
+          }
+        },
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "members": {
+          "target": "com.amazonaws.madstudio#LaunchProfileMembershipList",
+          "traits": {
+            "smithy.api#jsonName": "members"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#PutLaunchProfileMembersResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.madstudio#PutStudioMembers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#PutStudioMembersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#PutStudioMembersResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/studios/{studioId}/membership",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#PutStudioMembersRequest": {
+      "type": "structure",
+      "members": {
+        "identityStoreId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "identityStoreId"
+          }
+        },
+        "members": {
+          "target": "com.amazonaws.madstudio#StudioMembershipList",
+          "traits": {
+            "smithy.api#jsonName": "members"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#PutStudioMembersResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.madstudio#Region": {
+      "type": "string"
+    },
+    "com.amazonaws.madstudio#RegionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#Region"
+      }
+    },
+    "com.amazonaws.madstudio#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "code"
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.madstudio#ExceptionContext",
+          "traits": {
+            "smithy.api#jsonName": "context"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.madstudio#ScriptParameterKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z0-9_]+$"
+      }
+    },
+    "com.amazonaws.madstudio#ScriptParameterKeyValue": {
+      "type": "structure",
+      "members": {
+        "key": {
+          "target": "com.amazonaws.madstudio#ScriptParameterKey",
+          "traits": {
+            "smithy.api#jsonName": "key"
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "value"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#SecurityGroupId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^sg-[0-9A-z]+$"
+      }
+    },
+    "com.amazonaws.madstudio#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "code"
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.madstudio#ExceptionContext",
+          "traits": {
+            "smithy.api#jsonName": "context"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.madstudio#SharedFileSystemConfiguration": {
+      "type": "structure",
+      "members": {
+        "endpoint": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "endpoint"
+          }
+        },
+        "fileSystemId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "fileSystemId"
+          }
+        },
+        "linuxMountPoint": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "linuxMountPoint"
+          }
+        },
+        "shareName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "shareName"
+          }
+        },
+        "windowsMountDrive": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "windowsMountDrive"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamConfiguration": {
+      "type": "structure",
+      "members": {
+        "clipboardMode": {
+          "target": "com.amazonaws.madstudio#StreamingClipboardMode",
+          "traits": {
+            "smithy.api#jsonName": "clipboardMode"
+          }
+        },
+        "ec2InstanceTypes": {
+          "target": "com.amazonaws.madstudio#StreamingInstanceTypeList",
+          "traits": {
+            "smithy.api#jsonName": "ec2InstanceTypes"
+          }
+        },
+        "ec2SubnetIds": {
+          "target": "com.amazonaws.madstudio#StreamingSubnetIdList",
+          "traits": {
+            "smithy.api#jsonName": "ec2SubnetIds"
+          }
+        },
+        "imageIds": {
+          "target": "com.amazonaws.madstudio#StreamingImageIdList",
+          "traits": {
+            "smithy.api#jsonName": "imageIds"
+          }
+        },
+        "maxSessionLengthInMinutes": {
+          "target": "com.amazonaws.madstudio#__integerMin1Max690",
+          "traits": {
+            "smithy.api#jsonName": "maxSessionLengthInMinutes"
+          }
+        },
+        "transferStorageMode": {
+          "target": "com.amazonaws.madstudio#TransferStorageMode",
+          "traits": {
+            "smithy.api#jsonName": "transferStorageMode"
+          }
+        },
+        "transferStorageRoot": {
+          "target": "com.amazonaws.madstudio#StreamConfigurationTransferStorageRoot",
+          "traits": {
+            "smithy.api#jsonName": "transferStorageRoot"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamConfigurationCreate": {
+      "type": "structure",
+      "members": {
+        "clipboardMode": {
+          "target": "com.amazonaws.madstudio#StreamingClipboardMode",
+          "traits": {
+            "smithy.api#jsonName": "clipboardMode",
+            "smithy.api#required": {}
+          }
+        },
+        "ec2InstanceTypes": {
+          "target": "com.amazonaws.madstudio#StreamingInstanceTypeList",
+          "traits": {
+            "smithy.api#jsonName": "ec2InstanceTypes",
+            "smithy.api#required": {}
+          }
+        },
+        "ec2SubnetIds": {
+          "target": "com.amazonaws.madstudio#StreamingSubnetIdList",
+          "traits": {
+            "smithy.api#jsonName": "ec2SubnetIds",
+            "smithy.api#required": {}
+          }
+        },
+        "imageIds": {
+          "target": "com.amazonaws.madstudio#StreamingImageIdList",
+          "traits": {
+            "smithy.api#jsonName": "imageIds",
+            "smithy.api#required": {}
+          }
+        },
+        "maxSessionLengthInMinutes": {
+          "target": "com.amazonaws.madstudio#__integerMin1Max690",
+          "traits": {
+            "smithy.api#jsonName": "maxSessionLengthInMinutes"
+          }
+        },
+        "transferStorageMode": {
+          "target": "com.amazonaws.madstudio#TransferStorageMode",
+          "traits": {
+            "smithy.api#jsonName": "transferStorageMode",
+            "smithy.api#required": {}
+          }
+        },
+        "transferStorageRoot": {
+          "target": "com.amazonaws.madstudio#StreamConfigurationTransferStorageRoot",
+          "traits": {
+            "smithy.api#jsonName": "transferStorageRoot"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamConfigurationTransferStorageRoot": {
+      "type": "structure",
+      "members": {
+        "linux": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "linux"
+          }
+        },
+        "windows": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "windows"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamingClipboardMode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ENABLED",
+            "name": "ENABLED"
+          },
+          {
+            "value": "DISABLED",
+            "name": "DISABLED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StreamingImage": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "encryptionConfiguration": {
+          "target": "com.amazonaws.madstudio#StreamingImageEncryptionConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "encryptionConfiguration"
+          }
+        },
+        "eulaIds": {
+          "target": "com.amazonaws.madstudio#EulaIdList",
+          "traits": {
+            "smithy.api#jsonName": "eulaIds"
+          }
+        },
+        "imageId": {
+          "target": "com.amazonaws.madstudio#ImageId",
+          "traits": {
+            "smithy.api#jsonName": "imageId"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.madstudio#StreamingImageState",
+          "traits": {
+            "smithy.api#jsonName": "state"
+          }
+        },
+        "statusCode": {
+          "target": "com.amazonaws.madstudio#StreamingImageStatusCode",
+          "traits": {
+            "smithy.api#jsonName": "statusCode"
+          }
+        },
+        "statusMessage": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "statusMessage"
+          }
+        },
+        "streamingImageId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "streamingImageId"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamingImageEncryptionConfiguration": {
+      "type": "structure",
+      "members": {
+        "keyArn": {
+          "target": "com.amazonaws.madstudio#StreamingImageEncryptionConfigurationKeyArn",
+          "traits": {
+            "smithy.api#jsonName": "keyArn"
+          }
+        },
+        "keyType": {
+          "target": "com.amazonaws.madstudio#StreamingImageEncryptionConfigurationKeyType",
+          "traits": {
+            "smithy.api#jsonName": "keyType",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamingImageEncryptionConfigurationKeyArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 4
+        },
+        "smithy.api#pattern": "^arn:.*"
+      }
+    },
+    "com.amazonaws.madstudio#StreamingImageEncryptionConfigurationKeyType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CUSTOMER_OWNED_CMK",
+            "name": "CUSTOMER_OWNED_CMK"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StreamingImageId": {
+      "type": "string"
+    },
+    "com.amazonaws.madstudio#StreamingImageIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#StreamingImageId"
+      }
+    },
+    "com.amazonaws.madstudio#StreamingImageList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#StreamingImage"
+      }
+    },
+    "com.amazonaws.madstudio#StreamingImageState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CREATING",
+            "name": "CREATING"
+          },
+          {
+            "value": "COPYING",
+            "name": "COPYING"
+          },
+          {
+            "value": "READY",
+            "name": "READY"
+          },
+          {
+            "value": "DELETING",
+            "name": "DELETING"
+          },
+          {
+            "value": "DELETED",
+            "name": "DELETED"
+          },
+          {
+            "value": "ERROR",
+            "name": "ERROR"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StreamingImageStatusCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "STREAMING_IMAGE_READY",
+            "name": "STREAMING_IMAGE_READY"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StreamingInstanceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "g4dn.xlarge",
+            "name": "g4dn_xlarge"
+          },
+          {
+            "value": "g4dn.2xlarge",
+            "name": "g4dn_2xlarge"
+          },
+          {
+            "value": "g4dn.4xlarge",
+            "name": "g4dn_4xlarge"
+          },
+          {
+            "value": "g4dn.8xlarge",
+            "name": "g4dn_8xlarge"
+          },
+          {
+            "value": "g4dn.12xlarge",
+            "name": "g4dn_12xlarge"
+          },
+          {
+            "value": "g4dn.16xlarge",
+            "name": "g4dn_16xlarge"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StreamingInstanceTypeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#StreamingInstanceType"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 30
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamingSession": {
+      "type": "structure",
+      "members": {
+        "createdAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "createdAt"
+          }
+        },
+        "createdBy": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "createdBy"
+          }
+        },
+        "ec2InstanceType": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "ec2InstanceType"
+          }
+        },
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "launchProfileId"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "sessionId"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.madstudio#StreamingSessionState",
+          "traits": {
+            "smithy.api#jsonName": "state"
+          }
+        },
+        "statusCode": {
+          "target": "com.amazonaws.madstudio#StreamingSessionStatusCode",
+          "traits": {
+            "smithy.api#jsonName": "statusCode"
+          }
+        },
+        "statusMessage": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "statusMessage"
+          }
+        },
+        "streamingImageId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "streamingImageId"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "terminateAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "terminateAt"
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "updatedAt"
+          }
+        },
+        "updatedBy": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "updatedBy"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamingSessionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#StreamingSession"
+      }
+    },
+    "com.amazonaws.madstudio#StreamingSessionState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "STARTING",
+            "name": "STARTING"
+          },
+          {
+            "value": "STARTED",
+            "name": "STARTED"
+          },
+          {
+            "value": "IDLE",
+            "name": "IDLE"
+          },
+          {
+            "value": "TERMINATING",
+            "name": "TERMINATING"
+          },
+          {
+            "value": "TERMINATED",
+            "name": "TERMINATED"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          },
+          {
+            "value": "CANCELLED",
+            "name": "CANCELLED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StreamingSessionStatusCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "STREAMING_SESSION_READY",
+            "name": "STREAMING_SESSION_READY"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StreamingSessionStream": {
+      "type": "structure",
+      "members": {
+        "url": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "url"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StreamingSessionStreamList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#StreamingSessionStream"
+      }
+    },
+    "com.amazonaws.madstudio#StreamingSubnetIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#__string"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 30
+        }
+      }
+    },
+    "com.amazonaws.madstudio#Studio": {
+      "type": "structure",
+      "members": {
+        "adminRoleArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "adminRoleArn"
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "createdAt"
+          }
+        },
+        "displayName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "displayName"
+          }
+        },
+        "homeRegion": {
+          "target": "com.amazonaws.madstudio#Region",
+          "traits": {
+            "smithy.api#jsonName": "homeRegion"
+          }
+        },
+        "ssoClientId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "ssoClientId"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.madstudio#StudioState",
+          "traits": {
+            "smithy.api#jsonName": "state"
+          }
+        },
+        "statusCode": {
+          "target": "com.amazonaws.madstudio#StudioStatusCode",
+          "traits": {
+            "smithy.api#jsonName": "statusCode"
+          }
+        },
+        "statusMessage": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "statusMessage"
+          }
+        },
+        "studioEncryptionConfiguration": {
+          "target": "com.amazonaws.madstudio#StudioEncryptionConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "studioEncryptionConfiguration"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "studioId"
+          }
+        },
+        "studioName": {
+          "target": "com.amazonaws.madstudio#StudioName",
+          "traits": {
+            "smithy.api#jsonName": "studioName"
+          }
+        },
+        "studioUrl": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "studioUrl"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "updatedAt"
+          }
+        },
+        "userRoleArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "userRoleArn"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponent": {
+      "type": "structure",
+      "members": {
+        "configuration": {
+          "target": "com.amazonaws.madstudio#StudioComponentConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "configuration"
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "createdAt"
+          }
+        },
+        "createdBy": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "createdBy"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "ec2SecurityGroupIds": {
+          "target": "com.amazonaws.madstudio#StudioComponentSecurityGroupIdList",
+          "traits": {
+            "smithy.api#jsonName": "ec2SecurityGroupIds"
+          }
+        },
+        "initializationScript": {
+          "target": "com.amazonaws.madstudio#StudioComponentInitializationScript",
+          "traits": {
+            "smithy.api#jsonName": "initializationScript"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "scriptParameters": {
+          "target": "com.amazonaws.madstudio#StudioComponentScriptParameterKeyValueList",
+          "traits": {
+            "smithy.api#jsonName": "scriptParameters"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.madstudio#StudioComponentState",
+          "traits": {
+            "smithy.api#jsonName": "state"
+          }
+        },
+        "statusCode": {
+          "target": "com.amazonaws.madstudio#StudioComponentStatusCode",
+          "traits": {
+            "smithy.api#jsonName": "statusCode"
+          }
+        },
+        "statusMessage": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "statusMessage"
+          }
+        },
+        "studioComponentId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "studioComponentId"
+          }
+        },
+        "subtype": {
+          "target": "com.amazonaws.madstudio#StudioComponentSubtype",
+          "traits": {
+            "smithy.api#jsonName": "subtype"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.madstudio#StudioComponentType",
+          "traits": {
+            "smithy.api#jsonName": "type"
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.madstudio#Timestamp",
+          "traits": {
+            "smithy.api#jsonName": "updatedAt"
+          }
+        },
+        "updatedBy": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "updatedBy"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentConfiguration": {
+      "type": "structure",
+      "members": {
+        "activeDirectoryConfiguration": {
+          "target": "com.amazonaws.madstudio#ActiveDirectoryConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "activeDirectoryConfiguration"
+          }
+        },
+        "computeFarmConfiguration": {
+          "target": "com.amazonaws.madstudio#ComputeFarmConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "computeFarmConfiguration"
+          }
+        },
+        "licenseServiceConfiguration": {
+          "target": "com.amazonaws.madstudio#LicenseServiceConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "licenseServiceConfiguration"
+          }
+        },
+        "sharedFileSystemConfiguration": {
+          "target": "com.amazonaws.madstudio#SharedFileSystemConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "sharedFileSystemConfiguration"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentInitializationScript": {
+      "type": "structure",
+      "members": {
+        "linux": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "linux"
+          }
+        },
+        "windows": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "windows"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#StudioComponent"
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentScriptParameterKeyValueList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#ScriptParameterKeyValue"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 30
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentSecurityGroupIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#SecurityGroupId"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 30
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CREATING",
+            "name": "CREATING"
+          },
+          {
+            "value": "READY",
+            "name": "READY"
+          },
+          {
+            "value": "UPDATING",
+            "name": "UPDATING"
+          },
+          {
+            "value": "DELETING",
+            "name": "DELETING"
+          },
+          {
+            "value": "DELETED",
+            "name": "DELETED"
+          },
+          {
+            "value": "ERROR",
+            "name": "ERROR"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentStatusCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE_DIRECTORY_ALREADY_EXISTS",
+            "name": "ACTIVE_DIRECTORY_ALREADY_EXISTS"
+          },
+          {
+            "value": "ACTIVE_DIRECTORY_IN_USE",
+            "name": "ACTIVE_DIRECTORY_IN_USE"
+          },
+          {
+            "value": "CREATING_STUDIO_COMPONENT",
+            "name": "CREATING_STUDIO_COMPONENT"
+          },
+          {
+            "value": "UPDATING_STUDIO_COMPONENT",
+            "name": "UPDATING_STUDIO_COMPONENT"
+          },
+          {
+            "value": "STUDIO_COMPONENT_READY",
+            "name": "STUDIO_COMPONENT_READY"
+          },
+          {
+            "value": "DELETING_STUDIO_COMPONENT",
+            "name": "DELETING_STUDIO_COMPONENT"
+          },
+          {
+            "value": "CONCURRENT_MODIFICATION_ERROR",
+            "name": "CONCURRENT_MODIFICATION_ERROR"
+          },
+          {
+            "value": "STUDIO_COMPONENT_DELETED",
+            "name": "STUDIO_COMPONENT_DELETED"
+          },
+          {
+            "value": "INVALID_INPUT_PARAMETER_VALUE",
+            "name": "INVALID_INPUT_PARAMETER_VALUE"
+          },
+          {
+            "value": "INTERNAL_ERROR",
+            "name": "INTERNAL_ERROR"
+          },
+          {
+            "value": "ACCESS_DENIED",
+            "name": "ACCESS_DENIED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentSubtype": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AWS_MANAGED_MICROSOFT_AD",
+            "name": "AWS_MANAGED_MICROSOFT_AD"
+          },
+          {
+            "value": "AMAZON_FSX_FOR_WINDOWS",
+            "name": "AMAZON_FSX_FOR_WINDOWS"
+          },
+          {
+            "value": "AMAZON_FSX_FOR_LUSTRE",
+            "name": "AMAZON_FSX_FOR_LUSTRE"
+          },
+          {
+            "value": "CUSTOM",
+            "name": "CUSTOM"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StudioComponentType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE_DIRECTORY",
+            "name": "ACTIVE_DIRECTORY"
+          },
+          {
+            "value": "SHARED_FILE_SYSTEM",
+            "name": "SHARED_FILE_SYSTEM"
+          },
+          {
+            "value": "COMPUTE_FARM",
+            "name": "COMPUTE_FARM"
+          },
+          {
+            "value": "LICENSE_SERVICE",
+            "name": "LICENSE_SERVICE"
+          },
+          {
+            "value": "CUSTOM",
+            "name": "CUSTOM"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StudioEncryptionConfiguration": {
+      "type": "structure",
+      "members": {
+        "keyArn": {
+          "target": "com.amazonaws.madstudio#StudioEncryptionConfigurationKeyArn",
+          "traits": {
+            "smithy.api#jsonName": "keyArn"
+          }
+        },
+        "keyType": {
+          "target": "com.amazonaws.madstudio#StudioEncryptionConfigurationKeyType",
+          "traits": {
+            "smithy.api#jsonName": "keyType",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioEncryptionConfigurationKeyArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 4
+        },
+        "smithy.api#pattern": "^arn:.*"
+      }
+    },
+    "com.amazonaws.madstudio#StudioEncryptionConfigurationKeyType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AWS_OWNED_CMK",
+            "name": "AWS_OWNED_CMK"
+          },
+          {
+            "value": "CUSTOMER_OWNED_CMK",
+            "name": "CUSTOMER_OWNED_CMK"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StudioList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#Studio"
+      }
+    },
+    "com.amazonaws.madstudio#StudioMembership": {
+      "type": "structure",
+      "members": {
+        "persona": {
+          "target": "com.amazonaws.madstudio#StudioPersona",
+          "traits": {
+            "smithy.api#jsonName": "persona"
+          }
+        },
+        "principalId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "principalId"
+          }
+        },
+        "sid": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "sid"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioMembershipList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#StudioMembership"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 20
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 3,
+          "max": 64
+        },
+        "smithy.api#pattern": "^[a-z0-9]*$"
+      }
+    },
+    "com.amazonaws.madstudio#StudioPersona": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ADMINISTRATOR",
+            "name": "ADMINISTRATOR"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StudioRegion": {
+      "type": "structure",
+      "members": {
+        "regionName": {
+          "target": "com.amazonaws.madstudio#Region",
+          "traits": {
+            "smithy.api#jsonName": "regionName"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioRegionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#StudioRegion"
+      }
+    },
+    "com.amazonaws.madstudio#StudioSatellite": {
+      "type": "structure",
+      "members": {
+        "homeRegion": {
+          "target": "com.amazonaws.madstudio#Region",
+          "traits": {
+            "smithy.api#jsonName": "homeRegion"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "state"
+          }
+        },
+        "statusCode": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "statusCode"
+          }
+        },
+        "studioEncryptionConfiguration": {
+          "target": "com.amazonaws.madstudio#StudioEncryptionConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "studioEncryptionConfiguration"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "studioId"
+          }
+        },
+        "studioName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "studioName"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#StudioState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CREATING",
+            "name": "CREATING"
+          },
+          {
+            "value": "READY",
+            "name": "READY"
+          },
+          {
+            "value": "UPDATING",
+            "name": "UPDATING"
+          },
+          {
+            "value": "DELETING",
+            "name": "DELETING"
+          },
+          {
+            "value": "DELETED",
+            "name": "DELETED"
+          },
+          {
+            "value": "ERROR",
+            "name": "ERROR"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#StudioStatusCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CREATING_STUDIO_SATELLITE",
+            "name": "CREATING_STUDIO_SATELLITE"
+          },
+          {
+            "value": "CREATING_STUDIO",
+            "name": "CREATING_STUDIO"
+          },
+          {
+            "value": "UPDATING_STUDIO_ATTRIBUTES",
+            "name": "UPDATING_STUDIO_ATTRIBUTES"
+          },
+          {
+            "value": "STUDIO_SATELLITE_DELETE_FAILED",
+            "name": "STUDIO_SATELLITE_DELETE_FAILED"
+          },
+          {
+            "value": "STUDIO_READY",
+            "name": "STUDIO_READY"
+          },
+          {
+            "value": "STUDIO_DELETED",
+            "name": "STUDIO_DELETED"
+          },
+          {
+            "value": "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED",
+            "name": "STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED"
+          },
+          {
+            "value": "STUDIO_WITH_PROJECTS_NOT_DELETED",
+            "name": "STUDIO_WITH_PROJECTS_NOT_DELETED"
+          },
+          {
+            "value": "STUDIO_WITH_SANDBOXES_NOT_DELETED",
+            "name": "STUDIO_WITH_SANDBOXES_NOT_DELETED"
+          },
+          {
+            "value": "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED",
+            "name": "STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED"
+          },
+          {
+            "value": "DELETING_STUDIO_SATELLITE",
+            "name": "DELETING_STUDIO_SATELLITE"
+          },
+          {
+            "value": "DELETING_STUDIO_MEMBERSHIP",
+            "name": "DELETING_STUDIO_MEMBERSHIP"
+          },
+          {
+            "value": "DELETING_STUDIO",
+            "name": "DELETING_STUDIO"
+          },
+          {
+            "value": "AWS_SSO_NOT_ENABLED",
+            "name": "AWS_SSO_NOT_ENABLED"
+          },
+          {
+            "value": "AWS_SSO_ACCESS_DENIED",
+            "name": "AWS_SSO_ACCESS_DENIED"
+          },
+          {
+            "value": "ROLE_NOT_OWNED_BY_STUDIO_OWNER",
+            "name": "ROLE_NOT_OWNED_BY_STUDIO_OWNER"
+          },
+          {
+            "value": "ROLE_COULD_NOT_BE_ASSUMED",
+            "name": "ROLE_COULD_NOT_BE_ASSUMED"
+          },
+          {
+            "value": "INTERNAL_ERROR",
+            "name": "INTERNAL_ERROR"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/2020-08-01/tags/{resourceArn}",
+          "code": 204
+        }
+      }
+    },
+    "com.amazonaws.madstudio#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.madstudio#Tags": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.madstudio#__string"
+      },
+      "value": {
+        "target": "com.amazonaws.madstudio#__string"
+      }
+    },
+    "com.amazonaws.madstudio#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "code"
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.madstudio#ExceptionContext",
+          "traits": {
+            "smithy.api#jsonName": "context"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.madstudio#Timestamp": {
+      "type": "timestamp",
+      "traits": {
+        "smithy.api#timestampFormat": "date-time"
+      }
+    },
+    "com.amazonaws.madstudio#TransferStorageMode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "DISABLED",
+            "name": "DISABLED"
+          },
+          {
+            "value": "STREAMING_WORKSTATION_SHARED_FOLDER",
+            "name": "STREAMING_WORKSTATION_SHARED_FOLDER"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.madstudio#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/2020-08-01/tags/{resourceArn}",
+          "code": 204
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.madstudio#multiValueQueryStringList",
+          "traits": {
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.madstudio#UpdateLaunchProfile": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#UpdateLaunchProfileRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#UpdateLaunchProfileResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateLaunchProfileMember": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#UpdateLaunchProfileMemberRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#UpdateLaunchProfileMemberResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/2020-08-01/studios/{studioId}/launch-profiles/{launchProfileId}/membership/{principalId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateLaunchProfileMemberRequest": {
+      "type": "structure",
+      "members": {
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "persona": {
+          "target": "com.amazonaws.madstudio#LaunchProfilePersona",
+          "traits": {
+            "smithy.api#jsonName": "persona",
+            "smithy.api#required": {}
+          }
+        },
+        "principalId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateLaunchProfileMemberResponse": {
+      "type": "structure",
+      "members": {
+        "member": {
+          "target": "com.amazonaws.madstudio#LaunchProfileMembership",
+          "traits": {
+            "smithy.api#jsonName": "member"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateLaunchProfileRequest": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "launchProfileId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "streamConfiguration": {
+          "target": "com.amazonaws.madstudio#StreamConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "streamConfiguration"
+          }
+        },
+        "studioComponentIds": {
+          "target": "com.amazonaws.madstudio#LaunchProfileStudioComponentIdList",
+          "traits": {
+            "smithy.api#jsonName": "studioComponentIds"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateLaunchProfileResponse": {
+      "type": "structure",
+      "members": {
+        "launchProfile": {
+          "target": "com.amazonaws.madstudio#LaunchProfile",
+          "traits": {
+            "smithy.api#jsonName": "launchProfile"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStreamingImage": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#UpdateStreamingImageRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#UpdateStreamingImageResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/2020-08-01/studios/{studioId}/streaming-images/{streamingImageId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStreamingImageRequest": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "streamingImageId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStreamingImageResponse": {
+      "type": "structure",
+      "members": {
+        "streamingImage": {
+          "target": "com.amazonaws.madstudio#StreamingImage",
+          "traits": {
+            "smithy.api#jsonName": "streamingImage"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStudio": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#UpdateStudioRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#UpdateStudioResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/2020-08-01/studios/{studioId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStudioComponent": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.madstudio#UpdateStudioComponentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.madstudio#UpdateStudioComponentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.madstudio#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.madstudio#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/2020-08-01/studios/{studioId}/studio-components/{studioComponentId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStudioComponentRequest": {
+      "type": "structure",
+      "members": {
+        "configuration": {
+          "target": "com.amazonaws.madstudio#StudioComponentConfiguration",
+          "traits": {
+            "smithy.api#jsonName": "configuration"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "ec2SecurityGroupIds": {
+          "target": "com.amazonaws.madstudio#StudioComponentSecurityGroupIdList",
+          "traits": {
+            "smithy.api#jsonName": "ec2SecurityGroupIds"
+          }
+        },
+        "initializationScript": {
+          "target": "com.amazonaws.madstudio#StudioComponentInitializationScript",
+          "traits": {
+            "smithy.api#jsonName": "initializationScript"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "name"
+          }
+        },
+        "scriptParameters": {
+          "target": "com.amazonaws.madstudio#StudioComponentScriptParameterKeyValueList",
+          "traits": {
+            "smithy.api#jsonName": "scriptParameters"
+          }
+        },
+        "studioComponentId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "subtype": {
+          "target": "com.amazonaws.madstudio#StudioComponentSubtype",
+          "traits": {
+            "smithy.api#jsonName": "subtype"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.madstudio#StudioComponentType",
+          "traits": {
+            "smithy.api#jsonName": "type"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStudioComponentResponse": {
+      "type": "structure",
+      "members": {
+        "studioComponent": {
+          "target": "com.amazonaws.madstudio#StudioComponent",
+          "traits": {
+            "smithy.api#jsonName": "studioComponent"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStudioRequest": {
+      "type": "structure",
+      "members": {
+        "adminRoleArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "adminRoleArn"
+          }
+        },
+        "displayName": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "displayName"
+          }
+        },
+        "studioId": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.madstudio#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "userRoleArn": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "userRoleArn"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#UpdateStudioResponse": {
+      "type": "structure",
+      "members": {
+        "studio": {
+          "target": "com.amazonaws.madstudio#Studio",
+          "traits": {
+            "smithy.api#jsonName": "studio"
+          }
+        }
+      }
+    },
+    "com.amazonaws.madstudio#ValidationException": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "code"
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.madstudio#ExceptionContext",
+          "traits": {
+            "smithy.api#jsonName": "context"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.madstudio#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.madstudio#__integerMin1Max690": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 690
+        }
+      }
+    },
+    "com.amazonaws.madstudio#__string": {
+      "type": "string"
+    },
+    "com.amazonaws.madstudio#multiValueQueryStringList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.madstudio#__string"
+      }
+    }
+  }
+}

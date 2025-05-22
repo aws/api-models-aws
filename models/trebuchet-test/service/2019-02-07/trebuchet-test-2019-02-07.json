@@ -1,0 +1,97 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.trebuchettest#GetTest": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.trebuchettest#TestRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.trebuchettest#TestResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<para>GetTest Docs</para>"
+      }
+    },
+    "com.amazonaws.trebuchettest#TestRequest": {
+      "type": "structure",
+      "members": {
+        "featureName": {
+          "target": "com.amazonaws.trebuchettest#featureName",
+          "traits": {
+            "smithy.api#documentation": "<para>TestRequest Docs</para>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.trebuchettest#TestResult": {
+      "type": "structure",
+      "members": {
+        "featureArn": {
+          "target": "com.amazonaws.trebuchettest#featureArn",
+          "traits": {
+            "smithy.api#documentation": "<para>TestResult Docs</para>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.trebuchettest#TrebuchetTestService": {
+      "type": "service",
+      "version": "2019-02-07",
+      "operations": [
+        {
+          "target": "com.amazonaws.trebuchettest#GetTest"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Trebuchet Test",
+          "arnNamespace": "trebuchettest",
+          "cloudFormationName": "TrebuchetTest",
+          "cloudTrailEventSource": "trebuchettest.amazonaws.com",
+          "endpointPrefix": "trebuchettest"
+        },
+        "aws.auth#sigv4": {
+          "name": "trebuchettest"
+        },
+        "aws.protocols#awsJson1_1": {},
+        "smithy.api#documentation": "<para>Test Doc</para>",
+        "smithy.api#title": "AWS TrebuchetTest"
+      }
+    },
+    "com.amazonaws.trebuchettest#featureArn": {
+      "type": "string"
+    },
+    "com.amazonaws.trebuchettest#featureName": {
+      "type": "string"
+    }
+  }
+}

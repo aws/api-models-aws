@@ -1,5 +1,5 @@
 {
-  "smithy": "2.0",
+  "smithy": "1.0",
   "shapes": {
     "com.amazonaws.kafkaconnect#ApacheKafkaCluster": {
       "type": "structure",
@@ -47,9 +47,8 @@
       "type": "structure",
       "members": {
         "maxWorkerCount": {
-          "target": "com.amazonaws.kafkaconnect#__integer",
+          "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The maximum number of workers allocated to the connector.</p>",
             "smithy.api#required": {}
           }
@@ -57,15 +56,13 @@
         "mcuCount": {
           "target": "com.amazonaws.kafkaconnect#__integerMin1Max8",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>",
             "smithy.api#required": {}
           }
         },
         "minWorkerCount": {
-          "target": "com.amazonaws.kafkaconnect#__integer",
+          "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The minimum number of workers allocated to the connector.</p>",
             "smithy.api#required": {}
           }
@@ -93,21 +90,18 @@
         "maxWorkerCount": {
           "target": "com.amazonaws.kafkaconnect#__integer",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The maximum number of workers allocated to the connector.</p>"
           }
         },
         "mcuCount": {
           "target": "com.amazonaws.kafkaconnect#__integer",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>"
           }
         },
         "minWorkerCount": {
           "target": "com.amazonaws.kafkaconnect#__integer",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The minimum number of workers allocated to the connector.</p>"
           }
         },
@@ -132,9 +126,8 @@
       "type": "structure",
       "members": {
         "maxWorkerCount": {
-          "target": "com.amazonaws.kafkaconnect#__integer",
+          "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The target maximum number of workers allocated to the connector.</p>",
             "smithy.api#required": {}
           }
@@ -142,15 +135,13 @@
         "mcuCount": {
           "target": "com.amazonaws.kafkaconnect#__integerMin1Max8",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The target number of microcontroller units (MCUs) allocated to each connector worker.\n         The valid values are 1,2,4,8.</p>",
             "smithy.api#required": {}
           }
         },
         "minWorkerCount": {
-          "target": "com.amazonaws.kafkaconnect#__integer",
+          "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The target minimum number of workers allocated to the connector.</p>",
             "smithy.api#required": {}
           }
@@ -253,7 +244,6 @@
         "enabled": {
           "target": "com.amazonaws.kafkaconnect#__boolean",
           "traits": {
-            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Whether log delivery to Amazon CloudWatch Logs is enabled.</p>",
             "smithy.api#required": {}
           }
@@ -275,7 +265,6 @@
         "enabled": {
           "target": "com.amazonaws.kafkaconnect#__boolean",
           "traits": {
-            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Whether log delivery to Amazon CloudWatch Logs is enabled.</p>"
           }
         },
@@ -301,200 +290,6 @@
         "smithy.api#documentation": "<p>HTTP Status Code 409: Conflict. A resource with this name already exists. Retry your\n         request with another name.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 409
-      }
-    },
-    "com.amazonaws.kafkaconnect#ConnectorConfiguration": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.kafkaconnect#__string"
-      },
-      "value": {
-        "target": "com.amazonaws.kafkaconnect#__string"
-      },
-      "traits": {
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#ConnectorConfigurationUpdate": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.kafkaconnect#__string"
-      },
-      "value": {
-        "target": "com.amazonaws.kafkaconnect#__string"
-      },
-      "traits": {
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#ConnectorOperationState": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "PENDING",
-            "name": "PENDING"
-          },
-          {
-            "value": "UPDATE_IN_PROGRESS",
-            "name": "UPDATE_IN_PROGRESS"
-          },
-          {
-            "value": "UPDATE_COMPLETE",
-            "name": "UPDATE_COMPLETE"
-          },
-          {
-            "value": "UPDATE_FAILED",
-            "name": "UPDATE_FAILED"
-          },
-          {
-            "value": "ROLLBACK_IN_PROGRESS",
-            "name": "ROLLBACK_IN_PROGRESS"
-          },
-          {
-            "value": "ROLLBACK_FAILED",
-            "name": "ROLLBACK_FAILED"
-          },
-          {
-            "value": "ROLLBACK_COMPLETE",
-            "name": "ROLLBACK_COMPLETE"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kafkaconnect#ConnectorOperationStep": {
-      "type": "structure",
-      "members": {
-        "stepType": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorOperationStepType",
-          "traits": {
-            "smithy.api#documentation": "<p>The step type of the operation.</p>"
-          }
-        },
-        "stepState": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorOperationStepState",
-          "traits": {
-            "smithy.api#documentation": "<p>The step state of the operation.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Details of a step that is involved in a connector's operation.</p>"
-      }
-    },
-    "com.amazonaws.kafkaconnect#ConnectorOperationStepState": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "PENDING",
-            "name": "PENDING"
-          },
-          {
-            "value": "IN_PROGRESS",
-            "name": "IN_PROGRESS"
-          },
-          {
-            "value": "COMPLETED",
-            "name": "COMPLETED"
-          },
-          {
-            "value": "FAILED",
-            "name": "FAILED"
-          },
-          {
-            "value": "CANCELLED",
-            "name": "CANCELLED"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kafkaconnect#ConnectorOperationStepType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "INITIALIZE_UPDATE",
-            "name": "INITIALIZE_UPDATE"
-          },
-          {
-            "value": "FINALIZE_UPDATE",
-            "name": "FINALIZE_UPDATE"
-          },
-          {
-            "value": "UPDATE_WORKER_SETTING",
-            "name": "UPDATE_WORKER_SETTING"
-          },
-          {
-            "value": "UPDATE_CONNECTOR_CONFIGURATION",
-            "name": "UPDATE_CONNECTOR_CONFIGURATION"
-          },
-          {
-            "value": "VALIDATE_UPDATE",
-            "name": "VALIDATE_UPDATE"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kafkaconnect#ConnectorOperationSummary": {
-      "type": "structure",
-      "members": {
-        "connectorOperationArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector operation.</p>"
-          }
-        },
-        "connectorOperationType": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorOperationType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of connector operation performed.</p>"
-          }
-        },
-        "connectorOperationState": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorOperationState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the connector operation.</p>"
-          }
-        },
-        "creationTime": {
-          "target": "com.amazonaws.kafkaconnect#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when operation was created.</p>"
-          }
-        },
-        "endTime": {
-          "target": "com.amazonaws.kafkaconnect#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when operation ended.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Summary of a connector operation.</p>"
-      }
-    },
-    "com.amazonaws.kafkaconnect#ConnectorOperationType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "UPDATE_WORKER_SETTING",
-            "name": "UPDATE_WORKER_SETTING"
-          },
-          {
-            "value": "UPDATE_CONNECTOR_CONFIGURATION",
-            "name": "UPDATE_CONNECTOR_CONFIGURATION"
-          },
-          {
-            "value": "ISOLATE_CONNECTOR",
-            "name": "ISOLATE_CONNECTOR"
-          },
-          {
-            "value": "RESTORE_CONNECTOR",
-            "name": "RESTORE_CONNECTOR"
-          }
-        ]
       }
     },
     "com.amazonaws.kafkaconnect#ConnectorState": {
@@ -657,7 +452,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a connector using the specified properties. </p>",
+        "smithy.api#documentation": "<p>Creates a connector using the specified properties.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/v1/connectors",
@@ -676,10 +471,11 @@
           }
         },
         "connectorConfiguration": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorConfiguration",
+          "target": "com.amazonaws.kafkaconnect#__mapOf__string",
           "traits": {
             "smithy.api#documentation": "<p>A map of keys to values that represent the configuration for the connector.</p>",
-            "smithy.api#required": {}
+            "smithy.api#required": {},
+            "smithy.api#sensitive": {}
           }
         },
         "connectorDescription": {
@@ -732,7 +528,7 @@
         "plugins": {
           "target": "com.amazonaws.kafkaconnect#__listOfPlugin",
           "traits": {
-            "smithy.api#documentation": "<important>\n            <p>Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.</p>\n         </important>\n         <p>Specifies which plugin to use for the connector. You must specify a single-element list containing one <code>customPlugin</code> object.</p>",
+            "smithy.api#documentation": "<p>Specifies which plugins to use for the connector.</p>",
             "smithy.api#required": {}
           }
         },
@@ -748,16 +544,7 @@
           "traits": {
             "smithy.api#documentation": "<p>Specifies which worker configuration to use with the connector.</p>"
           }
-        },
-        "tags": {
-          "target": "com.amazonaws.kafkaconnect#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags you want to attach to the connector.</p>"
-          }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#CreateConnectorResponse": {
@@ -855,16 +642,7 @@
             "smithy.api#documentation": "<p>The name of the custom plugin.</p>",
             "smithy.api#required": {}
           }
-        },
-        "tags": {
-          "target": "com.amazonaws.kafkaconnect#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags you want to attach to the custom plugin.</p>"
-          }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#CreateCustomPluginResponse": {
@@ -891,7 +669,6 @@
         "revision": {
           "target": "com.amazonaws.kafkaconnect#__long",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The revision of the custom plugin.</p>"
           }
         }
@@ -957,21 +734,13 @@
           }
         },
         "propertiesFileContent": {
-          "target": "com.amazonaws.kafkaconnect#__sensitiveString",
+          "target": "com.amazonaws.kafkaconnect#__string",
           "traits": {
             "smithy.api#documentation": "<p>Base64 encoded contents of connect-distributed.properties file.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.kafkaconnect#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags you want to attach to the worker configuration.</p>"
+            "smithy.api#required": {},
+            "smithy.api#sensitive": {}
           }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#CreateWorkerConfigurationResponse": {
@@ -1000,12 +769,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that Amazon assigned to the worker configuration.</p>"
           }
-        },
-        "workerConfigurationState": {
-          "target": "com.amazonaws.kafkaconnect#WorkerConfigurationState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the worker configuration.</p>"
-          }
         }
       }
     },
@@ -1022,14 +785,13 @@
         "revision": {
           "target": "com.amazonaws.kafkaconnect#__longMin1",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The revision of the custom plugin.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A plugin is an Amazon Web Services resource that contains the code that defines a connector's logic.</p>"
+        "smithy.api#documentation": "<p>A plugin is an AWS resource that contains the code that defines a connector's\n         logic.</p>"
       }
     },
     "com.amazonaws.kafkaconnect#CustomPluginContentType": {
@@ -1059,7 +821,6 @@
         "revision": {
           "target": "com.amazonaws.kafkaconnect#__long",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The revision of the custom plugin.</p>"
           }
         }
@@ -1080,7 +841,6 @@
         "fileSize": {
           "target": "com.amazonaws.kafkaconnect#__long",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The size in bytes of the custom plugin file. You can use it to validate the file.</p>"
           }
         }
@@ -1154,7 +914,6 @@
         "revision": {
           "target": "com.amazonaws.kafkaconnect#__long",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The revision of the custom plugin.</p>"
           }
         }
@@ -1297,9 +1056,6 @@
             "smithy.api#httpQuery": "currentVersion"
           }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#DeleteConnectorResponse": {
@@ -1371,9 +1127,6 @@
             "smithy.api#required": {}
           }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#DeleteCustomPluginResponse": {
@@ -1389,80 +1142,6 @@
           "target": "com.amazonaws.kafkaconnect#CustomPluginState",
           "traits": {
             "smithy.api#documentation": "<p>The state of the custom plugin.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.kafkaconnect#DeleteWorkerConfiguration": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kafkaconnect#DeleteWorkerConfigurationRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kafkaconnect#DeleteWorkerConfigurationResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kafkaconnect#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ForbiddenException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#InternalServerErrorException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ServiceUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#TooManyRequestsException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#UnauthorizedException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Deletes the specified worker configuration.</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/v1/worker-configurations/{workerConfigurationArn}",
-          "code": 200
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#DeleteWorkerConfigurationRequest": {
-      "type": "structure",
-      "members": {
-        "workerConfigurationArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the worker configuration that you want to delete.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#DeleteWorkerConfigurationResponse": {
-      "type": "structure",
-      "members": {
-        "workerConfigurationArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the worker configuration that you requested to delete.</p>"
-          }
-        },
-        "workerConfigurationState": {
-          "target": "com.amazonaws.kafkaconnect#WorkerConfigurationState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the worker configuration.</p>"
           }
         }
       }
@@ -1508,140 +1187,6 @@
         "smithy.api#readonly": {}
       }
     },
-    "com.amazonaws.kafkaconnect#DescribeConnectorOperation": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kafkaconnect#DescribeConnectorOperationRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kafkaconnect#DescribeConnectorOperationResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kafkaconnect#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ForbiddenException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#InternalServerErrorException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ServiceUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#TooManyRequestsException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#UnauthorizedException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Returns information about the specified connector's operations.</p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/v1/connectorOperations/{connectorOperationArn}",
-          "code": 200
-        },
-        "smithy.api#readonly": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#DescribeConnectorOperationRequest": {
-      "type": "structure",
-      "members": {
-        "connectorOperationArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>ARN of the connector operation to be described.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#DescribeConnectorOperationResponse": {
-      "type": "structure",
-      "members": {
-        "connectorArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>"
-          }
-        },
-        "connectorOperationArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector operation.</p>"
-          }
-        },
-        "connectorOperationState": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorOperationState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the connector operation.</p>"
-          }
-        },
-        "connectorOperationType": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorOperationType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of connector operation performed.</p>"
-          }
-        },
-        "operationSteps": {
-          "target": "com.amazonaws.kafkaconnect#__listOfConnectorOperationStep",
-          "traits": {
-            "smithy.api#documentation": "<p>The array of operation steps taken.</p>"
-          }
-        },
-        "originWorkerSetting": {
-          "target": "com.amazonaws.kafkaconnect#WorkerSetting",
-          "traits": {
-            "smithy.api#documentation": "<p>The origin worker setting.</p>"
-          }
-        },
-        "originConnectorConfiguration": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The origin connector configuration.</p>"
-          }
-        },
-        "targetWorkerSetting": {
-          "target": "com.amazonaws.kafkaconnect#WorkerSetting",
-          "traits": {
-            "smithy.api#documentation": "<p>The target worker setting.</p>"
-          }
-        },
-        "targetConnectorConfiguration": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The target connector configuration.</p>"
-          }
-        },
-        "errorInfo": {
-          "target": "com.amazonaws.kafkaconnect#StateDescription"
-        },
-        "creationTime": {
-          "target": "com.amazonaws.kafkaconnect#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when the operation was created.</p>"
-          }
-        },
-        "endTime": {
-          "target": "com.amazonaws.kafkaconnect#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when the operation ended.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
     "com.amazonaws.kafkaconnect#DescribeConnectorRequest": {
       "type": "structure",
       "members": {
@@ -1653,9 +1198,6 @@
             "smithy.api#required": {}
           }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#DescribeConnectorResponse": {
@@ -1674,9 +1216,10 @@
           }
         },
         "connectorConfiguration": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorConfiguration",
+          "target": "com.amazonaws.kafkaconnect#__mapOf__string",
           "traits": {
-            "smithy.api#documentation": "<p>A map of keys to values that represent the configuration for the connector.</p>"
+            "smithy.api#documentation": "<p>A map of keys to values that represent the configuration for the connector.</p>",
+            "smithy.api#sensitive": {}
           }
         },
         "connectorDescription": {
@@ -1817,9 +1360,6 @@
             "smithy.api#required": {}
           }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#DescribeCustomPluginResponse": {
@@ -1921,9 +1461,6 @@
             "smithy.api#required": {}
           }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#DescribeWorkerConfigurationResponse": {
@@ -1958,12 +1495,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom configuration.</p>"
           }
-        },
-        "workerConfigurationState": {
-          "target": "com.amazonaws.kafkaconnect#WorkerConfigurationState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the worker configuration.</p>"
-          }
         }
       }
     },
@@ -1979,7 +1510,6 @@
         "enabled": {
           "target": "com.amazonaws.kafkaconnect#__boolean",
           "traits": {
-            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>",
             "smithy.api#required": {}
           }
@@ -2001,7 +1531,6 @@
         "enabled": {
           "target": "com.amazonaws.kafkaconnect#__boolean",
           "traits": {
-            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>"
           }
         }
@@ -2155,6 +1684,29 @@
     },
     "com.amazonaws.kafkaconnect#KafkaConnect": {
       "type": "service",
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "KafkaConnect",
+          "name": "kafkaconnect",
+          "arnNamespace": "kafkaconnect",
+          "cloudFormationName": "KafkaConnect",
+          "cloudTrailEventSource": "kafkaconnect.amazonaws.com",
+          "endpointPrefix": "kafkaconnect"
+        },
+        "aws.auth#sigv4": {
+          "name": "kafkaconnect"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#cors": {
+          "additionalAllowedHeaders": [
+            "X-Api-Key",
+            "Content-Type",
+            "Content-Length"
+          ]
+        },
+        "smithy.api#documentation": "<p/>",
+        "smithy.api#title": "Managed Streaming for Kafka Connect"
+      },
       "version": "2021-09-14",
       "operations": [
         {
@@ -2173,13 +1725,7 @@
           "target": "com.amazonaws.kafkaconnect#DeleteCustomPlugin"
         },
         {
-          "target": "com.amazonaws.kafkaconnect#DeleteWorkerConfiguration"
-        },
-        {
           "target": "com.amazonaws.kafkaconnect#DescribeConnector"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#DescribeConnectorOperation"
         },
         {
           "target": "com.amazonaws.kafkaconnect#DescribeCustomPlugin"
@@ -2188,993 +1734,18 @@
           "target": "com.amazonaws.kafkaconnect#DescribeWorkerConfiguration"
         },
         {
-          "target": "com.amazonaws.kafkaconnect#ListConnectorOperations"
-        },
-        {
           "target": "com.amazonaws.kafkaconnect#ListConnectors"
         },
         {
           "target": "com.amazonaws.kafkaconnect#ListCustomPlugins"
         },
         {
-          "target": "com.amazonaws.kafkaconnect#ListTagsForResource"
-        },
-        {
           "target": "com.amazonaws.kafkaconnect#ListWorkerConfigurations"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#TagResource"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#UntagResource"
         },
         {
           "target": "com.amazonaws.kafkaconnect#UpdateConnector"
         }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "KafkaConnect",
-          "name": "kafkaconnect",
-          "arnNamespace": "kafkaconnect",
-          "cloudFormationName": "KafkaConnect",
-          "cloudTrailEventSource": "kafkaconnect.amazonaws.com",
-          "endpointPrefix": "kafkaconnect"
-        },
-        "aws.auth#sigv4": {
-          "name": "kafkaconnect"
-        },
-        "aws.protocols#restJson1": {},
-        "smithy.api#cors": {
-          "additionalAllowedHeaders": [
-            "*",
-            "Date",
-            "X-Amz-Target",
-            "x-amzn-platform-id",
-            "x-amzn-trace-id",
-            "Authorization",
-            "Content-Type",
-            "Credentials",
-            "X-Amz-Date",
-            "X-Api-Key",
-            "X-Amz-Security-Token",
-            "x-amz-content-sha256",
-            "X-Amz-User-Agent"
-          ],
-          "additionalExposedHeaders": [
-            "x-amzn-errortype",
-            "x-amzn-requestid",
-            "x-amzn-errormessage",
-            "x-amzn-trace-id",
-            "x-amz-apigw-id",
-            "date"
-          ],
-          "origin": "*",
-          "maxAge": 86400
-        },
-        "smithy.api#documentation": "<p/>",
-        "smithy.api#title": "Managed Streaming for Kafka Connect",
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            },
-            "UseDualStack": {
-              "builtIn": "AWS::UseDualStack",
-              "required": true,
-              "default": false,
-              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-              "type": "Boolean"
-            },
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Endpoint"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseFIPS"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseDualStack"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [],
-                  "endpoint": {
-                    "url": {
-                      "ref": "Endpoint"
-                    },
-                    "properties": {},
-                    "headers": {}
-                  },
-                  "type": "endpoint"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Region"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "aws.partition",
-                      "argv": [
-                        {
-                          "ref": "Region"
-                        }
-                      ],
-                      "assign": "PartitionResult"
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseFIPS"
-                            },
-                            true
-                          ]
-                        },
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseDualStack"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsFIPS"
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsDualStack"
-                                  ]
-                                }
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [],
-                              "endpoint": {
-                                "url": "https://kafkaconnect-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseFIPS"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsFIPS"
-                                  ]
-                                },
-                                true
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [],
-                              "endpoint": {
-                                "url": "https://kafkaconnect-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "FIPS is enabled but this partition does not support FIPS",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseDualStack"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsDualStack"
-                                  ]
-                                }
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [],
-                              "endpoint": {
-                                "url": "https://kafkaconnect.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "DualStack is enabled but this partition does not support DualStack",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [],
-                      "endpoint": {
-                        "url": "https://kafkaconnect.{Region}.{PartitionResult#dnsSuffix}",
-                        "properties": {},
-                        "headers": {}
-                      },
-                      "type": "endpoint"
-                    }
-                  ],
-                  "type": "tree"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "error": "Invalid Configuration: Missing Region",
-              "type": "error"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.ap-northeast-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-northeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.ap-northeast-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-northeast-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.ap-south-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-south-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.ap-southeast-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-southeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.ap-southeast-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-southeast-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.ca-central-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ca-central-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.eu-central-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-central-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.eu-north-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-north-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.eu-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-west-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.eu-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.eu-west-3.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-west-3",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.sa-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "sa-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-east-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-west-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect-fips.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect-fips.us-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect-fips.cn-north-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-north-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect-fips.cn-north-1.amazonaws.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-north-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.cn-north-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-north-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.cn-north-1.amazonaws.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-north-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect-fips.us-gov-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect-fips.us-gov-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-gov-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-gov-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-gov-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-gov-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect-fips.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "error": "DualStack is enabled but this partition does not support DualStack"
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect-fips.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "error": "DualStack is enabled but this partition does not support DualStack"
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://kafkaconnect.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Endpoint": "https://example.com"
-              }
-            },
-            {
-              "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Endpoint": "https://example.com"
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false,
-                "Endpoint": "https://example.com"
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-              "expect": {
-                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true,
-                "Endpoint": "https://example.com"
-              }
-            },
-            {
-              "documentation": "Missing region",
-              "expect": {
-                "error": "Invalid Configuration: Missing Region"
-              }
-            }
-          ],
-          "version": "1.0"
-        }
-      }
-    },
-    "com.amazonaws.kafkaconnect#ListConnectorOperations": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kafkaconnect#ListConnectorOperationsRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kafkaconnect#ListConnectorOperationsResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kafkaconnect#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ForbiddenException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#InternalServerErrorException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ServiceUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#TooManyRequestsException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#UnauthorizedException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Lists information about a connector's operation(s).</p>",
-        "smithy.api#http": {
-          "method": "GET",
-          "uri": "/v1/connectors/{connectorArn}/operations",
-          "code": 200
-        },
-        "smithy.api#paginated": {
-          "inputToken": "nextToken",
-          "outputToken": "nextToken",
-          "pageSize": "maxResults",
-          "items": "connectorOperations"
-        },
-        "smithy.api#readonly": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#ListConnectorOperationsRequest": {
-      "type": "structure",
-      "members": {
-        "connectorArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector for which to list operations.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "maxResults": {
-          "target": "com.amazonaws.kafkaconnect#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>Maximum number of connector operations to fetch in one get request.</p>",
-            "smithy.api#httpQuery": "maxResults"
-          }
-        },
-        "nextToken": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>If the response is truncated, it includes a NextToken. Send this NextToken in a subsequent request to continue listing from where it left off.</p>",
-            "smithy.api#httpQuery": "nextToken"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#ListConnectorOperationsResponse": {
-      "type": "structure",
-      "members": {
-        "connectorOperations": {
-          "target": "com.amazonaws.kafkaconnect#__listOfConnectorOperationSummary",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of connector operation descriptions.</p>"
-          }
-        },
-        "nextToken": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>If the response is truncated, it includes a NextToken. Send this NextToken in a subsequent request to continue listing from where it left off.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
+      ]
     },
     "com.amazonaws.kafkaconnect#ListConnectors": {
       "type": "operation",
@@ -3247,9 +1818,6 @@
             "smithy.api#httpQuery": "nextToken"
           }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#ListConnectorsResponse": {
@@ -3332,17 +1900,7 @@
             "smithy.api#documentation": "<p>If the response of a ListCustomPlugins operation is truncated, it will include a\n         NextToken. Send this NextToken in a subsequent request to continue listing from where the\n         previous operation left off.</p>",
             "smithy.api#httpQuery": "nextToken"
           }
-        },
-        "namePrefix": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>Lists custom plugin names that start with the specified text string.</p>",
-            "smithy.api#httpQuery": "namePrefix"
-          }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#ListCustomPluginsResponse": {
@@ -3358,73 +1916,6 @@
           "target": "com.amazonaws.kafkaconnect#__string",
           "traits": {
             "smithy.api#documentation": "<p>If the response of a ListCustomPlugins operation is truncated, it will include a\n         NextToken. Send this NextToken in a subsequent request to continue listing from where the\n         previous operation left off.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.kafkaconnect#ListTagsForResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kafkaconnect#ListTagsForResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kafkaconnect#ListTagsForResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kafkaconnect#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ForbiddenException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#InternalServerErrorException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ServiceUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#TooManyRequestsException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#UnauthorizedException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Lists all the tags attached to the specified resource.</p>",
-        "smithy.api#http": {
-          "uri": "/v1/tags/{resourceArn}",
-          "method": "GET"
-        },
-        "smithy.api#readonly": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#ListTagsForResourceRequest": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want to list all attached tags.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#ListTagsForResourceResponse": {
-      "type": "structure",
-      "members": {
-        "tags": {
-          "target": "com.amazonaws.kafkaconnect#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>Lists the tags attached to the specified resource in the corresponding request.</p>"
           }
         }
       }
@@ -3492,17 +1983,7 @@
             "smithy.api#documentation": "<p>If the response of a ListWorkerConfigurations operation is truncated, it will include a\n         NextToken. Send this NextToken in a subsequent request to continue listing from where the\n         previous operation left off.</p>",
             "smithy.api#httpQuery": "nextToken"
           }
-        },
-        "namePrefix": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>Lists worker configuration names that start with the specified text string.</p>",
-            "smithy.api#httpQuery": "namePrefix"
-          }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#ListWorkerConfigurationsResponse": {
@@ -3585,7 +2066,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A plugin is an Amazon Web Services resource that contains the code that defines your connector logic. </p>"
+        "smithy.api#documentation": "<p>A plugin is an AWS resource that contains the code that defines your connector logic.\n      </p>"
       }
     },
     "com.amazonaws.kafkaconnect#PluginDescription": {
@@ -3608,15 +2089,13 @@
         "mcuCount": {
           "target": "com.amazonaws.kafkaconnect#__integerMin1Max8",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>",
             "smithy.api#required": {}
           }
         },
         "workerCount": {
-          "target": "com.amazonaws.kafkaconnect#__integer",
+          "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of workers that are allocated to the connector.</p>",
             "smithy.api#required": {}
           }
@@ -3632,14 +2111,12 @@
         "mcuCount": {
           "target": "com.amazonaws.kafkaconnect#__integer",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>"
           }
         },
         "workerCount": {
           "target": "com.amazonaws.kafkaconnect#__integer",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of workers that are allocated to the connector.</p>"
           }
         }
@@ -3654,15 +2131,13 @@
         "mcuCount": {
           "target": "com.amazonaws.kafkaconnect#__integerMin1Max8",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid\n         values are 1,2,4,8.</p>",
             "smithy.api#required": {}
           }
         },
         "workerCount": {
-          "target": "com.amazonaws.kafkaconnect#__integer",
+          "target": "com.amazonaws.kafkaconnect#__integerMin1Max10",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of workers that are allocated to the connector.</p>",
             "smithy.api#required": {}
           }
@@ -3738,7 +2213,6 @@
         "enabled": {
           "target": "com.amazonaws.kafkaconnect#__boolean",
           "traits": {
-            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>",
             "smithy.api#required": {}
           }
@@ -3766,7 +2240,6 @@
         "enabled": {
           "target": "com.amazonaws.kafkaconnect#__boolean",
           "traits": {
-            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>"
           }
         },
@@ -3787,7 +2260,6 @@
         "cpuUtilizationPercentage": {
           "target": "com.amazonaws.kafkaconnect#__integerMin1Max100",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>Specifies the CPU utilization percentage threshold at which you want connector scale in\n         to be triggered.</p>",
             "smithy.api#required": {}
           }
@@ -3803,7 +2275,6 @@
         "cpuUtilizationPercentage": {
           "target": "com.amazonaws.kafkaconnect#__integer",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>Specifies the CPU utilization percentage threshold at which you want connector scale in\n         to be triggered.</p>"
           }
         }
@@ -3818,7 +2289,6 @@
         "cpuUtilizationPercentage": {
           "target": "com.amazonaws.kafkaconnect#__integerMin1Max100",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The target CPU utilization percentage threshold at which you want connector scale in to\n         be triggered.</p>",
             "smithy.api#required": {}
           }
@@ -3834,7 +2304,6 @@
         "cpuUtilizationPercentage": {
           "target": "com.amazonaws.kafkaconnect#__integerMin1Max100",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The CPU utilization percentage threshold at which you want connector scale out to be\n         triggered.</p>",
             "smithy.api#required": {}
           }
@@ -3850,7 +2319,6 @@
         "cpuUtilizationPercentage": {
           "target": "com.amazonaws.kafkaconnect#__integer",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The CPU utilization percentage threshold at which you want connector scale out to be\n         triggered.</p>"
           }
         }
@@ -3865,7 +2333,6 @@
         "cpuUtilizationPercentage": {
           "target": "com.amazonaws.kafkaconnect#__integerMin1Max100",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The target CPU utilization percentage threshold at which you want connector scale out to\n         be triggered.</p>",
             "smithy.api#required": {}
           }
@@ -3908,121 +2375,6 @@
         "smithy.api#documentation": "<p>Details about the state of a resource.</p>"
       }
     },
-    "com.amazonaws.kafkaconnect#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        }
-      }
-    },
-    "com.amazonaws.kafkaconnect#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.kafkaconnect#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.kafkaconnect#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kafkaconnect#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kafkaconnect#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kafkaconnect#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ForbiddenException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#InternalServerErrorException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ServiceUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#TooManyRequestsException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#UnauthorizedException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Attaches tags to the specified resource.</p>",
-        "smithy.api#http": {
-          "uri": "/v1/tags/{resourceArn}",
-          "method": "POST"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which you want to attach tags.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.kafkaconnect#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags that you want to attach to the resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#TagResourceResponse": {
-      "type": "structure",
-      "members": {}
-    },
-    "com.amazonaws.kafkaconnect#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.kafkaconnect#Tags": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.kafkaconnect#TagKey"
-      },
-      "value": {
-        "target": "com.amazonaws.kafkaconnect#TagValue"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
     "com.amazonaws.kafkaconnect#TooManyRequestsException": {
       "type": "structure",
       "members": {
@@ -4048,74 +2400,6 @@
         "smithy.api#error": "client",
         "smithy.api#httpError": 401
       }
-    },
-    "com.amazonaws.kafkaconnect#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kafkaconnect#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kafkaconnect#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kafkaconnect#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ForbiddenException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#InternalServerErrorException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#ServiceUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#TooManyRequestsException"
-        },
-        {
-          "target": "com.amazonaws.kafkaconnect#UnauthorizedException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes tags from the specified resource.</p>",
-        "smithy.api#http": {
-          "uri": "/v1/tags/{resourceArn}",
-          "method": "DELETE"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which you want to remove tags.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "tagKeys": {
-          "target": "com.amazonaws.kafkaconnect#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of the tags that you want to remove from the resource.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kafkaconnect#UntagResourceResponse": {
-      "type": "structure",
-      "members": {}
     },
     "com.amazonaws.kafkaconnect#UpdateConnector": {
       "type": "operation",
@@ -4164,13 +2448,8 @@
         "capacity": {
           "target": "com.amazonaws.kafkaconnect#CapacityUpdate",
           "traits": {
-            "smithy.api#documentation": "<p>The target capacity.</p>"
-          }
-        },
-        "connectorConfiguration": {
-          "target": "com.amazonaws.kafkaconnect#ConnectorConfigurationUpdate",
-          "traits": {
-            "smithy.api#documentation": "<p>A map of keys to values that represent the configuration for the connector.</p>"
+            "smithy.api#documentation": "<p>The target capacity.</p>",
+            "smithy.api#required": {}
           }
         },
         "connectorArn": {
@@ -4189,9 +2468,6 @@
             "smithy.api#required": {}
           }
         }
-      },
-      "traits": {
-        "smithy.api#input": {}
       }
     },
     "com.amazonaws.kafkaconnect#UpdateConnectorResponse": {
@@ -4207,12 +2483,6 @@
           "target": "com.amazonaws.kafkaconnect#ConnectorState",
           "traits": {
             "smithy.api#documentation": "<p>The state of the connector.</p>"
-          }
-        },
-        "connectorOperationArn": {
-          "target": "com.amazonaws.kafkaconnect#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector operation.</p>"
           }
         }
       }
@@ -4264,7 +2534,6 @@
         "revision": {
           "target": "com.amazonaws.kafkaconnect#__longMin1",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The revision of the worker configuration.</p>",
             "smithy.api#required": {}
           }
@@ -4287,7 +2556,6 @@
         "revision": {
           "target": "com.amazonaws.kafkaconnect#__long",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The revision of the worker configuration.</p>"
           }
         },
@@ -4318,15 +2586,15 @@
           }
         },
         "propertiesFileContent": {
-          "target": "com.amazonaws.kafkaconnect#__sensitiveString",
+          "target": "com.amazonaws.kafkaconnect#__string",
           "traits": {
-            "smithy.api#documentation": "<p>Base64 encoded contents of the connect-distributed.properties file.</p>"
+            "smithy.api#documentation": "<p>Base64 encoded contents of the connect-distributed.properties file.</p>",
+            "smithy.api#sensitive": {}
           }
         },
         "revision": {
           "target": "com.amazonaws.kafkaconnect#__long",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The description of a revision of the worker configuration.</p>"
           }
         }
@@ -4353,28 +2621,12 @@
         "revision": {
           "target": "com.amazonaws.kafkaconnect#__long",
           "traits": {
-            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The revision of a worker configuration.</p>"
           }
         }
       },
       "traits": {
         "smithy.api#documentation": "<p>The summary of a worker configuration revision.</p>"
-      }
-    },
-    "com.amazonaws.kafkaconnect#WorkerConfigurationState": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "ACTIVE",
-            "name": "ACTIVE"
-          },
-          {
-            "value": "DELETING",
-            "name": "DELETING"
-          }
-        ]
       }
     },
     "com.amazonaws.kafkaconnect#WorkerConfigurationSummary": {
@@ -4408,12 +2660,6 @@
           "target": "com.amazonaws.kafkaconnect#__string",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the worker configuration.</p>"
-          }
-        },
-        "workerConfigurationState": {
-          "target": "com.amazonaws.kafkaconnect#WorkerConfigurationState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the worker configuration.</p>"
           }
         }
       },
@@ -4473,33 +2719,24 @@
         "smithy.api#documentation": "<p>Workers can send worker logs to different destination types. This configuration\n         specifies the details of these destinations.</p>"
       }
     },
-    "com.amazonaws.kafkaconnect#WorkerSetting": {
-      "type": "structure",
-      "members": {
-        "capacity": {
-          "target": "com.amazonaws.kafkaconnect#CapacityDescription"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Details about worker setting of a connector</p>"
-      }
-    },
     "com.amazonaws.kafkaconnect#__boolean": {
-      "type": "boolean",
-      "traits": {
-        "smithy.api#default": false
-      }
+      "type": "boolean"
     },
     "com.amazonaws.kafkaconnect#__integer": {
+      "type": "integer"
+    },
+    "com.amazonaws.kafkaconnect#__integerMin1Max10": {
       "type": "integer",
       "traits": {
-        "smithy.api#default": 0
+        "smithy.api#range": {
+          "min": 1,
+          "max": 10
+        }
       }
     },
     "com.amazonaws.kafkaconnect#__integerMin1Max100": {
       "type": "integer",
       "traits": {
-        "smithy.api#default": 0,
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -4509,23 +2746,10 @@
     "com.amazonaws.kafkaconnect#__integerMin1Max8": {
       "type": "integer",
       "traits": {
-        "smithy.api#default": 0,
         "smithy.api#range": {
           "min": 1,
           "max": 8
         }
-      }
-    },
-    "com.amazonaws.kafkaconnect#__listOfConnectorOperationStep": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.kafkaconnect#ConnectorOperationStep"
-      }
-    },
-    "com.amazonaws.kafkaconnect#__listOfConnectorOperationSummary": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.kafkaconnect#ConnectorOperationSummary"
       }
     },
     "com.amazonaws.kafkaconnect#__listOfConnectorSummary": {
@@ -4565,25 +2789,24 @@
       }
     },
     "com.amazonaws.kafkaconnect#__long": {
-      "type": "long",
-      "traits": {
-        "smithy.api#default": 0
-      }
+      "type": "long"
     },
     "com.amazonaws.kafkaconnect#__longMin1": {
       "type": "long",
       "traits": {
-        "smithy.api#default": 0,
         "smithy.api#range": {
           "min": 1,
           "max": 9223372036854775807
         }
       }
     },
-    "com.amazonaws.kafkaconnect#__sensitiveString": {
-      "type": "string",
-      "traits": {
-        "smithy.api#sensitive": {}
+    "com.amazonaws.kafkaconnect#__mapOf__string": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.kafkaconnect#__string"
+      },
+      "value": {
+        "target": "com.amazonaws.kafkaconnect#__string"
       }
     },
     "com.amazonaws.kafkaconnect#__string": {
