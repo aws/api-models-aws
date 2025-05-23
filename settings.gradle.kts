@@ -7,9 +7,7 @@ pluginManagement {
 }
 
 // Dynamically create subprojects for each directory in models/
-fileTree("models/").files.forEach {
-    if (it.isDirectory && !it.isHidden) {
-        include(it.name)
-        project(":${it.name}").projectDir = it
-    }
+file("models/").listFiles()?.forEach {
+    include(it.name)
+    project(":${it.name}").projectDir = it
 }
