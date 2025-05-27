@@ -988,6 +988,86 @@
         }
       }
     },
+    "com.amazonaws.ec2#ActiveVpnTunnelStatus": {
+      "type": "structure",
+      "members": {
+        "Phase1EncryptionAlgorithm": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Phase1EncryptionAlgorithm",
+            "smithy.api#documentation": "<p>The encryption algorithm negotiated in Phase 1 IKE negotiations.</p>",
+            "smithy.api#xmlName": "phase1EncryptionAlgorithm"
+          }
+        },
+        "Phase2EncryptionAlgorithm": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Phase2EncryptionAlgorithm",
+            "smithy.api#documentation": "<p>The encryption algorithm negotiated in Phase 2 IKE negotiations.</p>",
+            "smithy.api#xmlName": "phase2EncryptionAlgorithm"
+          }
+        },
+        "Phase1IntegrityAlgorithm": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Phase1IntegrityAlgorithm",
+            "smithy.api#documentation": "<p>The integrity algorithm negotiated in Phase 1 IKE negotiations.</p>",
+            "smithy.api#xmlName": "phase1IntegrityAlgorithm"
+          }
+        },
+        "Phase2IntegrityAlgorithm": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Phase2IntegrityAlgorithm",
+            "smithy.api#documentation": "<p>The integrity algorithm negotiated in Phase 2 IKE negotiations.</p>",
+            "smithy.api#xmlName": "phase2IntegrityAlgorithm"
+          }
+        },
+        "Phase1DHGroup": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Phase1DHGroup",
+            "smithy.api#documentation": "<p>The Diffie-Hellman group number being used in Phase 1 IKE negotiations.</p>",
+            "smithy.api#xmlName": "phase1DHGroup"
+          }
+        },
+        "Phase2DHGroup": {
+          "target": "com.amazonaws.ec2#Integer",
+          "traits": {
+            "aws.protocols#ec2QueryName": "Phase2DHGroup",
+            "smithy.api#documentation": "<p>The Diffie-Hellman group number being used in Phase 2 IKE negotiations.</p>",
+            "smithy.api#xmlName": "phase2DHGroup"
+          }
+        },
+        "IkeVersion": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "IkeVersion",
+            "smithy.api#documentation": "<p>The version of the Internet Key Exchange (IKE) protocol being used.</p>",
+            "smithy.api#xmlName": "ikeVersion"
+          }
+        },
+        "ProvisioningStatus": {
+          "target": "com.amazonaws.ec2#VpnTunnelProvisioningStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ProvisioningStatus",
+            "smithy.api#documentation": "<p>The current provisioning status of the VPN tunnel.</p>",
+            "smithy.api#xmlName": "provisioningStatus"
+          }
+        },
+        "ProvisioningStatusReason": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ProvisioningStatusReason",
+            "smithy.api#documentation": "<p>The reason for the current provisioning status.</p>",
+            "smithy.api#xmlName": "provisioningStatusReason"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains information about the current security configuration of an active VPN tunnel.</p>"
+      }
+    },
     "com.amazonaws.ec2#ActivityStatus": {
       "type": "enum",
       "members": {
@@ -3697,6 +3777,9 @@
         },
         {
           "target": "com.amazonaws.ec2#ExportVerifiedAccessInstanceClientConfiguration"
+        },
+        {
+          "target": "com.amazonaws.ec2#GetActiveVpnTunnelStatus"
         },
         {
           "target": "com.amazonaws.ec2#GetAllowedImagesSettings"
@@ -24146,6 +24229,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The tags to apply to the VPN connection.</p>",
             "smithy.api#xmlName": "TagSpecification"
+          }
+        },
+        "PreSharedKeyStorage": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the storage mode for the pre-shared key (PSK). Valid values are <code>Standard</code>\" (stored in the Site-to-Site VPN service) or <code>SecretsManager</code> (stored in Amazon Web Services Secrets Manager).</p>"
           }
         },
         "DryRun": {
@@ -56033,6 +56122,64 @@
         }
       }
     },
+    "com.amazonaws.ec2#GetActiveVpnTunnelStatus": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ec2#GetActiveVpnTunnelStatusRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ec2#GetActiveVpnTunnelStatusResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the currently negotiated security parameters for an active VPN tunnel, including IKE version, DH groups, encryption algorithms, and integrity algorithms.</p>"
+      }
+    },
+    "com.amazonaws.ec2#GetActiveVpnTunnelStatusRequest": {
+      "type": "structure",
+      "members": {
+        "VpnConnectionId": {
+          "target": "com.amazonaws.ec2#VpnConnectionId",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The ID of the VPN connection for which to retrieve the active tunnel status.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "VpnTunnelOutsideIpAddress": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The external IP address of the VPN tunnel for which to retrieve the active status.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.ec2#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ec2#GetActiveVpnTunnelStatusResult": {
+      "type": "structure",
+      "members": {
+        "ActiveVpnTunnelStatus": {
+          "target": "com.amazonaws.ec2#ActiveVpnTunnelStatus",
+          "traits": {
+            "aws.protocols#ec2QueryName": "ActiveVpnTunnelStatus",
+            "smithy.api#documentation": "<p>Information about the current security configuration of the VPN tunnel.</p>",
+            "smithy.api#xmlName": "activeVpnTunnelStatus"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
     "com.amazonaws.ec2#GetAllowedImagesSettings": {
       "type": "operation",
       "input": {
@@ -60178,6 +60325,12 @@
           "target": "com.amazonaws.ec2#String",
           "traits": {
             "smithy.api#documentation": "<p>The IKE version to be used in the sample configuration file for your customer gateway\n            device. You can specify one of the following versions: <code>ikev1</code> or\n                <code>ikev2</code>.</p>"
+          }
+        },
+        "SampleType": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of sample configuration to generate. Valid values are \"compatibility\" (includes IKEv1) or \"recommended\" (throws UnsupportedOperationException for IKEv1).</p>"
           }
         },
         "DryRun": {
@@ -87872,6 +88025,12 @@
           "target": "com.amazonaws.ec2#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Choose whether or not to trigger immediate tunnel replacement. This is only applicable when turning on or off <code>EnableTunnelLifecycleControl</code>.</p>\n         <p>Valid values: <code>True</code> | <code>False</code>\n         </p>"
+          }
+        },
+        "PreSharedKeyStorage": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the storage mode for the pre-shared key (PSK). Valid values are <code>Standard</code> (stored in Site-to-Site VPN service) or <code>SecretsManager</code> (stored in Amazon Web Services Secrets Manager).</p>"
           }
         }
       },
@@ -119369,6 +119528,14 @@
             "smithy.api#xmlName": "vgwTelemetry"
           }
         },
+        "PreSharedKeyArn": {
+          "target": "com.amazonaws.ec2#String",
+          "traits": {
+            "aws.protocols#ec2QueryName": "PreSharedKeyArn",
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret storing the pre-shared key(s) for the VPN connection.</p>",
+            "smithy.api#xmlName": "preSharedKeyArn"
+          }
+        },
         "VpnConnectionId": {
           "target": "com.amazonaws.ec2#String",
           "traits": {
@@ -120022,6 +120189,29 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.ec2#VpnTunnelOptionsSpecification"
+      }
+    },
+    "com.amazonaws.ec2#VpnTunnelProvisioningStatus": {
+      "type": "enum",
+      "members": {
+        "available": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "available"
+          }
+        },
+        "pending": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending"
+          }
+        },
+        "failed": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "failed"
+          }
+        }
       }
     },
     "com.amazonaws.ec2#WeekDay": {
