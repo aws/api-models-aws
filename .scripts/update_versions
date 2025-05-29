@@ -38,6 +38,11 @@ def main(properties_file: Path, projects: Set[str]):
             )
             properties[project_key] = properties[project_key]
     write_properties(properties_file, properties)
+    
+    # Write the file containing the list of changed services, excluding the 'all' project
+    changed_file = properties_file.parent / '.changed'
+    projects.discard('all')
+    changed_file.write_text("\n".join(projects))
 
 
 def read_properties(properties_file: Path) -> dict:
