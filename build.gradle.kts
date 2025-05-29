@@ -1,4 +1,3 @@
-import org.gradle.internal.extensions.stdlib.capitalized
 import org.jreleaser.model.Active
 
 plugins {
@@ -10,10 +9,22 @@ plugins {
 
 description = "This module contains the Smithy model (JSON AST) for all AWS services."
 extra["displayName"] = "Software :: Amazon :: API :: Models"
+
+// Check if the environment variable for updated services is set
+// We will only build and publish those services if the variable *is* set
+val updatedServices = checkUpdatedServices()
+
 subprojects {
     afterEvaluate {
         apply {
             plugin("api-models-aws.model-conventions")
+        }
+
+        // If updatedServices is set, and the project isn't in that set, disable it
+        if (updatedServices?.contains(project.name) == false) {
+            project.tasks.forEach {
+                it.enabled = false
+            }
         }
     }
 }
@@ -76,4 +87,15 @@ jreleaser {
             }
         }
     }
+}
+
+
+private fun checkUpdatedServices(): Set<String>? {
+    val services = System.getenv("UPDATED_SERVICES")
+    if (services != null) {
+        val updatedServices = services.trim().split("\\s".toRegex()).toSortedSet()
+        println("Detected updated services: $updatedServices")
+        return updatedServices
+    }
+    return null
 }
