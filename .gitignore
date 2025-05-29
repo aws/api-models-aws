@@ -30,3 +30,6 @@ build/
 
 # Smithy
 .smithy.lsp.log
+
+# changed file
+.changed

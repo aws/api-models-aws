@@ -91,9 +91,10 @@ jreleaser {
 
 
 private fun checkUpdatedServices(): Set<String>? {
-    val services = System.getenv("UPDATED_SERVICES")
-    if (services != null) {
-        val updatedServices = services.trim().split("\\s".toRegex()).toSortedSet()
+    val changedFile = rootDir.resolve(".changed")
+    if (changedFile.exists()) {
+        val changedStr = changedFile.readText()
+        val updatedServices = changedStr.trim().split("\\s".toRegex()).toSortedSet()
         println("Detected updated services: $updatedServices")
         return updatedServices
     }
