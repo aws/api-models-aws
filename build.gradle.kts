@@ -71,6 +71,7 @@ jreleaser {
                     active = Active.ALWAYS
                     url = "https://central.sonatype.com/api/v1/publisher"
                     stagingRepository(rootProject.layout.buildDirectory.dir("staging").get().asFile.path)
+                    maxRetries = 100
                 }
             }
         }
