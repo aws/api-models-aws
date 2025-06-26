@@ -22,7 +22,7 @@ implementing MCP servers to interact with AWS services.
 
 ## Directory Structure
 
-The AWS models repository contains a top-level directory, `models`, wich contains:
+The AWS models repository contains a top-level directory, `models`, which contains:
 
 * One directory per public AWS service
     * Note: service directories are named using the `<sdk-id>` of the service, where `<sdk-id>` is the value of the
