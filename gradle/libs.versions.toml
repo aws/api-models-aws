@@ -1,7 +1,7 @@
 [versions]
-smithy = "1.69.0"
+smithy = "1.72.1"
 smithy-gradle-plugins = "1.4.0"
-jreleaser = "1.23.0"
+jreleaser = "1.25.0"
 
 [libraries]
 smithy-aws-cloudformation-traits = { module = "software.amazon.smithy:smithy-aws-cloudformation-traits", version.ref = "smithy" }
