@@ -1,0 +1,3730 @@
+{
+  "smithy": "2.0",
+  "shapes": {
+    "com.amazonaws.bcmdatahub#AWSBCMDataHub": {
+      "type": "service",
+      "version": "2026-10-29",
+      "operations": [
+        {
+          "target": "com.amazonaws.bcmdatahub#CancelQueryExecution"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#GetDatasetSchema"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#GetQueryExecution"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#GetQueryExecutionResults"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ListQueryExecutions"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#StartQueryExecution"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#TagResource"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#UntagResource"
+        }
+      ],
+      "resources": [
+        {
+          "target": "com.amazonaws.bcmdatahub#DatasetResource"
+        }
+      ],
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ValidationException"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "BCM Data Hub",
+          "arnNamespace": "bcm-data-hub",
+          "cloudFormationName": "BCMDataHub",
+          "cloudWatchNamespace": "AWS/BCMDataHub",
+          "cloudTrailEventSource": "bcm-data-hub.amazonaws.com",
+          "endpointPrefix": "bcm-data-hub"
+        },
+        "aws.api#tagEnabled": {},
+        "aws.auth#sigv4": {
+          "name": "bcm-data-hub"
+        },
+        "aws.iam#defineConditionKeys": {
+          "aws:RequestTag/${TagKey}": {
+            "type": "String",
+            "documentation": "Filters access by the tags that are passed in the request",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+          },
+          "aws:ResourceTag/${TagKey}": {
+            "type": "String",
+            "documentation": "Filters access by the tags associated with the resource",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+          },
+          "aws:TagKeys": {
+            "type": "ArrayOfString",
+            "documentation": "Filters access by the tag keys that are passed in the request",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+          }
+        },
+        "aws.iam#supportedPrincipalTypes": [
+          "Root",
+          "IAMUser",
+          "IAMRole",
+          "FederatedUser"
+        ],
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "AWS Billing and Cost Management Data Hub lets you query your AWS cost and usage data with SQL.\nCreate datasets over your billing data, then start, monitor, and retrieve the results of query\nexecutions against them.",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        },
+        "smithy.api#title": "AWS Billing and Cost Management Data Hub",
+        "smithy.rules#endpointBdd": {
+          "version": "1.1",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "conditions": [
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Endpoint"
+                }
+              ]
+            },
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ]
+            },
+            {
+              "fn": "aws.partition",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ],
+              "assign": "PartitionResult"
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseFIPS"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseDualStack"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsDualStack"
+                  ]
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsFIPS"
+                  ]
+                },
+                true
+              ]
+            }
+          ],
+          "results": [
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": {
+                  "ref": "Endpoint"
+                },
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://bcm-data-hub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://bcm-data-hub-fips.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS is enabled but this partition does not support FIPS",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://bcm-data-hub.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "DualStack is enabled but this partition does not support DualStack",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://bcm-data-hub.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ],
+          "root": 2,
+          "nodeCount": 13,
+          "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+        },
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                      "type": "error"
+                    },
+                    {
+                      "conditions": [],
+                      "endpoint": {
+                        "url": {
+                          "ref": "Endpoint"
+                        },
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    }
+                  ],
+                  "type": "tree"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ]
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "aws.partition",
+                          "argv": [
+                            {
+                              "ref": "Region"
+                            }
+                          ],
+                          "assign": "PartitionResult"
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseFIPS"
+                                },
+                                true
+                              ]
+                            },
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseDualStack"
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "booleanEquals",
+                                  "argv": [
+                                    true,
+                                    {
+                                      "fn": "getAttr",
+                                      "argv": [
+                                        {
+                                          "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "fn": "booleanEquals",
+                                  "argv": [
+                                    true,
+                                    {
+                                      "fn": "getAttr",
+                                      "argv": [
+                                        {
+                                          "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "rules": [
+                                {
+                                  "conditions": [],
+                                  "rules": [
+                                    {
+                                      "conditions": [],
+                                      "endpoint": {
+                                        "url": "https://bcm-data-hub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                      },
+                                      "type": "endpoint"
+                                    }
+                                  ],
+                                  "type": "tree"
+                                }
+                              ],
+                              "type": "tree"
+                            },
+                            {
+                              "conditions": [],
+                              "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                              "type": "error"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseFIPS"
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "booleanEquals",
+                                  "argv": [
+                                    {
+                                      "fn": "getAttr",
+                                      "argv": [
+                                        {
+                                          "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                      ]
+                                    },
+                                    true
+                                  ]
+                                }
+                              ],
+                              "rules": [
+                                {
+                                  "conditions": [],
+                                  "rules": [
+                                    {
+                                      "conditions": [],
+                                      "endpoint": {
+                                        "url": "https://bcm-data-hub-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                      },
+                                      "type": "endpoint"
+                                    }
+                                  ],
+                                  "type": "tree"
+                                }
+                              ],
+                              "type": "tree"
+                            },
+                            {
+                              "conditions": [],
+                              "error": "FIPS is enabled but this partition does not support FIPS",
+                              "type": "error"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseDualStack"
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "booleanEquals",
+                                  "argv": [
+                                    true,
+                                    {
+                                      "fn": "getAttr",
+                                      "argv": [
+                                        {
+                                          "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "rules": [
+                                {
+                                  "conditions": [],
+                                  "rules": [
+                                    {
+                                      "conditions": [],
+                                      "endpoint": {
+                                        "url": "https://bcm-data-hub.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                      },
+                                      "type": "endpoint"
+                                    }
+                                  ],
+                                  "type": "tree"
+                                }
+                              ],
+                              "type": "tree"
+                            },
+                            {
+                              "conditions": [],
+                              "error": "DualStack is enabled but this partition does not support DualStack",
+                              "type": "error"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://bcm-data-hub.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        }
+                      ],
+                      "type": "tree"
+                    }
+                  ],
+                  "type": "tree"
+                },
+                {
+                  "conditions": [],
+                  "error": "Invalid Configuration: Missing Region",
+                  "type": "error"
+                }
+              ],
+              "type": "tree"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub-fips.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub-fips.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub-fips.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub-fips.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub-fips.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://bcm-data-hub.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+              "expect": {
+                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.bcmdatahub#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The caller is not authorized to perform the requested action.",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.bcmdatahub#BillingViewArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "The ARN of an AWS Billing View that a dataset is scoped to.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^arn:[a-z0-9-]+:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_+=.@-]{0,59}$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#BusinessGlossaryEntry": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#BusinessTerm",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "sqlExpression": {
+          "target": "com.amazonaws.bcmdatahub#QueryString",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "comment": {
+          "target": "com.amazonaws.bcmdatahub#Comment"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A business-glossary term mapped to its SQL expression."
+      }
+    },
+    "com.amazonaws.bcmdatahub#BusinessGlossaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#BusinessGlossaryEntry"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of business-glossary entries.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#BusinessTerm": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Business-glossary term, e.g. \"Effective Cost\".",
+        "smithy.api#length": {
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#CancelQueryExecution": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#CancelQueryExecutionInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#CancelQueryExecutionOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to cancel a query execution",
+          "resources": {
+            "required": {
+              "dataset": {}
+            }
+          }
+        },
+        "smithy.api#documentation": "Aborts an in-flight query. Only meaningful while running; a no-op once terminal.",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/query-executions/{id}/cancel",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#CancelQueryExecutionInput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#QueryExecutionId",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#CancelQueryExecutionOutput": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#Cardinality": {
+      "type": "enum",
+      "members": {
+        "ONE_TO_ONE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ONE_TO_ONE"
+          }
+        },
+        "ONE_TO_MANY": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ONE_TO_MANY"
+          }
+        },
+        "MANY_TO_MANY": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MANY_TO_MANY"
+          }
+        },
+        "MANY_TO_ONE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MANY_TO_ONE"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Join cardinality between two schemas, e.g. \"many-to-one\"."
+      }
+    },
+    "com.amazonaws.bcmdatahub#Column": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#ColumnName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.bcmdatahub#ColumnType",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "comment": {
+          "target": "com.amazonaws.bcmdatahub#Comment"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A column of a schema, with its data type and description."
+      }
+    },
+    "com.amazonaws.bcmdatahub#ColumnList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#Column"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of schema columns or partition keys.",
+        "smithy.api#length": {
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ColumnName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A column name.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 127
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ColumnNameList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#ColumnName"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of column names to join on.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ColumnType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A column's data type, e.g. string, decimal, timestamp.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#Comment": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Free-text comment.",
+        "smithy.api#length": {
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ConflictException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.bcmdatahub#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceId": {
+          "target": "com.amazonaws.bcmdatahub#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "The identifier of the conflicting resource.",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.bcmdatahub#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "The type of the conflicting resource.",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The request conflicts with the current state of the resource.",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.bcmdatahub#ContextEntry": {
+      "type": "structure",
+      "members": {
+        "context": {
+          "target": "com.amazonaws.bcmdatahub#ContextText",
+          "traits": {
+            "smithy.api#documentation": "The natural-language context text.",
+            "smithy.api#required": {}
+          }
+        },
+        "suitability": {
+          "target": "com.amazonaws.bcmdatahub#Suitability",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A natural-language context and how suitable the schema is for it."
+      }
+    },
+    "com.amazonaws.bcmdatahub#ContextList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#ContextEntry"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of natural-language contexts.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ContextText": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A natural-language context a schema is suited (or unsuited) for.",
+        "smithy.api#length": {
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#CostUsageProperties": {
+      "type": "structure",
+      "members": {
+        "billingViewArn": {
+          "target": "com.amazonaws.bcmdatahub#BillingViewArn",
+          "traits": {
+            "smithy.api#documentation": "The Billing View ARN the dataset is scoped to."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Deprecated: use `schema`. Properties of a cost_usage dataset."
+      }
+    },
+    "com.amazonaws.bcmdatahub#CreateDataset": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#CreateDatasetInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#CreateDatasetOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ConflictException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#conditionKeys": [
+          "aws:RequestTag/${TagKey}",
+          "aws:TagKeys"
+        ],
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to create a dataset",
+          "requiredActions": [
+            "bcm-data-hub:TagResource"
+          ]
+        },
+        "smithy.api#documentation": "Provisions a new dataset. `name` must be unique for the caller's account.",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/datasets",
+          "code": 201
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#CreateDatasetInput": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#DatasetName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "schema": {
+          "target": "com.amazonaws.bcmdatahub#DatasetSchemaSpec",
+          "traits": {
+            "smithy.api#documentation": "The dataset's schema, and the dataset's settings for that schema.",
+            "smithy.api#property": {
+              "name": "schemaSpec"
+            },
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#DatasetDescription"
+        },
+        "clientToken": {
+          "target": "com.amazonaws.bcmdatahub#IdempotencyToken",
+          "traits": {
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.bcmdatahub#TagMap"
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#CreateDatasetOutput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#DatasetId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.bcmdatahub#DatasetArn",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#DatasetName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#DatasetDescription"
+        },
+        "status": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "refreshedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "Freshness of the dataset: when its underlying data was last updated."
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "The time at which the dataset was created.",
+            "smithy.api#required": {}
+          }
+        },
+        "properties": {
+          "target": "com.amazonaws.bcmdatahub#DatasetProperties",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema`."
+          }
+        },
+        "schemaName": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema.name`.",
+            "smithy.api#required": {}
+          }
+        },
+        "schemaDescription": {
+          "target": "com.amazonaws.bcmdatahub#SchemaDescription",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema.description`."
+          }
+        },
+        "schema": {
+          "target": "com.amazonaws.bcmdatahub#DatasetSchemaInfo",
+          "traits": {
+            "smithy.api#documentation": "The dataset's schema, and the dataset's settings for that schema.",
+            "smithy.api#required": {}
+          }
+        },
+        "updatedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "The time at which the dataset was last updated."
+          }
+        },
+        "statusReason": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatusReason",
+          "traits": {
+            "smithy.api#documentation": "Read-only, human-readable explanation of the current status."
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.bcmdatahub#TagMap",
+          "traits": {
+            "smithy.api#documentation": "The tags applied to the dataset."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Full representation mixin, returned by create, read, and update operations.",
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetArn": {
+      "type": "string",
+      "traits": {
+        "aws.api#arnReference": {
+          "type": "AWS::BCMDataHub::Dataset"
+        },
+        "smithy.api#documentation": "The Amazon Resource Name (ARN) of a provisioned dataset. Format:\n`arn:<partition>:bcm-data-hub:<region>:<accountId>:dataset/<datasetId>`\nThe trailing segment is the DatasetId (schema name + base-36 UUID).",
+        "smithy.api#length": {
+          "min": 20,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^arn:aws[a-z-]*:bcm-data-hub:[a-z0-9-]*:[0-9]{12}:dataset/[a-z_]{1,38}-[0-9a-z]{25}$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetDescription": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Free-text description of a dataset. Any printable text; control characters are rejected.",
+        "smithy.api#length": {
+          "max": 2048
+        },
+        "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F]*$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "The immutable, service-generated identifier of a dataset: the schema name\n(up to 38 characters) and a base-36-encoded UUID (25 characters) joined by a\nhyphen. Returned on the read views and embedded in the ARN.",
+        "smithy.api#length": {
+          "min": 27,
+          "max": 64
+        },
+        "smithy.api#pattern": "^[a-z_]{1,38}-[0-9a-z]{25}$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetIdentifier": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A reference to a dataset in any of its three forms:\n  - name: `[a-z0-9][a-z0-9_]*`                            (see DatasetName)\n  - id:   `[a-z_]{1,38}-[0-9a-z]{25}`                     (see DatasetId)\n  - arn:  `arn:aws[a-z-]*:bcm-data-hub:...:dataset/<id>`  (see DatasetArn)",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^([a-z0-9][a-z0-9_]*|[a-z_]{1,38}-[0-9a-z]{25}|arn:aws[a-z-]*:bcm-data-hub:[a-z0-9-]*:[0-9]{12}:dataset/[a-z_]{1,38}-[0-9a-z]{25})$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Caller-supplied name for a dataset; also the SQL table name. Mutable and\nunique per account. Lowercase letters, digits, and underscores only (like\nRedshift/Glue identifiers).",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "^[a-z0-9][a-z0-9_]*$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetNameList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#DatasetName"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of dataset names.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetProperties": {
+      "type": "union",
+      "members": {
+        "costUsage": {
+          "target": "com.amazonaws.bcmdatahub#CostUsageProperties",
+          "traits": {
+            "smithy.api#documentation": "Properties of a cost_usage dataset."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Deprecated: use `schema`. Schema-specific properties; exactly one member is set, corresponding to the\ndataset's schema."
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetResource": {
+      "type": "resource",
+      "identifiers": {
+        "identifier": {
+          "target": "com.amazonaws.bcmdatahub#DatasetIdentifier"
+        }
+      },
+      "properties": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#DatasetId"
+        },
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#DatasetName"
+        },
+        "schema": {
+          "target": "com.amazonaws.bcmdatahub#DatasetSchemaInfo"
+        },
+        "schemaSpec": {
+          "target": "com.amazonaws.bcmdatahub#DatasetSchemaSpec"
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#DatasetDescription"
+        },
+        "status": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatus"
+        },
+        "statusReason": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatusReason"
+        },
+        "arn": {
+          "target": "com.amazonaws.bcmdatahub#DatasetArn"
+        },
+        "refreshedAt": {
+          "target": "smithy.api#Timestamp"
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp"
+        },
+        "updatedAt": {
+          "target": "smithy.api#Timestamp"
+        },
+        "tags": {
+          "target": "com.amazonaws.bcmdatahub#TagMap"
+        },
+        "properties": {
+          "target": "com.amazonaws.bcmdatahub#DatasetProperties"
+        },
+        "schemaName": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName"
+        },
+        "schemaDescription": {
+          "target": "com.amazonaws.bcmdatahub#SchemaDescription"
+        }
+      },
+      "create": {
+        "target": "com.amazonaws.bcmdatahub#CreateDataset"
+      },
+      "read": {
+        "target": "com.amazonaws.bcmdatahub#GetDataset"
+      },
+      "update": {
+        "target": "com.amazonaws.bcmdatahub#UpdateDataset"
+      },
+      "delete": {
+        "target": "com.amazonaws.bcmdatahub#DeleteDataset"
+      },
+      "list": {
+        "target": "com.amazonaws.bcmdatahub#ListDatasets"
+      },
+      "traits": {
+        "aws.api#arn": {
+          "template": "dataset/{identifier}"
+        },
+        "aws.api#taggable": {},
+        "aws.iam#conditionKeys": [
+          "aws:ResourceTag/${TagKey}"
+        ],
+        "aws.iam#disableConditionKeyInference": {},
+        "aws.iam#iamResource": {
+          "name": "dataset"
+        },
+        "smithy.api#documentation": "Represents a dataset, a queryable table over your billing data whose ARN ends in the dataset ID",
+        "smithy.api#suppress": [
+          "UnstableTrait.aws.iam#identifierTypes"
+        ]
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetSchemaInfo": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "The schema the dataset conforms to.",
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#SchemaDescription",
+          "traits": {
+            "smithy.api#documentation": "The service-provided description of the schema."
+          }
+        },
+        "billingViewArn": {
+          "target": "com.amazonaws.bcmdatahub#BillingViewArn",
+          "traits": {
+            "smithy.api#documentation": "The billing view the dataset is scoped to. Present for schemas scoped by a billing view."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The schema a dataset conforms to, and the dataset's settings for that schema."
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetSchemaSpec": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "The schema the dataset conforms to.",
+            "smithy.api#required": {}
+          }
+        },
+        "billingViewArn": {
+          "target": "com.amazonaws.bcmdatahub#BillingViewArn",
+          "traits": {
+            "smithy.api#documentation": "The billing view the dataset is scoped to. Supported by schemas scoped by a billing view, such as\n`cost_usage`, where it defaults to your primary billing view."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The schema to create a dataset with, and the dataset's settings for that schema. A dataset's schema can't be\nchanged after it's created."
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetSchemaSummary": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "The schema the dataset conforms to.",
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#SchemaDescription",
+          "traits": {
+            "smithy.api#documentation": "The service-provided description of the schema."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The schema a dataset conforms to, as shown in a dataset summary."
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetStatus": {
+      "type": "enum",
+      "members": {
+        "PROVISIONING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "PROVISIONING"
+          }
+        },
+        "ACTIVE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ACTIVE"
+          }
+        },
+        "SUSPENDED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SUSPENDED"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Provisioning lifecycle status of a dataset."
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetStatusReason": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Read-only, human-readable explanation of a dataset's current status.",
+        "smithy.api#length": {
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetSummary": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#DatasetId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.bcmdatahub#DatasetArn",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#DatasetName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#DatasetDescription"
+        },
+        "status": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "refreshedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "Freshness of the dataset: when its underlying data was last updated."
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "The time at which the dataset was created.",
+            "smithy.api#required": {}
+          }
+        },
+        "properties": {
+          "target": "com.amazonaws.bcmdatahub#DatasetProperties",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema`."
+          }
+        },
+        "schemaName": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema.name`.",
+            "smithy.api#required": {}
+          }
+        },
+        "schemaDescription": {
+          "target": "com.amazonaws.bcmdatahub#SchemaDescription",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema.description`."
+          }
+        },
+        "schema": {
+          "target": "com.amazonaws.bcmdatahub#DatasetSchemaSummary",
+          "traits": {
+            "smithy.api#documentation": "The dataset's schema.",
+            "smithy.api#required": {},
+            "smithy.api#suppress": [
+              "ResourceOperationInputOutput"
+            ]
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A catalog entry for a provisioned dataset (lightweight view)."
+      }
+    },
+    "com.amazonaws.bcmdatahub#DatasetSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#DatasetSummary"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of dataset summaries returned by ListDatasets.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#DeleteDataset": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#DeleteDatasetInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#DeleteDatasetOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to delete a dataset"
+        },
+        "smithy.api#documentation": "Deletes a dataset.",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/datasets/{identifier}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#DeleteDatasetInput": {
+      "type": "structure",
+      "members": {
+        "identifier": {
+          "target": "com.amazonaws.bcmdatahub#DatasetIdentifier",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#DeleteDatasetOutput": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ErrorMessage": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#Field": {
+      "type": "union",
+      "members": {
+        "blobValue": {
+          "target": "smithy.api#Blob",
+          "traits": {
+            "smithy.api#documentation": "A value of the BLOB data type."
+          }
+        },
+        "booleanValue": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "A value of the Boolean data type."
+          }
+        },
+        "doubleValue": {
+          "target": "smithy.api#Double",
+          "traits": {
+            "smithy.api#documentation": "A value of the double data type."
+          }
+        },
+        "isNull": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "A value that indicates whether the data is NULL."
+          }
+        },
+        "longValue": {
+          "target": "smithy.api#Long",
+          "traits": {
+            "smithy.api#documentation": "A value of the long data type."
+          }
+        },
+        "stringValue": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "A value of the string data type."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A single scalar value within a result row. Exactly one member is set."
+      }
+    },
+    "com.amazonaws.bcmdatahub#FieldName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#Filter": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#ColumnName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.bcmdatahub#ColumnType",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "comment": {
+          "target": "com.amazonaws.bcmdatahub#Comment"
+        },
+        "requirementLevel": {
+          "target": "com.amazonaws.bcmdatahub#FilterRequirementLevel",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A filterable column and its requirement level."
+      }
+    },
+    "com.amazonaws.bcmdatahub#FilterList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#Filter"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of filters.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#FilterRequirementLevel": {
+      "type": "enum",
+      "members": {
+        "REQUIRED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "REQUIRED"
+          }
+        },
+        "RECOMMENDED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RECOMMENDED"
+          }
+        },
+        "OPTIONAL": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "OPTIONAL"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "RFC 2119 requirement level for a filter."
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetDataset": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#GetDatasetInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#GetDatasetOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to get a dataset"
+        },
+        "smithy.api#documentation": "Returns the full details of a dataset.",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/datasets/{identifier}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetDatasetInput": {
+      "type": "structure",
+      "members": {
+        "identifier": {
+          "target": "com.amazonaws.bcmdatahub#DatasetIdentifier",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetDatasetOutput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#DatasetId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.bcmdatahub#DatasetArn",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#DatasetName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#DatasetDescription"
+        },
+        "status": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "refreshedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "Freshness of the dataset: when its underlying data was last updated."
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "The time at which the dataset was created.",
+            "smithy.api#required": {}
+          }
+        },
+        "properties": {
+          "target": "com.amazonaws.bcmdatahub#DatasetProperties",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema`."
+          }
+        },
+        "schemaName": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema.name`.",
+            "smithy.api#required": {}
+          }
+        },
+        "schemaDescription": {
+          "target": "com.amazonaws.bcmdatahub#SchemaDescription",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema.description`."
+          }
+        },
+        "schema": {
+          "target": "com.amazonaws.bcmdatahub#DatasetSchemaInfo",
+          "traits": {
+            "smithy.api#documentation": "The dataset's schema, and the dataset's settings for that schema.",
+            "smithy.api#required": {}
+          }
+        },
+        "updatedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "The time at which the dataset was last updated."
+          }
+        },
+        "statusReason": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatusReason",
+          "traits": {
+            "smithy.api#documentation": "Read-only, human-readable explanation of the current status."
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.bcmdatahub#TagMap",
+          "traits": {
+            "smithy.api#documentation": "The tags applied to the dataset."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Full representation mixin, returned by create, read, and update operations.",
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetDatasetSchema": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#GetDatasetSchemaInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#GetDatasetSchemaOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to get a dataset schema"
+        },
+        "smithy.api#documentation": "Returns the semantic layer for a schema: columns, filters, joins, glossary,\ngolden queries, and guardrails.",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/dataset-schemas/{name}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetDatasetSchemaInput": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "The name of the schema to describe.",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetDatasetSchemaOutput": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "The name of the schema.",
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#SchemaDescription",
+          "traits": {
+            "smithy.api#documentation": "Human-readable description of what the schema contains."
+          }
+        },
+        "granularity": {
+          "target": "com.amazonaws.bcmdatahub#Granularity",
+          "traits": {
+            "smithy.api#documentation": "The grain of the schema: what a single row represents."
+          }
+        },
+        "contexts": {
+          "target": "com.amazonaws.bcmdatahub#ContextList",
+          "traits": {
+            "smithy.api#documentation": "Natural-language contexts, each marked recommended or discouraged."
+          }
+        },
+        "partitionKeys": {
+          "target": "com.amazonaws.bcmdatahub#ColumnList",
+          "traits": {
+            "smithy.api#documentation": "The columns the underlying table is partitioned by."
+          }
+        },
+        "columns": {
+          "target": "com.amazonaws.bcmdatahub#ColumnList",
+          "traits": {
+            "smithy.api#documentation": "All columns in the schema, with their data types and comments.",
+            "smithy.api#required": {}
+          }
+        },
+        "filters": {
+          "target": "com.amazonaws.bcmdatahub#FilterList",
+          "traits": {
+            "smithy.api#documentation": "Columns intended for filtering, each with a requirement level."
+          }
+        },
+        "businessGlossary": {
+          "target": "com.amazonaws.bcmdatahub#BusinessGlossaryList",
+          "traits": {
+            "smithy.api#documentation": "Business-glossary terms mapped to the SQL expressions that compute them."
+          }
+        },
+        "joinPatterns": {
+          "target": "com.amazonaws.bcmdatahub#JoinPatternList",
+          "traits": {
+            "smithy.api#documentation": "Recommended joins from this schema to other schemas."
+          }
+        },
+        "goldenQueries": {
+          "target": "com.amazonaws.bcmdatahub#GoldenQueryList",
+          "traits": {
+            "smithy.api#documentation": "Vetted natural-language questions paired with the SQL that answers them."
+          }
+        },
+        "queryGuardrails": {
+          "target": "com.amazonaws.bcmdatahub#QueryGuardrailList",
+          "traits": {
+            "smithy.api#documentation": "Rules a query against this schema is expected to observe, each with a severity."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetQueryExecution": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#GetQueryExecutionInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#GetQueryExecutionOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to get a query execution",
+          "resources": {
+            "required": {
+              "dataset": {}
+            }
+          }
+        },
+        "smithy.api#documentation": "Polls the execution state of a submitted query.",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/query-executions/{id}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetQueryExecutionInput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#QueryExecutionId",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetQueryExecutionOutput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#QueryExecutionId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.bcmdatahub#QueryStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "queryString": {
+          "target": "com.amazonaws.bcmdatahub#QueryString",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp"
+        },
+        "datasetNames": {
+          "target": "com.amazonaws.bcmdatahub#DatasetNameList",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "statusUpdatedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "When the execution's status last changed."
+          }
+        },
+        "totalExecutionTimeInMilliseconds": {
+          "target": "com.amazonaws.bcmdatahub#TotalExecutionTimeInMilliseconds",
+          "traits": {
+            "smithy.api#documentation": "Total time the execution took to complete, in milliseconds."
+          }
+        },
+        "rowCount": {
+          "target": "com.amazonaws.bcmdatahub#ResultRowCount",
+          "traits": {
+            "smithy.api#documentation": "The number of rows in the execution's result, at most 10,000. When isTruncated is true, the query\nproduced more rows than this. Present once the execution succeeds."
+          }
+        },
+        "totalRows": {
+          "target": "com.amazonaws.bcmdatahub#ResultRowCount",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use rowCount, which has the same value."
+          }
+        },
+        "isTruncated": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "True when the query produced more than 10,000 rows, so the result holds only 10,000 of them (the first\n10,000 by the query's ORDER BY, if it has one). Present once the execution succeeds."
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.bcmdatahub#QueryErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "Failure message when the query failed."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Full representation mixin, returned by GetQueryExecution.",
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetQueryExecutionResults": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#GetQueryExecutionResultsInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#GetQueryExecutionResultsOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to get query execution results",
+          "resources": {
+            "required": {
+              "dataset": {}
+            }
+          }
+        },
+        "smithy.api#documentation": "Fetches the inline result rows of a completed query. Valid only once\nGetQueryExecution reports SUCCEEDED.",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/query-executions/{id}/results",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "items": "rows"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetQueryExecutionResultsInput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#QueryExecutionId",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.bcmdatahub#QueryResultsMaxResults",
+          "traits": {
+            "smithy.api#default": 100,
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.bcmdatahub#PaginationToken",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GetQueryExecutionResultsOutput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#QueryExecutionId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "columns": {
+          "target": "com.amazonaws.bcmdatahub#ResultColumnList",
+          "traits": {
+            "smithy.api#documentation": "The result-set columns, in order. Echoed on every page so a page\ndecodes without the caller retaining prior pages.",
+            "smithy.api#required": {}
+          }
+        },
+        "rows": {
+          "target": "com.amazonaws.bcmdatahub#RecordList",
+          "traits": {
+            "smithy.api#documentation": "This page of result rows, each a list of field values in column\norder.",
+            "smithy.api#required": {}
+          }
+        },
+        "totalRows": {
+          "target": "com.amazonaws.bcmdatahub#ResultRowCount",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use rowCount on GetQueryExecution, which has the same value."
+          }
+        },
+        "isTruncated": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use isTruncated on GetQueryExecution, which has the same value."
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.bcmdatahub#PaginationToken"
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#GoldenQuery": {
+      "type": "structure",
+      "members": {
+        "question": {
+          "target": "com.amazonaws.bcmdatahub#QuestionText",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "sql": {
+          "target": "com.amazonaws.bcmdatahub#QueryString",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A vetted natural-language question paired with its SQL."
+      }
+    },
+    "com.amazonaws.bcmdatahub#GoldenQueryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#GoldenQuery"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of golden queries.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#Granularity": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "The grain of a schema, e.g. \"one row per billing line item per billing month\".",
+        "smithy.api#length": {
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#GuardrailRule": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Human-readable statement of a guardrail rule.",
+        "smithy.api#length": {
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#GuardrailSeverity": {
+      "type": "enum",
+      "members": {
+        "ERROR": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ERROR"
+          }
+        },
+        "WARN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "WARN"
+          }
+        },
+        "INFO": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "INFO"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Severity of a query guardrail violation."
+      }
+    },
+    "com.amazonaws.bcmdatahub#Guidance": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Guidance on how to safely join or use a schema.",
+        "smithy.api#length": {
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#IdempotencyToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A unique, case-sensitive token to ensure idempotency of mutating requests.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        },
+        "smithy.api#pattern": "^[!-~]+$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.bcmdatahub#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "An internal server error occurred; the request can be retried.",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500,
+        "smithy.api#retryable": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#JoinPattern": {
+      "type": "structure",
+      "members": {
+        "targetSchemaName": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "sourceKeys": {
+          "target": "com.amazonaws.bcmdatahub#ColumnNameList",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "targetKeys": {
+          "target": "com.amazonaws.bcmdatahub#ColumnNameList",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "cardinality": {
+          "target": "com.amazonaws.bcmdatahub#Cardinality"
+        },
+        "guidance": {
+          "target": "com.amazonaws.bcmdatahub#Guidance"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A recommended join between this schema and another schema."
+      }
+    },
+    "com.amazonaws.bcmdatahub#JoinPatternList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#JoinPattern"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of join patterns.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListDatasets": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#ListDatasetsInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#ListDatasetsOutput"
+      },
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to list datasets"
+        },
+        "smithy.api#documentation": "Lists the caller's datasets, returning a paginated summary of each.",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/datasets",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "items": "items"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListDatasetsInput": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.bcmdatahub#MaxResults",
+          "traits": {
+            "smithy.api#default": 50,
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.bcmdatahub#PaginationToken",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "schemaName": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "Optional filter by schema name.",
+            "smithy.api#httpQuery": "schemaName"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListDatasetsOutput": {
+      "type": "structure",
+      "members": {
+        "items": {
+          "target": "com.amazonaws.bcmdatahub#DatasetSummaryList",
+          "traits": {
+            "smithy.api#documentation": "The datasets matching the request, one summary per dataset.",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.bcmdatahub#PaginationToken"
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListQueryExecutions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#ListQueryExecutionsInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#ListQueryExecutionsOutput"
+      },
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to list query executions"
+        },
+        "smithy.api#documentation": "Lists the caller's prior query executions.",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/query-executions",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "items": "items"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListQueryExecutionsInput": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.bcmdatahub#MaxResults",
+          "traits": {
+            "smithy.api#default": 50,
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.bcmdatahub#PaginationToken",
+          "traits": {
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.bcmdatahub#QueryStatusFilter",
+          "traits": {
+            "smithy.api#documentation": "Optional filter executions by state.",
+            "smithy.api#httpQuery": "status"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListQueryExecutionsOutput": {
+      "type": "structure",
+      "members": {
+        "items": {
+          "target": "com.amazonaws.bcmdatahub#QueryExecutionSummaryList",
+          "traits": {
+            "smithy.api#documentation": "The query executions matching the request, one summary per execution.",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.bcmdatahub#PaginationToken"
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#ListTagsForResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to list tags for a resource"
+        },
+        "smithy.api#documentation": "Lists the tags applied to the specified resource.",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListTagsForResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.bcmdatahub#ResourceArn",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Input for the ListTagsForResource operation.",
+        "smithy.api#input": {},
+        "smithy.api#references": [
+          {
+            "resource": "com.amazonaws.bcmdatahub#DatasetResource",
+            "ids": {
+              "identifier": "resourceArn"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.bcmdatahub#ListTagsForResourceOutput": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.bcmdatahub#TagMap"
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#documentation": "The maximum number of results to return in a single page of output.",
+        "smithy.api#range": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#PaginationToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "An opaque pagination token returned when more results are available.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 8192
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryErrorMessage": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Failure message describing why a query failed.",
+        "smithy.api#length": {
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryExecutionId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Service-generated opaque correlator for a submitted query.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        },
+        "smithy.api#pattern": "^[a-z0-9]+$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryExecutionSummary": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#QueryExecutionId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.bcmdatahub#QueryStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "queryString": {
+          "target": "com.amazonaws.bcmdatahub#QueryString",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A summary of a prior query execution."
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryExecutionSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#QueryExecutionSummary"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of query-execution summaries.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryGuardrail": {
+      "type": "structure",
+      "members": {
+        "rule": {
+          "target": "com.amazonaws.bcmdatahub#GuardrailRule",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "comment": {
+          "target": "com.amazonaws.bcmdatahub#Comment"
+        },
+        "severity": {
+          "target": "com.amazonaws.bcmdatahub#GuardrailSeverity",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A query guardrail rule and its severity."
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryGuardrailList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#QueryGuardrail"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of query guardrails.",
+        "smithy.api#length": {
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryResultsMaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryStatus": {
+      "type": "enum",
+      "members": {
+        "QUEUED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "QUEUED"
+          }
+        },
+        "RUNNING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RUNNING"
+          }
+        },
+        "SUCCEEDED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SUCCEEDED"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "CANCELLED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CANCELLED"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Execution state of a submitted query."
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryStatusFilter": {
+      "type": "enum",
+      "members": {
+        "QUEUED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "QUEUED"
+          }
+        },
+        "RUNNING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RUNNING"
+          }
+        },
+        "SUCCEEDED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SUCCEEDED"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "CANCELLED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CANCELLED"
+          }
+        },
+        "ALL": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ALL"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Filter for listing query executions by state."
+      }
+    },
+    "com.amazonaws.bcmdatahub#QueryString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A single read-only SQL statement or expression. Max size 16 KB.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 16384
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#QuestionText": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Natural-language question a golden query answers.",
+        "smithy.api#length": {
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#QuotaCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#Record": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#Field"
+      },
+      "traits": {
+        "smithy.api#documentation": "A single result row: the field values for one row, in column order."
+      }
+    },
+    "com.amazonaws.bcmdatahub#RecordList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#Record"
+      },
+      "traits": {
+        "smithy.api#documentation": "The result rows. Each element is one row of field values, in column order.",
+        "smithy.api#length": {
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ResourceArn": {
+      "type": "string",
+      "traits": {
+        "aws.api#arnReference": {
+          "type": "AWS::BCMDataHub::Dataset"
+        },
+        "smithy.api#documentation": "The Amazon Resource Name (ARN) of a resource managed by this service.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^arn:[a-z0-9-]+:[a-z0-9_-]+:[a-z0-9-]*:[0-9]{12}:.+$"
+      }
+    },
+    "com.amazonaws.bcmdatahub#ResourceId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.bcmdatahub#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceId": {
+          "target": "com.amazonaws.bcmdatahub#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "The identifier of the resource that could not be found.",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.bcmdatahub#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "The type of the resource that could not be found.",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The requested resource could not be found.",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.bcmdatahub#ResourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ResultColumn": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#ColumnName",
+          "traits": {
+            "smithy.api#documentation": "The column's name, as the query's select list names it.",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.bcmdatahub#ColumnType",
+          "traits": {
+            "smithy.api#documentation": "The column's Redshift type name, for example `varchar`, `int8`, `float8` or `numeric`.",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A column of a query result."
+      }
+    },
+    "com.amazonaws.bcmdatahub#ResultColumnList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#ResultColumn"
+      },
+      "traits": {
+        "smithy.api#documentation": "The columns of a query result, in order. Up to 300, so a `SELECT *` over a self-join of two datasets fits.",
+        "smithy.api#length": {
+          "max": 300
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ResultRowCount": {
+      "type": "long",
+      "traits": {
+        "smithy.api#documentation": "Number of result rows; absent until known."
+      }
+    },
+    "com.amazonaws.bcmdatahub#SchemaDescription": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Human-readable description of a schema.",
+        "smithy.api#length": {
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#SchemaName": {
+      "type": "enum",
+      "members": {
+        "COST_USAGE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "cost_usage"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The name of a billing schema. The set of schemas is service-owned and\nclosed. Values are lowercase because they are embedded in the dataset ID.\nBound to the REST URI path (`/dataset-schemas/{name}`) as an `@httpLabel`."
+      }
+    },
+    "com.amazonaws.bcmdatahub#SensitiveQueryString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "The SQL as submitted to StartQueryExecution, redacted from CloudTrail\nrequestParameters (Athena precedent). Same constraints as QueryString.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 16384
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ServiceCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.bcmdatahub#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceId": {
+          "target": "com.amazonaws.bcmdatahub#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "The identifier of the resource associated with the quota.",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.bcmdatahub#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "The type of the resource associated with the quota.",
+            "smithy.api#required": {}
+          }
+        },
+        "serviceCode": {
+          "target": "com.amazonaws.bcmdatahub#ServiceCode",
+          "traits": {
+            "smithy.api#documentation": "A service-specific error code.",
+            "smithy.api#required": {}
+          }
+        },
+        "quotaCode": {
+          "target": "com.amazonaws.bcmdatahub#QuotaCode",
+          "traits": {
+            "smithy.api#documentation": "The identifier of the service quota that was exceeded.",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The request would exceed a service quota.",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.bcmdatahub#StartQueryExecution": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#StartQueryExecutionInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#StartQueryExecutionOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ServiceQuotaExceededException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to start a query execution",
+          "resources": {
+            "required": {
+              "dataset": {}
+            }
+          }
+        },
+        "smithy.api#documentation": "Submits a single read-only SQL statement for asynchronous execution. The\ncaller identity is inferred from the invoking principal (per-payer row-level\nsecurity); it is never a request parameter.",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/query-executions",
+          "code": 202
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#StartQueryExecutionInput": {
+      "type": "structure",
+      "members": {
+        "queryString": {
+          "target": "com.amazonaws.bcmdatahub#SensitiveQueryString",
+          "traits": {
+            "smithy.api#documentation": "A single read-only SQL statement or expression.",
+            "smithy.api#required": {}
+          }
+        },
+        "clientToken": {
+          "target": "com.amazonaws.bcmdatahub#IdempotencyToken",
+          "traits": {
+            "smithy.api#idempotencyToken": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#StartQueryExecutionOutput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#QueryExecutionId",
+          "traits": {
+            "smithy.api#documentation": "Service-generated identifier for the submitted query.",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#Suitability": {
+      "type": "enum",
+      "members": {
+        "RECOMMENDED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RECOMMENDED"
+          }
+        },
+        "DISCOURAGED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DISCOURAGED"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "How suitable a schema/context is for a given question."
+      }
+    },
+    "com.amazonaws.bcmdatahub#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A tag key.",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#TagKey"
+      },
+      "traits": {
+        "smithy.api#documentation": "A list of tag keys, used by UntagResource.",
+        "smithy.api#length": {
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#TagMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.bcmdatahub#TagKey"
+      },
+      "value": {
+        "target": "com.amazonaws.bcmdatahub#TagValue"
+      },
+      "traits": {
+        "smithy.api#documentation": "A map of tag keys to tag values (max 50 tags per resource).",
+        "smithy.api#length": {
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#TagResourceInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to tag a resource"
+        },
+        "smithy.api#documentation": "Adds or updates tags on the specified resource.",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#TagResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.bcmdatahub#ResourceArn",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.bcmdatahub#TagMap",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Input for the TagResource operation.",
+        "smithy.api#input": {},
+        "smithy.api#references": [
+          {
+            "resource": "com.amazonaws.bcmdatahub#DatasetResource",
+            "ids": {
+              "identifier": "resourceArn"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.bcmdatahub#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A tag value.",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.bcmdatahub#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The request was throttled; retry after the indicated delay.",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {
+          "throttling": true
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#TotalExecutionTimeInMilliseconds": {
+      "type": "long",
+      "traits": {
+        "smithy.api#documentation": "Total time an execution took to complete, in milliseconds."
+      }
+    },
+    "com.amazonaws.bcmdatahub#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#UntagResourceInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to untag a resource"
+        },
+        "smithy.api#documentation": "Removes the specified tags from a resource.",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#UntagResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.bcmdatahub#ResourceArn",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.bcmdatahub#TagKeyList",
+          "traits": {
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Input for the UntagResource operation.",
+        "smithy.api#input": {},
+        "smithy.api#references": [
+          {
+            "resource": "com.amazonaws.bcmdatahub#DatasetResource",
+            "ids": {
+              "identifier": "resourceArn"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.bcmdatahub#UpdateDataset": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.bcmdatahub#UpdateDatasetInput"
+      },
+      "output": {
+        "target": "com.amazonaws.bcmdatahub#UpdateDatasetOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmdatahub#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.bcmdatahub#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to update a dataset"
+        },
+        "smithy.api#documentation": "Updates a dataset's non-identifying metadata (name and/or description).",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/datasets/{identifier}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#UpdateDatasetInput": {
+      "type": "structure",
+      "members": {
+        "identifier": {
+          "target": "com.amazonaws.bcmdatahub#DatasetIdentifier",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#DatasetName"
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#DatasetDescription"
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#UpdateDatasetOutput": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.bcmdatahub#DatasetId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.bcmdatahub#DatasetArn",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#DatasetName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.bcmdatahub#DatasetDescription"
+        },
+        "status": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "refreshedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "Freshness of the dataset: when its underlying data was last updated."
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "The time at which the dataset was created.",
+            "smithy.api#required": {}
+          }
+        },
+        "properties": {
+          "target": "com.amazonaws.bcmdatahub#DatasetProperties",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema`."
+          }
+        },
+        "schemaName": {
+          "target": "com.amazonaws.bcmdatahub#SchemaName",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema.name`.",
+            "smithy.api#required": {}
+          }
+        },
+        "schemaDescription": {
+          "target": "com.amazonaws.bcmdatahub#SchemaDescription",
+          "traits": {
+            "smithy.api#documentation": "Deprecated: use `schema.description`."
+          }
+        },
+        "schema": {
+          "target": "com.amazonaws.bcmdatahub#DatasetSchemaInfo",
+          "traits": {
+            "smithy.api#documentation": "The dataset's schema, and the dataset's settings for that schema.",
+            "smithy.api#required": {}
+          }
+        },
+        "updatedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "The time at which the dataset was last updated."
+          }
+        },
+        "statusReason": {
+          "target": "com.amazonaws.bcmdatahub#DatasetStatusReason",
+          "traits": {
+            "smithy.api#documentation": "Read-only, human-readable explanation of the current status."
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.bcmdatahub#TagMap",
+          "traits": {
+            "smithy.api#documentation": "The tags applied to the dataset."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Full representation mixin, returned by create, read, and update operations.",
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.bcmdatahub#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.bcmdatahub#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "reason": {
+          "target": "com.amazonaws.bcmdatahub#ValidationExceptionReason",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "fieldList": {
+          "target": "com.amazonaws.bcmdatahub#ValidationExceptionFieldList"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The request failed input validation.",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.bcmdatahub#ValidationExceptionField": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.bcmdatahub#FieldName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.bcmdatahub#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.bcmdatahub#ValidationExceptionFieldList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.bcmdatahub#ValidationExceptionField"
+      }
+    },
+    "com.amazonaws.bcmdatahub#ValidationExceptionReason": {
+      "type": "enum",
+      "members": {
+        "UNKNOWN_OPERATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "unknownOperation"
+          }
+        },
+        "CANNOT_PARSE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "cannotParse"
+          }
+        },
+        "FIELD_VALIDATION_FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "fieldValidationFailed"
+          }
+        },
+        "OTHER": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "other"
+          }
+        }
+      }
+    }
+  }
+}
