@@ -78,6 +78,253 @@
         },
         "aws.protocols#restJson1": {},
         "smithy.api#title": "A beautiful and amazing HornnichTestService",
+        "smithy.rules#endpointBdd": {
+          "version": "1.1",
+          "parameters": {
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            },
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            }
+          },
+          "conditions": [
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Endpoint"
+                }
+              ]
+            },
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ]
+            },
+            {
+              "fn": "aws.partition",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ],
+              "assign": "PartitionResult"
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseFIPS"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsFIPS"
+                  ]
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseDualStack"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsDualStack"
+                  ]
+                },
+                true
+              ]
+            },
+            {
+              "fn": "stringEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "name"
+                  ]
+                },
+                "aws"
+              ]
+            }
+          ],
+          "results": [
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": {
+                  "ref": "Endpoint"
+                },
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://d18lqfd88zfjfu.cloudfront.net",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "sigv4",
+                      "signingRegion": "us-east-1"
+                    }
+                  ]
+                },
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://hornnichtestservice-fips.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "sigv4",
+                      "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                    }
+                  ]
+                },
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://hornnichtestservice-fips.{PartitionResult#dnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "sigv4",
+                      "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                    }
+                  ]
+                },
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS is enabled but this partition does not support FIPS",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://hornnichtestservice.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "sigv4",
+                      "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                    }
+                  ]
+                },
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "DualStack is enabled but this partition does not support DualStack",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://hornnichtestservice.{PartitionResult#dnsSuffix}",
+                "properties": {
+                  "authSchemes": [
+                    {
+                      "name": "sigv4",
+                      "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                    }
+                  ]
+                },
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ],
+          "root": 2,
+          "nodeCount": 14,
+          "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAkAAAAGAAAABQAAAAgAAAAHAAAABwX14QQF9eELAAAABgX14QkF9eEKAAAABAAAAAsAAAAKAAAABQX14QYF9eEIAAAABQAAAAwF9eEHAAAABgX14QUF9eEGAAAAAwX14QEAAAAOAAAABQX14QIF9eED"
+        },
         "smithy.rules#endpointRuleSet": {
           "version": "1.0",
           "parameters": {
@@ -86,26 +333,26 @@
               "required": true,
               "default": false,
               "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-              "type": "Boolean"
+              "type": "boolean"
             },
             "UseFIPS": {
               "builtIn": "AWS::UseFIPS",
               "required": true,
               "default": false,
               "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
+              "type": "boolean"
             },
             "Endpoint": {
               "builtIn": "SDK::Endpoint",
               "required": false,
               "documentation": "Override the endpoint used to send this request",
-              "type": "String"
+              "type": "string"
             },
             "Region": {
               "builtIn": "AWS::Region",
               "required": false,
               "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
+              "type": "string"
             }
           },
           "rules": [
@@ -704,85 +951,43 @@
               }
             },
             {
-              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+              "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
               "expect": {
                 "endpoint": {
                   "properties": {
                     "authSchemes": [
                       {
                         "name": "sigv4",
-                        "signingRegion": "us-gov-west-1"
+                        "signingRegion": "eusc-de-east-1"
                       }
                     ]
                   },
-                  "url": "https://hornnichtestservice-fips.api.aws"
+                  "url": "https://hornnichtestservice-fips.amazonaws.eu"
                 }
               },
               "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-gov-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://hornnichtestservice-fips.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
+                "Region": "eusc-de-east-1",
                 "UseFIPS": true,
                 "UseDualStack": false
               }
             },
             {
-              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+              "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
               "expect": {
                 "endpoint": {
                   "properties": {
                     "authSchemes": [
                       {
                         "name": "sigv4",
-                        "signingRegion": "us-gov-west-1"
+                        "signingRegion": "eusc-de-east-1"
                       }
                     ]
                   },
-                  "url": "https://hornnichtestservice.api.aws"
+                  "url": "https://hornnichtestservice.amazonaws.eu"
                 }
               },
               "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-gov-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://hornnichtestservice.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
+                "Region": "eusc-de-east-1",
                 "UseFIPS": false,
                 "UseDualStack": false
               }
@@ -956,43 +1161,85 @@
               }
             },
             {
-              "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
               "expect": {
                 "endpoint": {
                   "properties": {
                     "authSchemes": [
                       {
                         "name": "sigv4",
-                        "signingRegion": "eusc-de-east-1"
+                        "signingRegion": "us-gov-west-1"
                       }
                     ]
                   },
-                  "url": "https://hornnichtestservice-fips.amazonaws.eu"
+                  "url": "https://hornnichtestservice-fips.api.aws"
                 }
               },
               "params": {
-                "Region": "eusc-de-east-1",
+                "Region": "us-gov-west-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-gov-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://hornnichtestservice-fips.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
                 "UseFIPS": true,
                 "UseDualStack": false
               }
             },
             {
-              "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
               "expect": {
                 "endpoint": {
                   "properties": {
                     "authSchemes": [
                       {
                         "name": "sigv4",
-                        "signingRegion": "eusc-de-east-1"
+                        "signingRegion": "us-gov-west-1"
                       }
                     ]
                   },
-                  "url": "https://hornnichtestservice.amazonaws.eu"
+                  "url": "https://hornnichtestservice.api.aws"
                 }
               },
               "params": {
-                "Region": "eusc-de-east-1",
+                "Region": "us-gov-west-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-gov-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://hornnichtestservice.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
                 "UseFIPS": false,
                 "UseDualStack": false
               }
